@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function sendok(){	
+            if(userid.value!="" && userpwd.value!=""){		
+                localStorage.userid=userid.value;
+                sessionStorage.userpwd=userpwd.value;
+                return true;
+            }else{
+                alert("請輸入帳號或密碼");
+                return false;
+            }
+        }
+        
+        function isload(){
+        if(localStorage.userid)
+            userid.value=localStorage.userid;
+        }
+    </script> 
     <style>
     	body {font-family: 微軟正黑體;}
     </style>
@@ -71,32 +88,24 @@
 					<div class="col-sm-12">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p><form method="post" action="ch14_02.htm" onsubmit="return sendok();">
-                            請輸入您的帳號：
+							<p>
+                                <form method="post" action="food_menu.html" onsubmit="return sendok();">
+                                請輸入您的帳號：
                             </p>
-                            <p>   <input type="text" id="userid" value="" autofocus><br />
+                            <p>   
+                                <input type="text" id="userid" value="" autofocus><br />
                                 請輸入您的密碼：
                             </p>
                             <p>  <input type="password" id="userpwd" value=""><br /><font style="font-size:12px">
-                                (測試帳號：guest 密碼:1234)</font></form>
+                                (測試帳號：guest 密碼:1234)</font>
+                            </p>
+                            <p>
                                 <input id="btn_send" type="submit" value="送出">
                             </p>	
-                            </form>
+                                </form>
 						</div>
 					</div>
-
-					<!--  -->
-
-						<div class="col-sm-12">
-							<ul class="pagination">
-								<li><a>1</a></li>
-								<li><a>2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a>5</a></li>
-							</ul>
-						</div>
-					
+				
 				</div>
 			</article>
 			

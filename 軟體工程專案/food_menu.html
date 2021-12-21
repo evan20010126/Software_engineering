@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--我有試做前端驗證機制，顯示錯誤跳轉回登錄頁面是正常的，可以將其註解掉(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
 <html>
   <head>
     <meta charset="utf-8">
@@ -9,7 +10,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
+	<script type="text/javascript">
+		//模擬檢測帳號、密碼
+		  if(localStorage.userid!="guest" || sessionStorage.userpwd!="1234"){
+			  alert("帳號密碼錯誤,請回首頁登入!!");							//方便多次測試時這3行可以加註解
+			  sessionStorage.removeItem('userpwd');							//第2行
+			  document.location="customer_sign_in.html";							//第3行	
+		  }
+	</script>
+	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
     <style>
+
     	body {font-family: 微軟正黑體;}
     </style>
   </head>
