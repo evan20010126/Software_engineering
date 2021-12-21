@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>瀏覽菜單&即時點餐</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    	body {font-family: 微軟正黑體;}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">        
+      <div class="container-fluid">
+        <div class="navbar-header">
+		  <a class="navbar-brand" href="☆">FBL</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+		    <li><a href="dance00.html">首頁</a></li>
+            <li class="active"><a href="dance01.html">心得</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+              圖/影 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="dance02.html">圖片</a></li>
+                <li><a href="dance03.html">影集</a></li>
+              </ul>
+            </li>
+          </ul>
+		  
+		  <form class="navbar-form navbar-right">
+			<div class="form-group has-feedback">
+				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-default">搜尋</button>
+		  </form>
+		</div>
+	  </div>
+	</nav>
+	
+	<!--頁首-->
+	<header>
+		<div class="container">
+			<h1>瀏覽菜單&即時點餐</h1>
+			<p class="lead">下標</p>
+			<hr>
+		</div>
+	</header>
+	<!--內容區-->
+	<div class="container">
+		<div class="row">
+			<article>
+				<div class="col-sm-8">
+					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
+					<hr>
+					<!-- 這邊是餐點 -->
+					<div class="col-sm-4">
+						<div class="thumbnail">
+							<img src="img\\demo.png" alt="2" width="400" height="300">
+							<p><strong>Paris</strong></p>
+							<p>Friday 27 November 2015</p>
+							<button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
+						</div>
+					</div>
+					<!--  -->
+					<center>
+						<div class="col-sm-12">
+							<ul class="pagination">
+								<li><a>1</a></li>
+								<li><a>2</a></li>
+								<li><a>3</a></li>
+								<li><a>4</a></li>
+								<li><a>5</a></li>
+							</ul>
+						</div>
+					</center>
+				</div>
+			</article>
+			
+			<aside>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3>購物車</h3>
+						</div>
+						<div class="panel-body">
+							<ul>
+								<li>商品</li>
+								<li>商品</li>
+								<li>商品</li>
+								<li>寒假：
+									<ol type="I">
+										<li>寒訓</li>
+										<li>寒訓盃</li>
+									</ol>
+								</li>
+							</ul>
+							<button value="submit">結帳</button>
+						</div>
+						
+					</div>
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h3>優惠卷</h3>
+						</div>
+						
+						<div class="panel-body">
+							<ul>
+								<li>優惠卷1</li>
+								<li>2</li>
+								<li>期末成發12/19</li>
+								<li>寒假：
+									<ol type="I">
+										<li>寒訓</li>
+										<li>寒訓盃</li>
+									</ol>
+								</li>
+							</ul>
+						</div>	
+					</div>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3>FBL早餐店</h3>
+							<br>[海大店]
+						</div>
+							
+						<div class="panel-body">
+							<ul>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>花枝羹</li>
+								<li>婷亭剉冰</li>
+								<li>和泰雜貨店</li>
+								<li>鬍鬚伯肉粽大王</li>
+								<li>麻將臭豆腐</li>
+								<li>呷天下</li>
+								<li>車輪餅</li>
+							</ul>
+						</div>
+					</div>
+					
+
+				</div>
+			</aside>
+		</div>	
+	</div>
+	<hr>
+	
+	
+	
+	<!--頁尾-->
+	<footer>
+		<div class="container">
+			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+
+		</div>
+	</footer>
+	
+	
+	
+  </body>
+</html>
