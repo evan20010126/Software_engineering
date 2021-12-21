@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>麥味登顧客登入</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    	body {font-family: 微軟正黑體;}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">        
+      <div class="container-fluid">
+        <div class="navbar-header">
+		  <a class="navbar-brand" href="☆">FBL</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+		    <li><a href="dance00.html">首頁</a></li>
+            <li class="active"><a href="dance01.html">心得</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+              圖/影 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="dance02.html">圖片</a></li>
+                <li><a href="dance03.html">影集</a></li>
+              </ul>
+            </li>
+          </ul>
+		  
+		  <form class="navbar-form navbar-right">
+			<div class="form-group has-feedback">
+				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-default">搜尋</button>
+		  </form>
+		</div>
+	  </div>
+	</nav>
+	
+	<!--頁首-->
+	<header>
+		<div class="container">
+			<h1>瀏覽菜單&即時點餐</h1>
+			<p class="lead">下標</p>
+			<hr>
+		</div>
+	</header>
+	<!--內容區-->
+    <center>
+	<div class="container">   
+		<div class="d-flex justify-content-center">
+			<article>
+				<div class="col-sm-12">
+					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
+					<hr>
+					<!--  -->
+                    
+					<div class="col-sm-12">
+						<div class="thumbnail">
+							<img src="img\\demo.png" alt="2" width="400" height="300">
+							<p><form method="post" action="ch14_02.htm" onsubmit="return sendok();">
+                            請輸入您的帳號：
+                            </p>
+                            <p>   <input type="text" id="userid" value="" autofocus><br />
+                                請輸入您的密碼：
+                            </p>
+                            <p>  <input type="password" id="userpwd" value=""><br /><font style="font-size:12px">
+                                (測試帳號：guest 密碼:1234)</font></form>
+                                <input id="btn_send" type="submit" value="送出">
+                            </p>	
+                            </form>
+						</div>
+					</div>
+
+					<!--  -->
+
+						<div class="col-sm-12">
+							<ul class="pagination">
+								<li><a>1</a></li>
+								<li><a>2</a></li>
+								<li><a>3</a></li>
+								<li><a>4</a></li>
+								<li><a>5</a></li>
+							</ul>
+						</div>
+					
+				</div>
+			</article>
+			
+		</div>	       
+	</div>
+    </center>
+	<hr>
+	
+	
+	
+	<!--頁尾-->
+	<footer>
+		<div class="container">
+			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+
+		</div>
+	</footer>
+	
+	
+	
+  </body>
+</html>
