@@ -15,9 +15,9 @@
 	<script type="text/javascript">
 		//模擬檢測帳號、密碼
 		  if(localStorage.userid!="guest" || sessionStorage.userpwd!="1234"){
-			  alert("帳號密碼錯誤,請回首頁登入!!");							//方便多次測試時這3行可以加註解
-			  sessionStorage.removeItem('userpwd');							//第2行
-			  document.location="customer_sign_in.html";							//第3行	
+			  alert("帳號密碼錯誤,請回首頁登入!!");							
+			  sessionStorage.removeItem('userpwd');							
+			  document.location="customer_sign_in.html";								
 		  }
 	</script>
 	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
