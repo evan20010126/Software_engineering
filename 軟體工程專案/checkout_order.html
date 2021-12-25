@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>麥味登店長登入</title>
+    <title>瀏覽菜單&即時點餐</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
@@ -58,35 +58,24 @@
 		</div>
 	</header>
 	<!--內容區-->
-    <center>
-	<div class="container">   
-		<div class="d-flex justify-content-center">
+	<div class="container">
+		<div class="row">
 			<article>
-				<div class="col-sm-12">
+				<div class="col-sm-8">
 					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
 					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
 					<hr>
-					<!--  -->
-                    
-					<div class="col-sm-12">
+					<!-- 這邊是餐點 -->
+					<div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p><form method="post" action="ch14_02.htm" onsubmit="return sendok();">
-                            請輸入您的帳號：
-                            </p>
-                            <p>   <input type="text" id="userid" value="" autofocus><br />
-                                請輸入您的密碼：
-                            </p>
-                            <p>  <input type="password" id="userpwd" value=""><br /><font style="font-size:12px">
-                                (測試帳號：guest 密碼:1234)</font></form>
-                                <input id="btn_send" type="submit" value="送出">
-                            </p>	
-                            </form>
+							<p><strong>Paris</strong></p>
+							<p>Friday 27 November 2015</p>
+							<button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
 						</div>
 					</div>
-
 					<!--  -->
-
+					<center>
 						<div class="col-sm-12">
 							<ul class="pagination">
 								<li><a>1</a></li>
@@ -96,13 +85,79 @@
 								<li><a>5</a></li>
 							</ul>
 						</div>
-					
+					</center>
 				</div>
 			</article>
 			
-		</div>	       
+			<aside>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3>購物車</h3>
+						</div>
+						<div class="panel-body">
+							<ul>
+								<li>商品</li>
+								<li>商品</li>
+								<li>商品</li>
+								<li>寒假：
+									<ol type="I">
+										<li>寒訓</li>
+										<li>寒訓盃</li>
+									</ol>
+								</li>
+							</ul>
+							<button value="submit">結帳</button>
+						</div>
+						
+					</div>
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h3>優惠卷</h3>
+						</div>
+						
+						<div class="panel-body">
+							<ul>
+								<li>優惠卷1</li>
+								<li>2</li>
+								<li>期末成發12/19</li>
+								<li>寒假：
+									<ol type="I">
+										<li>寒訓</li>
+										<li>寒訓盃</li>
+									</ol>
+								</li>
+							</ul>
+						</div>	
+					</div>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3>FBL早餐店</h3>
+							<br>[海大店]
+						</div>
+							
+						<div class="panel-body">
+							<ul>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>花枝羹</li>
+								<li>婷亭剉冰</li>
+								<li>和泰雜貨店</li>
+								<li>鬍鬚伯肉粽大王</li>
+								<li>麻將臭豆腐</li>
+								<li>呷天下</li>
+								<li>車輪餅</li>
+							</ul>
+						</div>
+					</div>
+					
+
+				</div>
+			</aside>
+		</div>	
 	</div>
-    </center>
 	<hr>
 	
 	
