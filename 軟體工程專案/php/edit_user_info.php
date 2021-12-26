@@ -1,6 +1,6 @@
 <?php
-    //連線到資料庫 (這邊暫定資料庫名稱為edit.php)
-    require_once('edit.php');
+    //連線到資料庫 
+    require_once('db_conn_software.php');
 
     //判斷使用者帳號是否為NULL
     if(empty($_POST['user_account'])){
@@ -27,5 +27,5 @@
         die($edit->error);
     }
 
-    header("Location: ");//會自動跳轉的地方
+    header("Location: ");//會自動跳轉的地方 但不知道要跳到哪個頁面暫時為空
 ?>
