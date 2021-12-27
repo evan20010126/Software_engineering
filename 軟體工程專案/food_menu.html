@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--我有試做前端驗證機制，顯示錯誤跳轉回登錄頁面是正常的，可以將其註解掉(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
 <html>
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +25,10 @@
     <style>
 
     	body {font-family: 微軟正黑體;}
+		.left {}
+		.right{
+			text-align: right;
+		}
     </style>
   </head>
   <body>
@@ -81,27 +86,40 @@
 		<div class="row">
 			<article>
 				<div class="col-sm-8">
-					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+					<div>
+						<form class="navbar-form navbar-right">
+							<div class="form-group has-feedback">
+								<input type="search" class="form-control" placeholder="search" onkeyup="searching_function(this.value)">
+							</div>
+							<!-- <button type="submit" class="btn btn-default" onclick="searching_function(this.value)">搜尋</button> -->
+						</form>
+						<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+					</div>
+					
 					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
 					<hr>
 					<!-- 這邊是餐點 -->
-					<div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p><strong>Paris</strong></p>
-							<p>Friday 27 November 2015</p>
-							<button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-						</div>
-					</div>
+                    <p id="menu">
+                        <!--<div class="col-sm-4" >
+                            <div class="thumbnail">
+                                <img src="img\\demo.png" alt="2" width="400" height="300">
+                                <p><strong>Paris</strong></p>
+                                <p>Friday 27 November 2015</p>
+                                <p>Price: </p>
+                                <button class="btn" data-toggle="modal" data-target="#myModal" >Add To Package</button> 
+                            
+                            </div>
+                        </div>-->
+                    </p>
 					<!--  -->
 					<center>
 						<div class="col-sm-12">
 							<ul class="pagination">
-								<li><a>1</a></li>
-								<li><a>2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a>5</a></li>
+								<li><a onclick="page1()">1</a></li>
+								<li><a onclick="page2()">2</a></li>
+								<li><a onclick="page3()">3</a></li>
+								<li><a onclick="page4()">4</a></li>
+								<li><a onclick="page5()">5</a></li>
 							</ul>
 						</div>
 					</center>
@@ -115,18 +133,14 @@
 							<h3>購物車</h3>
 						</div>
 						<div class="panel-body">
-							<ul>
-								<li>商品</li>
-								<li>商品</li>
-								<li>商品</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
+							<ul id="package">
+								<!--
+								<li>商品: <span style="float: right;">100</span></li>
+								<li>商品: <span style="float: right;">100</span></li>
+								-->
 							</ul>
 							<button value="submit">結帳</button>
+							<span id="totalPrice"  style="float: right;">Total: </span>
 						</div>
 						
 					</div>
@@ -190,6 +204,124 @@
 	</footer>
 	
 	
-	
+	<script>
+		var i = 0;
+        function showMenu() {
+            const xmlhttp = new XMLHttpRequest();
+            
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+				//console.log(obj);
+				obj = obj.substring(11,obj.length);
+				//console.log(obj);
+                var product = JSON.parse(obj);
+                
+                //console.log(product[0]);
+				//console.log(product[0].product_pic);
+				//display first product
+				document.getElementById("menu").innerHTML = '';
+				var max = i+6;
+				//display remain product
+                for(;i<max;i++){
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong>' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button onclick="showPackage()" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+                }
+            }
+			xmlhttp.open("GET", "php\\display_menu.php");
+            //xmlhttp.responseType = 'json';
+            xmlhttp.send(); 
+        }
+		function page1(){
+			i = 0;
+			showMenu();
+		}
+		function page2(){
+			i = 6;
+			showMenu();
+		}
+		function page3(){
+			i = 12;
+			showMenu();
+		}
+		function page4(){
+			i = 18;
+			showMenu();
+		}
+		function page5(){
+			i = 24;
+			showMenu();
+		}
+		function showPackage(){
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+				//console.log(obj);
+				obj = obj.substring(11,obj.length);
+				//console.log(obj);
+                var package_obj = JSON.parse(obj);
+                
+                //console.log(package_obj);
+				//console.log(package_obj[0].product_name);
+				//display first product
+				document.getElementById("package").innerHTML = '';
+				//display remain product
+				var index = 0;
+                while(package_obj[index].product_name != null){
+                    document.getElementById("package").innerHTML += '<li>'+ package_obj[index].product_name +': <span style="float: right;">'+ package_obj[index].product_price +' dollar</span></li>';
+					index++;
+				}
+				showPackageSum();
+            }
+            
+			xmlhttp.open("GET", "php/display_package.php");
+            //xmlhttp.responseType = 'json';
+            xmlhttp.send();
+		}
+		function showPackageSum(){
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var sum = this.responseText;
+				document.getElementById("totalPrice").innerHTML = sum;
+            
+			}
+			
+			xmlhttp.open("GET", "php/package_sum.php");
+            	//xmlhttp.responseType = 'json';
+            xmlhttp.send(); 
+		}
+		
+		function searching_function(str){
+			if (str.length == 0) {
+				i = 0;
+				showMenu();
+				return;
+			}
+			console.log(str);
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+				obj = obj.substring(11,obj.length);
+				var product_searching = JSON.parse(obj);
+				document.getElementById("menu").innerHTML = '';
+				for(var k = 0;k<product_searching.length;k++){
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong>' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '</p><button onclick="showPackage()" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+					//k++;
+				}
+				//document.getElementById("totalPrice").innerHTML = sum;
+            
+			}
+			
+			xmlhttp.open("GET", "php/searching.php?q=" + str);
+            	//xmlhttp.responseType = 'json';
+            xmlhttp.send(); 
+		}
+        function start(){
+			i = 0;
+            showMenu();
+			showPackage();
+			showPackageSum();
+			
+        }
+        window.addEventListener( "load", start, false );
+    </script>
   </body>
 </html>
