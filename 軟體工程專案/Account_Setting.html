@@ -1,1 +1,205 @@
-<!-- 待完成 -->
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>帳戶設定</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    </head>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+
+body {
+    font-family: 'Poppins', sans-serif , '微軟正黑體';
+    background-color: aliceblue
+}
+
+/* .wrapper { */
+    /* padding: 30px 50px; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 15px; */
+    /* margin: 10px auto; */
+    /* max-width: 600px */
+/* }    */
+
+label {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    padding-left: 3px
+}
+
+.form-control {
+    border-radius: 10px
+}
+
+input[placeholder] {
+    font-weight: 500
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 1.5px solid #0779e4
+}
+
+select {
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 40px;
+    padding: 5px 10px
+}
+
+select:focus {
+    outline: none
+}
+
+.button {
+    background-color: #fff;
+    color: #0779e4
+}
+
+.button:hover {
+    background-color: #0779e4;
+    color: #fff
+}
+
+.btn-primary {
+    background-color: #0779e4
+}
+
+.danger {
+    background-color: #fff;
+    color: #e20404;
+    border: 1px solid #ddd
+}
+
+.danger:hover {
+    background-color: #e20404;
+    color: #fff
+} 
+    </style>
+    <body>
+
+    
+        <nav class= "navbar navbar-default">        
+            <div class= "container-fluid">
+                <div class= "navbar-header">
+                <a class= "navbar-brand" href="visitor_index.html">FBL</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">導覽按鈕</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>          
+            </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    <li class="active"><a href="food_menu.html">即時點餐</a></li>
+                    <li><a href="auto_eat.html">自動取eat</a></li>
+                    <li><a href="order_web.html">檢視訂單</a></li>
+                </ul>
+                    <ul class = "nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="Account_Setting.html">Account Setting</a></li>
+                                <li><a href="preference.html">My preference Setting</a></li>
+                                <li><a href="customer_sign_in.html">Sign in</a></li>
+                                <li><a href="#">Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+    <div class="container">                        
+    <!--頁首-->
+	<header>
+        <h1 class="pb-4 border-bottom">帳號設定</h1>
+        <p class="lead">OOXX@gmail.com</p>
+        <hr>
+    </header>
+    <!--內容區-->
+        <div class="row">                
+                
+                    <div class="col-md-12">
+                        <div class="bg-white mt-sm-5">
+                            <div class="d-flex align-items-start py-3 border-bottom">
+                                <div class= "text-center"><img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt=""></div> 
+                                
+                                <div class="pl-sm-4 pl-2" id="img-section"> <b>名字 照片</b>
+                                    <p>說明說明說明說明</p> <button class="btn button border"><b>Upload</b></button>
+                                </div>
+                            </div>
+                            <div class="py-2">
+                                <div class="row py-2">
+                                    <div class="col-md-6"> <label for="firstname">名字</label> <input type="text" class="bg-light form-control" placeholder="Mary Jane Watson"> </div>
+                                    <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">暱稱</label> <input type="text" class="bg-light form-control" placeholder="MJ "> </div>
+                                </div>
+                                <div class="row py-2">
+                                    <div class="col-md-6"> <label for="email">Email</label> <input type="text" class="bg-light form-control" placeholder="Mary@email.com"> </div>
+                                    <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">電話號碼</label> <input type="tel" class="bg-light form-control" placeholder="0x-xxxxxxxx"> </div>
+                                </div>
+                                <div class = "row py-2">
+                                    <div class="col-md-6"><label for="">生日</label>
+                                        <div class="input-group date" id='date1'>
+                                            <input type="text" class="form-control" />
+                                            <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                        </div>                                 
+                                    </div>
+                                </div>
+                                 <!-- <div class="row py-2">
+                                    <div class="col-md-6"> <label for="country">縣市</label> <select name="country" id="country" class="bg-light">
+                                            <option value="india" selected>台北</option>
+                                            <option value="usa">新北</option>
+                                            <option value="uk">基隆</option>
+                                            <option value="uae">桃園</option>
+                                        </select> </div>
+                                    <div class="col-md-6 pt-md-0 pt-3" id="lang"> <label for="language">學校</label>
+                                        <div class="arrow"> <select name="language" id="language" class="bg-light">
+                                                <option value="english" selected>國立臺灣海洋大學</option>
+                                                <option value="english_us">國立臺灣大學</option>
+                                                <option value="enguk">國立宜蘭大學</option>
+                                                <option value="arab">國立臺北大學</option>
+                                            </select> </div>
+                                    </div>
+                                </div>  -->
+                                <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">儲存</button> <button class="btn border button">取消</button> </div>
+                                <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                                    <div> <b>刪除帳戶<b>
+                                        <p>注意！帳戶一經刪除便不能還原！！！</p>
+                                    </div>
+                                    <div class="ml-auto"> <button class="btn danger">刪除帳戶</button> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <blockquote class="blockquote">
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                        </p>
+                        <footer class="blockquote-footer">
+                            Someone famous in <cite>Source Title</cite></footer>    
+            </div> 		          
+    </div>  
+    </body>
+</html>
