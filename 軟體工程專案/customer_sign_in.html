@@ -10,25 +10,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-   <!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
-    <script type="text/javascript">
-        function sendok(){	
-            if(userid.value!="" && userpwd.value!=""){		
-                localStorage.userid=userid.value;
-                sessionStorage.userpwd=userpwd.value;
-                return true;
-            }else{
-                alert("請輸入帳號或密碼");
-                return false;
-            }
-        }
-        
-        function isload(){
-        if(localStorage.userid)
-            userid.value=localStorage.userid;
-        }
-    </script> 
-    <!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
     <style>
     	body {font-family: 微軟正黑體;}
     </style>
@@ -37,7 +18,7 @@
     <nav class="navbar navbar-default">        
       <div class="container-fluid">
         <div class="navbar-header">
-		  <a class="navbar-brand" href="☆">FBL</a>
+		  <a class="navbar-brand" href="visitor_index.html">FBL</a>
 		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
               <span class="sr-only">導覽按鈕</span>
               <span class="icon-bar"></span>
@@ -98,8 +79,8 @@
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
 							<p>
-                                <form method="post" action="food_menu.html" onsubmit="return sendok();">
-                                請輸入您的帳號：
+                      <form method="post" action="food_menu.html" onsubmit ="return false"> /<!--onsubmit ="return sign_in()-->
+                                請輸入您的帳號：  
                             </p>
                             <p>   
                                 <input type="text" id="userid" value="" autofocus><br />
@@ -109,9 +90,13 @@
                                 (測試帳號：guest 密碼:1234)</font>
                             </p>
                             <p>
-                                <input id="btn_send" type="submit" value="送出">
+                                <!-- <input id="btn_send" type="submit" value="送出"> -->
+                                <div class="col-sm-6">
+                                    <button type="submit" id = "sign_in" class="btn btn-dark">登入</button>                         
+                                    <a href="#" class="forgot_password" role="button" aria-pressed="flase">忘記密碼</a>  
+                               </div>   
                             </p>	
-                                </form>
+                        </form>
 						</div>
 					</div>
 				
@@ -135,5 +120,49 @@
 	
 	
 	
+  <script>
+      /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
+        // function send_is_ok(){	
+        //     if(userid.value!="" && userpwd.value!=""){		
+        //         localStorage.userid=userid.value;
+        //         sessionStorage.userpwd=userpwd.value;
+        //         return true;
+        //     }else{
+        //         alert("請輸入帳號或密碼");
+        //         return false;
+        //     }
+        // }
+        
+        function isload(){
+        if(localStorage.userid)
+            userid.value=localStorage.userid;
+        }
+    /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
+
+      function sign_in(){
+        const xmlhttp = new XMLHttpRequest();           
+
+            xmlhttp.onload = function() {
+              var obj = this.responseText;
+              //console.log(obj);
+				      obj = obj.substring(11,obj.length);
+				      //console.log(obj);
+              var product = JSON.parse(obj);
+
+              if(obj == "True"){
+                document.location="food_menu.html";
+              }
+              else if(!obj){
+                alert("帳號或密碼錯誤!!");
+                window.location.reload();
+                sendok();
+              }
+			      xmlhttp.open("GET", "php\\.php");     //待後端寫入
+            //xmlhttp.responseType = 'json';
+            xmlhttp.send(); 
+        }
+      }
+  </script>
+
   </body>
 </html>
