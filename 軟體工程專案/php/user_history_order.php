@@ -8,5 +8,5 @@
     $error = $stmt->execute(array($user_account)); //執行sql語法
     $result = $stmt->fetchAll();
     echo json_encode($result);
+//
 ?>
-
