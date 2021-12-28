@@ -20,6 +20,5 @@
         $bool = 0;
         echo json_encode($bool);
     }
-    //預設不用回傳值
 ?>
 
