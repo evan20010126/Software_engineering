@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>瀏覽菜單&即時點餐</title>
+    <title>FBL早餐店(Owner)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <style>
     	body {font-family: 微軟正黑體;}
     </style>
@@ -17,9 +18,15 @@
     <nav class="navbar navbar-default">        
       <div class="container-fluid">
         <div class="navbar-header">
-		  	<a class="navbar-brand" href="☆">FBL</a>        
+		  <a class="navbar-brand" href="☆">FBL</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
         </div>
-		<div id="navbar" class="navbar-collapse collapse">
+		<!-- <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 		    <li><a href="dance00.html">首頁</a></li>
             <li class="active"><a href="dance01.html">心得</a></li>
@@ -38,15 +45,40 @@
 				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
 			</div>
 			<button type="submit" class="btn btn-default">搜尋</button>
-		  </form> -->
-		</div>
+		  </form> 
+		</div> -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="store_owner_manage.html">Manage Menu</a></li>
+              <li><a href="">還沒想好</a></li>
+              <li><a href="owner_order.html">檢視訂單</a></li>
+            </ul>
+                <ul class = "nav navbar-nav navbar-right">
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="Account_Setting.html">Account Setting</a></li>
+                  <li><a href="preference.html">My preference Setting</a></li>
+                  <li><a href="store_owner_sign_in.html">Sign in</a></li>
+                  <li><a href="#">Sign out</a></li>
+              </ul>
+              </li>
+            </ul>
+            <!-- <form class="navbar-form navbar-right">
+              <div class="form-group has-feedback">
+                  <input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+              </div>
+              <button type="submit" class="btn btn-default">搜尋</button>
+            </form> -->
+          </div>
 	  </div>
 	</nav>
 	
 	<!--頁首-->
 	<header>
 		<div class="container">
-			<h1>瀏覽菜單&即時點餐</h1>
+			<h1>管理菜單</h1>
 			<p class="lead">下標</p>
 			<hr>
 		</div>
@@ -112,7 +144,7 @@
 			
 			<aside>
 				<div class="col-sm-3 col-sm-offset-1">
-					<div class="panel panel-success">
+					<!-- <div class="panel panel-success">
 						<div class="panel-heading">
 							<h3>購物車</h3>
 						</div>
@@ -131,23 +163,17 @@
 							<button value="submit">結帳</button>
 						</div>
 						
-					</div>
+					</div> -->
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3>優惠卷</h3>
+							<h3>設定優惠券</h3>
+                            
 						</div>
 						
 						<div class="panel-body">
-							<ul>
-								<li>優惠卷1</li>
-								<li>2</li>
-								<li>期末成發12/19</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
+							<ul id="coupon_code_id">
+								<!-- <li>優惠券1</li>
+								<li>2</li> -->
 							</ul>
 						</div>	
 					</div>
@@ -163,13 +189,6 @@
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
-								<li>花枝羹</li>
-								<li>婷亭剉冰</li>
-								<li>和泰雜貨店</li>
-								<li>鬍鬚伯肉粽大王</li>
-								<li>麻將臭豆腐</li>
-								<li>呷天下</li>
-								<li>車輪餅</li>
 							</ul>
 						</div>
 					</div>
@@ -181,6 +200,7 @@
 	</div>
 	<hr>
 	
+ 
 	
 	
 	<!--頁尾-->
@@ -219,7 +239,7 @@
 				var max = i+6;
 				//display remain product
                 for(;i<max;i++){
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="'+i+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p></div> </div>';
                 }
             }
 			xmlhttp.open("GET", "php/display_menu.php");
@@ -311,8 +331,39 @@
 			xmlhttp.open("GET", "php/searching.php?q=" + str);
             xmlhttp.send(); 
 		}
+        function showCoupon(){
+			//
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+				var obj = this.responseText;
+				
+				obj = obj.substring(11,obj.length);
+				console.log(obj);
+				var coupon_info = JSON.parse(obj);
+				console.log(coupon_info);
+				var index = 0;
+				document.getElementById("coupon_code_id").innerHTML = '';
+				while(coupon_info[index] != null){
+					console.log(typeof(coupon_info[index].is_persentoff));
+					console.log(coupon_info[index].is_persentoff);
+					if(coupon_info[index].is_persentoff == 1){
+						var disc = coupon_info[index].num * 10;
+						console.log("disc: "+disc);
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
+					}
+					else{
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>-"+coupon_info[index].num+"$</span></li>";
+					}
+					index++;
+				}
+				//console.log(product_name_Array[button_index]);
+			}
+			xmlhttp.open("GET", "php/show_coupon.php");
+            xmlhttp.send(); 
+		}
         function start(){
 			i = 0;
+            showCoupon();
             showMenu();
 			//console.log(Date.now);
         }
