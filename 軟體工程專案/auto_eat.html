@@ -1,182 +1,345 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>自動取Eat</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-    	body {font-family: 微軟正黑體;}
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-default">        
-      <div class="container-fluid">
-        <div class="navbar-header">
-		  <a class="navbar-brand" href="☆">FBL</a>
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-              <span class="sr-only">導覽按鈕</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-          </button>          
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>自動取eat</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+</head>
+<style>
+    /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.clearfix::after,
+.calendar ol::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* ================
+Calendar Styling */
+.calendar {
+  border-radius: 10px;
+}
+
+.month {
+  font-size: 2rem;
+}
+
+@media (min-width: 992px) {
+  .month {
+    font-size: 3.5rem;
+  }
+}
+.calendar ol li {
+  float: left;
+  width: 14.28571%;
+}
+
+.calendar .day-names {
+  border-bottom: 1px solid #eee;
+}
+
+.calendar .day-names li {
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.calendar .days li {
+  border-bottom: 1px solid #eee;
+  min-height: 8rem;
+}
+
+.calendar .days li .date {
+  margin: 0.5rem 0;
+}
+
+.calendar .days li .event {
+  font-size: 0.75rem;
+  padding: 0.4rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 4rem;
+  margin-bottom: 1px;
+}
+
+.calendar .days li .event.span-2 {
+  width: 200%;
+}
+
+.calendar .days li .event.begin {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.calendar .days li .event.end {
+  border-radius: 0 1rem 1rem 0;
+}
+
+.calendar .days li .event.clear {
+  background: none;
+}
+
+.calendar .days li:nth-child(n+29) {
+  border-bottom: none;
+}
+
+.calendar .days li.outside .date {
+  color: #ddd;
+}
+
+/*
+*
+* ==========================================
+* 使用者提示文字
+* ==========================================
+*
+*/
+body {
+  /* min-height: 100vh;*/
+  background-color: #3ca55c; 
+  background-image: linear-gradient(147deg, #3ca55c 0%, #b5ac49 100%);
+}
+</style>
+    <nav class= "navbar navbar-default">        
+        <div class= "container-fluid">
+            <div class= "navbar-header">
+            <a class= "navbar-brand" href="visitor_index.html">FBL</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">導覽按鈕</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>          
         </div>
-		<div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-		    <li><a href="food_menu.html">即時點餐</a></li>
-            <li class="active"><a href="auto_eat.html">自動取eat</a></li>
-			<li><a href="order_web.html">檢視訂單</a></li>
-          </ul>
-		  	<ul class = "nav navbar-nav navbar-right">
-			  <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-              <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="Account_Setting.html">Account Setting</a></li>
-                <li><a href="preference.html">My preference Setting</a></li>
-				<li><a href="customer_sign_in.html">Sign in</a></li>
-				<li><a href="#">Sign out</a></li>
-			</ul>
-            </li>
-		  </ul>
-		  
-		  <!-- <form class="navbar-form navbar-right">
-			<div class="form-group has-feedback">
-				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
-			</div>
-			<button type="submit" class="btn btn-default">搜尋</button>
-		  </form> -->
-		</div>
-	  </div>
-	</nav>
-	
-	<!--頁首-->
-	<header>
-		<div class="container">
-			<h1>自動取Eat</h1>
-			<p class="lead">下標</p>
-			<hr>
-		</div>
-	</header>
-	<!--內容區-->
-	<div class="container">
-		<div class="row">
-			<article>
-				<div class="col-sm-8">
-					<h1 style="font-family:微軟正黑體 ; text-align:center">?Menu?</h1>
-					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
-					<hr>
-					<!-- 這邊是餐點 -->
-					<div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p><strong>Paris</strong></p>
-							<p>Friday 27 November 2015</p>
-							<button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-						</div>
-					</div>
-					<!--  -->
-					<center>
-						<div class="col-sm-12">
-							<ul class="pagination">
-								<li><a>1</a></li>
-								<li><a>2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a>5</a></li>
-							</ul>
-						</div>
-					</center>
-				</div>
-			</article>
-			
-			<aside>
-				<div class="col-sm-3 col-sm-offset-1">
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<h3>購物車</h3>
-						</div>
-						<div class="panel-body">
-							<ul>
-								<li>商品</li>
-								<li>商品</li>
-								<li>商品</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
-							</ul>
-							<button value="submit">結帳</button>
-						</div>
-						
-					</div>
-					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<h3>優惠卷</h3>
-						</div>
-						
-						<div class="panel-body">
-							<ul>
-								<li>優惠卷1</li>
-								<li>2</li>
-								<li>期末成發12/19</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
-							</ul>
-						</div>	
-					</div>
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h3>FBL早餐店</h3>
-							<br>[海大店]
-						</div>
-							
-						<div class="panel-body">
-							<ul>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-								<li>花枝羹</li>
-								<li>婷亭剉冰</li>
-								<li>和泰雜貨店</li>
-								<li>鬍鬚伯肉粽大王</li>
-								<li>麻將臭豆腐</li>
-								<li>呷天下</li>
-								<li>車輪餅</li>
-							</ul>
-						</div>
-					</div>
-					
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                <li class="active"><a href="food_menu.html">即時點餐</a></li>
+                <li><a href="auto_eat.html">自動取eat</a></li>
+                <li><a href="order_web.html">檢視訂單</a></li>
+            </ul>
+                <ul class = "nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                        <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Account_Setting.html">Account Setting</a></li>
+                            <li><a href="preference.html">My preference Setting</a></li>
+                            <li><a href="customer_sign_in.html">Sign in</a></li>
+                            <li><a href="visitor_index.html">Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> 
+    <div class="container">                        
+    <!--頁首-->
+    <!-- 偏好設定 -->
+    <div class = "row">      
+        <div class = "col-sm-8">
+            <header>
+                <h1 >偏好設定</h1>
+                <p class="lead">OOXX@gmail.com</p>  
+            </header>
+        </div>
+        <div class = "col-sm-4">
+            <div class="card text-white bg-info mb-3" style="font-size:2em;max-width: 20rem; max-height: 100rem;">
+                <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" data-parent="#card-342570" href="#card-element-360127">客製化設定</a>
+                </div>
+                <div id="card-element-360127" class="collapse collapsing ">
+                    <div class="card-body">
+                        <a href = "#">購物車</a>
+                    </div>
+                    <div class="card-element-360127">
+                        <a href = "#">優惠卷</a>
+                    </div>
+                    <div class="card-element-360127">
+                        <a href = "#">歷史訂單</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                <div class="card-header"></div>
+                <div class="card-body">
+                  <h4 class="card-title">個人化設定</h4>
+                    第一個超連結-->
+                    <!-- <div class="col-md-12"> -->
 
-				</div>
-			</aside>
-		</div>	
-	</div>
-	<hr>
-	
-	
-	
-	<!--頁尾-->
-	<footer>
-		<div class="container">
-			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+                    <!-- </div> -->
+                    <!-- <p class="card-text"><a href = "#">優惠卷</a> -->
 
-		</div>
-	</footer>
-	
-	
-	
-  </body>
+                    <!-- </p>  -->
+
+
+                    <!-- <p class="card-text"><a href = "#">購物車</a> -->
+
+
+                    <!-- </p> -->
+                <!-- </div> -->
+            <!-- </div> --> 
+            <!-- </div> -->           
+        </div>
+    </div>
+    <span>&nbsp</span><hr>
+    <!--內容區-->
+    <!--\\\\\\\\\\ 日歷 ////////-->
+    <div class="container py-5">
+        <div class="row">  
+        
+        <!-- For Demo Purpose -->
+        <header class="text-center text-white mb-5">
+          <h1>每週早餐</h1>
+          <p class="font-italic mb-0"新的一天，由美好的早晨開始</p>
+          <p class="font-italic">以下進行預定<a href="food_menu.html" class="text-white">
+              <u>想不到要吃什麼嗎？</u></a>
+          </p>
+        </header>   
+            <!-- Calendar -->
+            <div class="calendar shadow bg-white p-5">
+            <div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
+                <h2 class="month font-weight-bold mb-0 text-uppercase">December 2021</h2>
+            </div>
+            <p class="font-italic text-muted mb-5">最近天氣氣溫驟降，要注意保暖哦</p>
+            <ol class="day-names list-unstyled">
+                <li class="font-weight-bold text-uppercase">Sun</li>
+                <li class="font-weight-bold text-uppercase">Mon</li>
+                <li class="font-weight-bold text-uppercase">Tue</li>
+                <li class="font-weight-bold text-uppercase">Wed</li>
+                <li class="font-weight-bold text-uppercase">Thu</li>
+                <li class="font-weight-bold text-uppercase">Fri</li>
+                <li class="font-weight-bold text-uppercase">Sat</li>
+            </ol>
+                <ol class="days list-unstyled">
+                    <li>
+                    <div class="date">1</div>
+                    <div class="event bg-primary">培根蛋餅+薯餅蛋餅+奶茶</div>
+                    </li>
+                    <li>
+                    <div class="date">2</div>
+                    </li>
+                    <li>
+                    <div class="date">3</div>
+                    </li>
+                    <li>
+                    <div class="date">4</div>
+                    </li>
+                    <li>
+                    <div class="date">5</div>
+                    </li>
+                    <li>
+                    <div class="date">6</div>
+                    </li>
+                    <li>
+                    <div class="date">7</div>
+                    </li>
+                    <li>
+                    <div class="date">8</div>
+                    </li>
+                    <li>
+                    <div class="date">9</div>
+                    </li>
+                    <li>
+                    <div class="date">10</div>
+                    </li>
+                    <li>
+                    <div class="date">11</div>
+                    </li>
+                    <li>
+                    <div class="date">12</div>
+                    </li>
+                    <li>
+                    <div class="date">13</div>
+                    <div class="event bg-primary">總匯三明治+飛魚卵蛋餅+奶茶</div>
+                    <!-- <div class="event all-day begin span-2 bg-warning">Event Name</div> -->
+                    </li>
+                    <li>
+                    <div class="date">14</div>
+                    </li>
+                    <li>
+                    <div class="date">15</div>
+                    <div class="event bg-primary">香煎嫩雞堡+奶茶</div>
+                    </li>
+                    <li>
+                    <div class="date">16</div>
+                    </li>
+                    <li>
+                    <div class="date">17</div>
+                    </li>
+                    <li>
+                    <div class="date">18</div>
+                    </li>
+                    <li>
+                    <div class="date">19</div>
+                    </li>
+                    <li>
+                    <div class="date">20</div>
+                    </li>
+                    <li>
+                    <div class="date">21</div>
+                    <div class="event bg-primary">義大利肉醬鐵板麵+柳橙汁</div>
+                    </li>
+                    <li>
+                    <div class="date">22</div>
+                    <div class="event bg-primary">豪華炒泡麵特餐+豆漿紅茶</div>
+                    </li>
+                    <li>
+                    <div class="date">23</div>
+                    </li>
+                    <li>
+                    <div class="date">24</div>
+                    </li>
+                    <li>
+                    <div class="date">25</div>
+                    </li>
+                    <li>
+                    <div class="date">26</div>
+                    </li>
+                    <li>
+                    <div class="date">27</div>
+                    </li>
+                    <li>
+                    <div class="date">28</div>
+                    </li>
+                    <li>
+                    <div class="date">29</div>
+                    </li>
+                    <li>
+                    <div class="date">30</div>
+                    </li>
+                    <li>
+                    <div class="date">31</div>
+                    </li>
+                    <li class="outside">
+                    <div class="date">1</div>
+                    </li>
+                    <li class="outside">
+                    <div class="date">2</div>
+                    </li>
+                    <li class="outside">
+                    <div class="date">3</div>
+                    </li>
+                    <li class="outside">
+                    <div class="date">4</div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
 </html>
