@@ -1,9 +1,15 @@
 <?php  
     include "db_conn_software.php";
     //input
-    $user_account = $_REQUEST["user_account"];//"666";
-    $product_id = $_REQUEST["product_id"];//5;
+    $user_account = $_REQUEST["user_account"];//"407";
     $product_name = $_REQUEST["product_name"];
+
+    $query = ("SELECT product_id FROM product WHERE product_name = ?");
+    $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
+    $error = $stmt->execute(array($product_name)); //執行sql語法
+    $result = $stmt->fetchAll();
+
+    $product_id =$result[0][0]  ;
 
     //check cost
     $query = ("SELECT  product_price FROM product WHERE product_id = ?");
