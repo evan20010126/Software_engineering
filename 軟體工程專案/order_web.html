@@ -92,8 +92,8 @@
                                             <th>金額</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr id="order_ing">
+                                        <tbody id="order_ing">
+                                        <tr >
                                             <!-- <td>01</td>
                                             <td>12:00</td>
                                             <td>漢堡 薯條 薯餅</td>
@@ -172,16 +172,8 @@
 						</div>
 						
 						<div class="panel-body">
-							<ul>
-								<li>優惠卷1</li>
-								<li>2</li>
-								<li>期末成發12/19</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
+							<ul id="coupon_code_id">
+								<li>優惠卷code <span style="float: right;">-30$</span> </li>
 							</ul>
 						</div>	
 					</div>
@@ -240,15 +232,32 @@
                 var index = 0;
                 while(orderObj[index] != null){
                     var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_ing").innerHTML +=" <td>"+index+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td>";
+                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
                     index++;
                 }
             }
 			xmlhttp.open("GET", "php/user_order_ing.php?user_account=" + User_test);
             xmlhttp.send(); 
         }
+        function showCoupon(){
+			//
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+				var obj = this.responseText;
+				obj = obj.substring(11,obj.length);
+				var coupon_info = JSON.parse(obj);
+				var index;
+				while(coupon_info[index] != null){
+					document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].code+"<span style='float: right;'>"+coupon_info[index].discount+"$</span></li>";
+				}
+				//console.log(product_name_Array[button_index]);
+			}
+			xmlhttp.open("GET", "php/display_coupon.php");
+            xmlhttp.send(); 
+		}
         function start(){
             showOrderList_ing();
+            showCoupon();
         }
         window.addEventListener("load", start, false);
     </script>
