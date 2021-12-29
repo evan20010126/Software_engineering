@@ -39,12 +39,12 @@
             </li>
           </ul>
 		  
-		  <form class="navbar-form navbar-right">
+		  <!-- <form class="navbar-form navbar-right">
 			<div class="form-group has-feedback">
 				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
 			</div>
 			<button type="submit" class="btn btn-default">搜尋</button>
-		  </form>
+		  </form> -->
 		</div>
 	  </div>
 	</nav>
@@ -62,11 +62,22 @@
 		<div class="row">
 			<article>
 				<div class="col-sm-8">
-					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
-					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
+					<div>
+						<form class="navbar-form navbar-right">
+							<div class="form-group has-feedback">
+								<input type="search" class="form-control" placeholder="search" onkeyup="searching_function(this.value)">
+							</div>
+							<!-- <button type="submit" class="btn btn-default" onclick="searching_function(this.value)">搜尋</button> -->
+						</form>
+						<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+						
+					</div>
 					<hr>
 					<!-- 這邊是餐點 -->
-					<div class="col-sm-4">
+                    <p id="menu">
+
+                    </p>
+					<!-- <div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
 							<p><strong>Paris</strong></p>
@@ -89,16 +100,16 @@
 							<p>Friday 27 November 2015</p>
 							<button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
 						</div>
-					</div>
+					</div> -->
 					<!--  -->
 					<center>
 						<div class="col-sm-12">
 							<ul class="pagination">
-								<li><a>1</a></li>
-								<li><a>2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a>5</a></li>
+								<li><a onclick="page1()">1</a></li>
+								<li><a onclick="page2()">2</a></li>
+								<li><a onclick="page3()">3</a></li>
+								<li><a onclick="page4()">4</a></li>
+								<li><a onclick="page5()">5</a></li>
 							</ul>
 						</div>
 					</center>
@@ -187,6 +198,131 @@
 	</footer>
 	
 	
-	
+	<script>
+        var i = 0;	//display index
+		var k = 0;	//searching index
+		var is_searching = 0;
+		var searching_str = '';
+		var product_name_Array = {};
+		var coupon_code = "";
+        function showMenu() {
+            const xmlhttp = new XMLHttpRequest();
+            
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+				//console.log(obj);
+				obj = obj.substring(11,obj.length);
+				//console.log(obj);
+                var product = JSON.parse(obj);
+				console.log(product);
+				var j = 0;
+                for(;j<product.length;j++){
+					product_name_Array[j] = product[j]["product_name"];
+				}
+                //console.log(product[0]);
+				//console.log(product[0].product_pic);
+				document.getElementById("menu").innerHTML = '';
+				var max = i+6;
+				//display remain product
+                for(;i<max;i++){
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="'+i+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+                }
+            }
+			xmlhttp.open("GET", "php/display_menu.php");
+            //xmlhttp.responseType = 'json';
+            xmlhttp.send();
+        }
+		function page1(){
+			i = 0;
+			k = 0;
+			if(is_searching){
+				searching_function(searching_str);
+			}
+			else{
+				showMenu();
+			}
+		}
+		function page2(){
+			i = 6;
+			k = 6;
+			if(is_searching){
+				searching_function(searching_str);
+			}
+			else{
+				showMenu();
+			}
+		}
+		function page3(){
+			i = 12;
+			k = 12;
+			if(is_searching){
+				searching_function(searching_str);
+			}
+			else{
+				showMenu();
+			}
+		}
+		function page4(){
+			i = 18;
+			k = 18;
+			if(is_searching){
+				searching_function(searching_str);
+			}
+			else{
+				showMenu();
+			}
+		}
+		function page5(){
+			i = 24;
+			k = 24;
+			if(is_searching){
+				searching_function(searching_str);
+			}
+			else{
+				showMenu();
+			}
+		}
+        function searching_function(str){
+			searching_str = str;
+			if (str.length == 0) {
+				i = 0;
+				is_searching = 0;
+				showMenu();
+				return;
+			}
+			is_searching = 1;
+			console.log(str);
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+				obj = obj.substring(11,obj.length);
+				var product_searching = JSON.parse(obj);
+
+				for(var j=0;j<product_searching.length;j++){
+					product_name_Array[j] = product_searching[j].product_name;
+				}
+				var max = product_searching.length;
+				if(product_searching.length>6){
+					max = k+6;
+				}
+				document.getElementById("menu").innerHTML = '';
+				for(;k<max;k++){
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '</p><button id="'+k+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+					//k++;
+				}
+				//document.getElementById("totalPrice").innerHTML = sum;
+				
+			}
+			
+			xmlhttp.open("GET", "php/searching.php?q=" + str);
+            xmlhttp.send(); 
+		}
+        function start(){
+			i = 0;
+            showMenu();
+			//console.log(Date.now);
+        }
+        window.addEventListener( "load", start, false );
+    </script>
   </body>
 </html>
