@@ -17,7 +17,14 @@
     <nav class="navbar navbar-default">        
       <div class="container-fluid">
         <div class="navbar-header">
-		  <a class="navbar-brand" href="visitor_index.html">FBL</a>     
+		  <a class="navbar-brand" href="☆">FBL</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
         </div>
 		<div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -97,7 +104,7 @@
                                     </table>
                                 </div>
                                 <div class="panel-footer">
-                                    商標小典：較為普遍的說法是創業者費魯齊歐·藍寶堅尼出生於1916年4月28日，當天正巧屬於金牛座，故以此為徽章。近來，另有「蠻牛」（藍寶堅尼徽章）抗衡「躍馬」（法拉利徽章）的傳言產生。
+                                    FBL早餐店
                                 </div>			
                             </div>
                         </div>
@@ -119,7 +126,7 @@
                                             <th>金額</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="order_history">
                                         <tr>
                                             <!-- <td>01</td>
                                             <td>12:00</td>
@@ -130,7 +137,7 @@
                                     </table>
                                 </div>
                                 <div class="panel-footer">
-                                    商標小典：較為普遍的說法是創業者費魯齊歐·藍寶堅尼出生於1916年4月28日，當天正巧屬於金牛座，故以此為徽章。近來，另有「蠻牛」（藍寶堅尼徽章）抗衡「躍馬」（法拉利徽章）的傳言產生。
+                                    FBL早餐店
                                 </div>
                             </div>
                         </div>
@@ -182,13 +189,6 @@
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
-								<li>花枝羹</li>
-								<li>婷亭剉冰</li>
-								<li>和泰雜貨店</li>
-								<li>鬍鬚伯肉粽大王</li>
-								<li>麻將臭豆腐</li>
-								<li>呷天下</li>
-								<li>車輪餅</li>
 							</ul>
 						</div>
 					</div>
@@ -212,7 +212,7 @@
 	
 	
 	<script>
-        var User_test = "22222";
+        var User_test = "414";
         function showOrderList_ing(){
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
@@ -232,24 +232,58 @@
 			xmlhttp.open("GET", "php/user_order_ing.php?user_account=" + User_test);
             xmlhttp.send(); 
         }
+        function showOrderList_history(){
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+                console.log(obj);
+				obj = obj.substring(11,obj.length);
+				var orderObj = JSON.parse(obj);
+                console.log(orderObj);
+                document.getElementById("order_history").innerHTML = "";
+                var index = 0;
+                while(orderObj[index] != null){
+                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
+                    document.getElementById("order_history").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    index++;
+                }
+            }
+			xmlhttp.open("GET", "php/user_history_order.php?user_account=" + User_test);
+            xmlhttp.send(); 
+        }
         function showCoupon(){
 			//
 			const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
 				var obj = this.responseText;
+				
 				obj = obj.substring(11,obj.length);
+				console.log(obj);
 				var coupon_info = JSON.parse(obj);
-				var index;
+				console.log(coupon_info);
+				var index = 0;
+				document.getElementById("coupon_code_id").innerHTML = '';
 				while(coupon_info[index] != null){
-					document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].code+"<span style='float: right;'>"+coupon_info[index].discount+"$</span></li>";
+					console.log(typeof(coupon_info[index].is_persentoff));
+					console.log(coupon_info[index].is_persentoff);
+					if(coupon_info[index].is_persentoff == 1){
+						var disc = coupon_info[index].num * 10;
+						console.log("disc: "+disc);
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
+					}
+					else{
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>-"+coupon_info[index].num+"$</span></li>";
+					}
+					index++;
 				}
 				//console.log(product_name_Array[button_index]);
 			}
-			xmlhttp.open("GET", "php/display_coupon.php");
+			xmlhttp.open("GET", "php/show_coupon.php");
             xmlhttp.send(); 
 		}
         function start(){
             showOrderList_ing();
+            showOrderList_history();
             showCoupon();
         }
         window.addEventListener("load", start, false);
