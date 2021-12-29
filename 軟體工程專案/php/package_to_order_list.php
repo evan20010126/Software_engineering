@@ -37,7 +37,7 @@
     $product_list = "";
     $sum = 0;
     for($i = 0; $i < count($result); $i++){
-        $product_list .= $result[$i]["product_name"];
+        $product_list = $product_list . " " . $result[$i]["product_name"];
         $sum += $result[$i]["product_price"];
     }
     ///////////////////////////////////////
