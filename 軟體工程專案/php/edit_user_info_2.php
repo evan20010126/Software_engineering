@@ -1,7 +1,7 @@
 <?php
     include "db_conn_software.php";
 
-    $user_name = $_POST['user_name'];
+    $user_account = $_POST['user_account'];
     $email = $_POST['email'];
     $nickname = $_POST['nickname'];
     $phone = $_POST['phone'];
@@ -9,10 +9,8 @@
     $preference = $_POST['preference'];
 
     $query = ("UPDATE customer SET email=?, nickname=?, phone=?,birthday=?,preference=? WHERE user_account =?");
-    //執行結果儲存再 $result這個變數中
     $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
-    $error = $stmt->execute(); //執行sql語法
-    $result = $stmt->fetchAll();
+    $error = $stmt->execute(array($email,$nickname,$phone,$birthday,$preference,$user_account)); //執行sql語法
 
-    echo json_encode($result);
+    //沒有回傳值
 ?>
