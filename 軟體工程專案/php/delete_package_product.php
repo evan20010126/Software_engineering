@@ -4,11 +4,20 @@
     $user_account = $_REQUEST["user_account"];//"407";
     $product_id = $_REQUEST["product_id"];//4;
     
-    $query = ("SELECT  product_id01, product_id02, product_id03, product_id04, product_id05, product_id06, product_id07, product_id08, product_id09, product_id10 FROM package WHERE user_account = ?");
+    //check cost
+    $query = ("SELECT  product_price FROM product WHERE product_id = ?");
+    $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
+    $error = $stmt->execute(array($product_id)); //執行sql語法
+    $result = $stmt->fetchAll();
+    $cost = $result[0][0];
+
+    $query = ("SELECT  product_id01, product_id02, product_id03, product_id04, product_id05, product_id06, product_id07, product_id08, product_id09, product_id10 ,cost FROM package WHERE user_account = ?");
     $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
     $error = $stmt->execute(array($user_account)); //執行sql語法
     $result = $stmt->fetchAll();
     
+    $cost = $result[0][10] - $cost ;
+
     if($result == NULL){
         $bool = -1;//not find user
         echo json_encode($bool);
@@ -41,6 +50,11 @@
                 $query = ("UPDATE package SET product_id10 = ? WHERE user_account = ?");
                 $stmt = $db->prepare($query);     
                 $error = $stmt->execute(array(NULL,$user_account)); 
+
+                $query = ("UPDATE package SET cost = ? WHERE user_account = ?");
+                $stmt = $db->prepare($query);     
+                $error = $stmt->execute(array($cost,$user_account));
+
                 $bool = 1;//shopping car have >=2 product need to reduce it
                 echo json_encode($bool);
             }
