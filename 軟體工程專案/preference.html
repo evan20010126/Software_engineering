@@ -49,40 +49,139 @@
     </div>
     <span>&nbsp</span><hr>
     <!--內容區-->
+    <!-- tab linker：菜單偏好設定 -->
     <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-tab active" data-toggle="tab" href="#home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" style="">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">菜單偏好設定</a>
+        <div class="dropdown-menu">
+            <p><a class="dropdown-item" href ="#">特餐餐點</a></p>
+            <p><a class="dropdown-item" href="#">中西餐點</a></p>
+            <a class="dropdown-item" href="#">漢堡湯種</a>
+            <div class="dropdown-divider"><hr></div>
+            <p><a class="dropdown-item" href="#">午茶時光</a></p>
+            <p><a class="dropdown-item" href="#">精選飲品</a></p>
         </div>
       </li>
+      <!-- tab linker：客製化輸入 -->
+      <li class="nav-item in active">
+        <a class="nav-link" data-toggle="tab" href="#custom_input">客製化輸入</a>
+      </li>
     </ul>
-    <div class="tab show">
-      <div class="tab fade in active" id="home">
-        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-      </div>
-      <div class="tab fade" id="profile">
-        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-      </div>
-      <div class="tab fade" id="dropdown1">
-        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
-      </div>
-      <div class="tab fade" id="dropdown2">
-        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+    <div class="tab">
+    <!-- tab list：產品一覽 -->
+      <div class="tab fade" id="special_food">
+        <ul class="nav nav-tabs">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">菜單偏好設定</a>
+          </li>
+        </ul>
+            <div class="dropdown-menu">
+          <a class="dropdown-item nav-link dropdown-toggle" id ="special_food">產品一覽</a>
+        </div>
       </div>
     </div>
-    
+    <!-- tab list content(id = custom_input)：客製化輸入 -->
+        <div class="tab fade in active" id="custom_input">
+        <!-- custom_input標頭 -->
+        <div class = "row" >
+          <div class = "col-md-12">
+              <h1>
+                想要告訴店家需要什麼？
+              </h1>
+              <h3>
+                請把想要客製化的敘述輸入在下方
+              </h3>
+              <p>我們的店家會在接受訂單時看到您的需求，盡可能滿足您的需求</p>
+              <p>輕鬆鬆鬆完成客製化</p>
+          </div>
+        <!-- custom_input內容 -->
+        <!-- 第一區 -->
+            <div class="col-md-4 well">
+                <h2>
+                    主餐
+                </h2>
+                <form role="form">
+                  <div class="form-group">
+                    
+                    <label for="exampleInputEmail1">
+                      e.g. 主餐撇除麵類本來就有的醬，一律不加醬，包括醬油、番茄醬、甜辣醬
+                    </label>
+                    <input type="text" class="form-control" id="text" />
+                  </div>
+            </div>
+        <!-- 第二區 -->
+
+            <div class="col-md-4">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h4>飲料</h4>
+                </div>
+                <div class="panel-body">Panel Content
+                  <li>
+                    <label>
+                    e.g. 飲料
+                  </label>
+                </li>
+                <div class = "col-md-6"><ol class = "list-unstyled"> 
+                  <li ><h3>甜度</h3></li>
+                  <li><input type="checkbox" /> 全糖</li>
+                  <li><input type="checkbox" /> 少糖</li>
+                  <li><input type="checkbox" /> 半糖</li>
+                  <li><input type="checkbox" /> 微糖</li>
+                  <li><input type="checkbox" /> 無糖</li>
+                </ol>
+              </div>
+              <div class = "col-md-6"><ol class = "list-unstyled"> 
+                <ol class = "list-unstyled"> <li ><h3>冰塊</h3></li>
+                  <li><input type="checkbox" /> 正常</li>
+                  <li><input type="checkbox" /> 少冰</li>
+                  <li><input type="checkbox" /> 去冰</li>
+                  <li><input type="checkbox" /> 不冰</li>
+                </ol>
+              </div>
+                </div>
+              </div>  
+            </div>  
+           <!-- 第三區 -->
+           <div class="col-md-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h4>其它</h4>
+              </div>
+              <div class="panel-body">
+                <ol class = "list-unstyled">
+                  <li><h3>e.g. 菜色建議：米漢堡 e.t.c</h3></li>
+                  <li>
+                    <label for="exampleInputEmail1">對店家的建議</label>
+                    <input type="text" class="form-control" id="feedback" />
+                  </li>
+                </ol>
+              </div>
+            </div>  
+          </div>  
+
+              <!-- <div class="card-deck mb-3 text-center"> <div class="card box-shadow">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Pro</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>20 users included</li>
+                    <li>10 GB of storage</li>
+                    <li>Priority email support</li>
+                    <li>Help center access</li>
+                  </ul>
+                  <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+                </div>
+                </div>
+               </div> -->
+              <div class = "row">
+                <div class = "col-md-12"> 
+                  <button  type="submit" class="btn btn-primary float:left">全部儲存</button> 
+                </div>
+              </div>
+          </div>        
+        </div>        
+    </div>  
 </html>
