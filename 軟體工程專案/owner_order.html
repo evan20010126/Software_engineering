@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>檢視訂單</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    	body {font-family: 微軟正黑體;}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">        
+      <div class="container-fluid">
+        <div class="navbar-header">
+		  <a class="navbar-brand" href="☆">FBL</a>
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">導覽按鈕</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+          </button>          
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+		    <li><a href="store_owner_manage.html">Manage Menu</a></li>
+              <li><a href="">還沒想好</a></li>
+              <li class="active"><a href="owner_order.html">檢視訂單</a></li>
+          </ul>
+		  	<ul class = "nav navbar-nav navbar-right">
+			  <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+              <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="Account_Setting.html">Account Setting</a></li>
+                <li><a href="preference.html">My preference Setting</a></li>
+				<li><a href="customer_sign_in.html">Sign in</a></li>
+				<li><a href="#">Sign out</a></li>
+			</ul>
+            </li>
+		  </ul>
+		  
+		  <!-- <form class="navbar-form navbar-right">
+			<div class="form-group has-feedback">
+				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-default">搜尋</button>
+		  </form> -->
+		</div>
+	  </div>
+	</nav>
+	
+	<!--頁首-->
+	<header>
+		<div class="container">
+			<h1>檢視訂單</h1>
+			<p class="lead">下標</p>
+			<hr>
+		</div>
+	</header>
+	<!--內容區-->
+	<div class="container">
+		<div class="row">
+			<article>
+				<div class="col-sm-8">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">進行中</a></li>	
+                        <li ><a href="#tab2" data-toggle="tab">歷史訂單</a></li>
+                        
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h1>進行中</h1>
+                                    <br>
+                                    <!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>訂單編號</th>
+                                            <th>下訂時間</th>
+                                            <th>下訂清單</th>
+                                            <th>客製化</th>
+                                            <th>金額</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="order_ing">
+                                        <tr >
+                                            <!-- <td>01</td>
+                                            <td>12:00</td>
+                                            <td>漢堡 薯條 薯餅</td>
+                                            <td>漢堡 薯條 薯餅不加醬</td>
+                                            <td>160</td> -->
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                    FBL早餐店
+                                </div>			
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h1>歷史訂單</h1>
+                                    <br>
+                                        <!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>訂單編號</th>
+                                            <th>下訂時間</th>
+                                            <th>下訂清單</th>        
+                                            <th>金額</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="order_history">
+                                        <tr>
+                                            <!-- <td>01</td>
+                                            <td>12:00</td>
+                                            <td>漢堡 薯條 薯餅</td>
+                                            <td>160</td> -->
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                    FBL早餐店
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</article>
+			
+			<aside>
+				<div class="col-sm-3 col-sm-offset-1">
+					<!-- <div class="panel panel-success">
+						<div class="panel-heading">
+							<h3>購物車</h3>
+						</div>
+						<div class="panel-body">
+							<ul>
+								<li>商品</li>
+								<li>商品</li>
+								<li>商品</li>
+								<li>寒假：
+									<ol type="I">
+										<li>寒訓</li>
+										<li>寒訓盃</li>
+									</ol>
+								</li>
+							</ul>
+							<button value="submit">結帳</button>
+						</div>
+					</div> -->
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h3>優惠卷</h3>
+						</div>
+						
+						<div class="panel-body">
+							<ul id="coupon_code_id">
+								<li>優惠卷code <span style="float: right;">-30$</span> </li>
+							</ul>
+						</div>	
+					</div>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3>FBL早餐店</h3>
+							<br>[海大店]
+						</div>
+							
+						<div class="panel-body">
+							<ul>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+								<li>此處引入php店家資訊</li>
+							</ul>
+						</div>
+					</div>
+					
+
+				</div>
+			</aside>
+		</div>	
+	</div>
+	<hr>
+	
+	
+	
+	<!--頁尾-->
+	<footer>
+		<div class="container">
+			<p>♂海洋大學 &middot; 資工系 &middot; 軟體工程專案♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+
+		</div>
+	</footer>
+	
+	
+	<script>
+        var boss_account = "evan";
+        function showOrderList_ing(){
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+                console.log(obj);
+				obj = obj.substring(11,obj.length);
+				var orderObj = JSON.parse(obj);
+                console.log(orderObj);
+                document.getElementById("order_ing").innerHTML = "";
+                var index = 0;
+                while(orderObj[index] != null){
+                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
+                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    index++;
+                }
+            }
+			xmlhttp.open("GET", "php/boss_order_ing.php");
+            xmlhttp.send(); 
+        }
+        function showOrderList_history(){
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+                console.log(obj);
+				obj = obj.substring(11,obj.length);
+				var orderObj = JSON.parse(obj);
+                console.log(orderObj);
+                document.getElementById("order_history").innerHTML = "";
+                var index = 0;
+                while(orderObj[index] != null){
+                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
+                    document.getElementById("order_history").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    index++;
+                }
+            }
+			xmlhttp.open("GET", "php/boss_history_order.php");
+            xmlhttp.send(); 
+        }
+        function showCoupon(){
+			//
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+				var obj = this.responseText;
+				
+				obj = obj.substring(11,obj.length);
+				console.log(obj);
+				var coupon_info = JSON.parse(obj);
+				console.log(coupon_info);
+				var index = 0;
+				document.getElementById("coupon_code_id").innerHTML = '';
+				while(coupon_info[index] != null){
+					console.log(typeof(coupon_info[index].is_persentoff));
+					console.log(coupon_info[index].is_persentoff);
+					if(coupon_info[index].is_persentoff == 1){
+						var disc = coupon_info[index].num * 10;
+						console.log("disc: "+disc);
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
+					}
+					else{
+						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>-"+coupon_info[index].num+"$</span></li>";
+					}
+					index++;
+				}
+				//console.log(product_name_Array[button_index]);
+			}
+			xmlhttp.open("GET", "php/show_coupon.php");
+            xmlhttp.send(); 
+		}
+        function start(){
+            showOrderList_ing();
+            showOrderList_history();
+            showCoupon();
+        }
+        window.addEventListener("load", start, false);
+    </script>
+  </body>
+</html>
