@@ -328,8 +328,22 @@
             	//xmlhttp.responseType = 'json';
             xmlhttp.send(); 
 		}
+		// product_name_to_id(product_name_Array[button_index]).then(
+		// 		function(pro_id){
+		// 			//console.log("addfunc_id:" + p_id );
+		// 			const xmlhttp = new XMLHttpRequest();
+		// 			xmlhttp.onload = function() {
+		// 				//console.log(product_name_Array[button_index]);
+						
+		// 				showPackage();
+		// 				//window.location.reload();
+		// 			}
+		// 			xmlhttp.open("GET", "php/add_to_Package.php?user_account="+ User_test +"&product_id=" + pro_id);
+		// 			xmlhttp.send(); 
+		// 		}
+		// 	);
 		function addToPackage(button_index){
-			product_name_to_id(product_name_Array[button_index]);
+			//product_name_to_id(product_name_Array[button_index]);
 			//console.log("addfunc_id:" + p_id );
 			const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
@@ -338,20 +352,25 @@
 				showPackage();
 				//window.location.reload();
 			}
-			xmlhttp.open("GET", "php/add_to_Package.php?user_account="+ User_test +"&product_id=" + p_id);
+			xmlhttp.open("GET", "php/add_to_Package.php?user_account="+ User_test +"&product_name=" + product_name_Array[button_index]);
             xmlhttp.send(); 
 			
 		}
 		function delete_package_product(del_product_name){
-			product_name_to_id(del_product_name);
-			console.log("del_pid:" + p_id);
+			//product_name_to_id(del_product_name);
+			//console.log("del_pid:" + p_id);
 			const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
 				console.log("deleteFunc: "+this.responseText);
-				showPackage();
+				var x = this.responseText;
+				if(x==-1){
+					document.getElementById("package").innerHTML = '';
+				}
+				else
+					showPackage();
 				//window.location.reload();
 			}
-			xmlhttp.open("GET", "php/delete_package_product.php?user_account=" + User_test +"&product_id=" + p_id);
+			xmlhttp.open("GET", "php/delete_package_product.php?user_account=" + User_test +"&product_name=" + product_name_Array[del_product_name]);
             xmlhttp.send(); 
 		}
 		function searching_function(str){
@@ -396,10 +415,12 @@
 				p_id = this.responseText;
 				p_id = p_id.substring(22,p_id.length);
 				console.log("onload:" + p_id);
+				
 			}
 			xmlhttp.open("GET", "php/check_id.php?product_name=" + name_str);
             xmlhttp.send(); 
-			console.log("p_id= " + p_id);
+			//console.log("p_id= " + p_id);
+			//return p_id;
 		}
 		function checkOut(){
 			var timestamp = Date.now();
@@ -414,11 +435,12 @@
 			const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
 				console.log(time);
+				showPackage();
 			}
 			
 			xmlhttp.open("GET", "php/package_to_order_list.php?q="+ User_test + "&s=" + coupon_code + "&r=" + time);
             xmlhttp.send(); 
-			showPackage();
+			
 		}
 		function showCoupon(){
 			//
