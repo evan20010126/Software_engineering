@@ -11,14 +11,23 @@
     $result = $stmt->fetchAll();                //將所有搜尋結果存於result
     /*---------------------connect database & prepare statement----------------------*/
     $product_arr = array();
-    for ($i = 0; $i < count($result[0]); $i++) 
+    for ($i = 0; $i < 10 & $result[0][$i]!=NULL ; $i++) 
     {
-        if (isset($result[0][$i])){
-            array_push($product_arr, $result[0][$i]);        
-        }
+        array_push($product_arr, $result[0][$i]);        
     }
-    
-    if(count($product_arr) != 0){ //如果購物車裡面有東西才抓說產品的名稱跟價錢
+    //echo json_encode($product_arr);
+    $output_arr = array();
+    for($i = 0 ; $i <count($product_arr); $i++){
+        $query = ("SELECT  product_name,product_price FROM product WHERE product_id = ? ");
+        $stmt = $db->prepare($query);
+        $error = $stmt->execute(array($product_arr[$i])); //product_arr本身就是陣列
+        //echo($product_arr[$i])
+        $result = $stmt->fetchAll();
+        array_push($output_arr, array($result[0][0],$result[0][1]));
+    }
+    echo json_encode($output_arr);
+ 
+    /*if(count($product_arr) != 0){ //如果購物車裡面有東西才抓說產品的名稱跟價錢
         // $product_arr
         $space = "?"; //因為一定有東西才會跑進來
         for ($i = 1; $i < count($product_arr); $i++){
@@ -30,10 +39,8 @@
         $result = $stmt->fetchAll();
 
     }
-    
-
-    echo json_encode($result);
+    echo json_encode($result);*/
     // json_encode
-    [{product_name,product_price} , {...}, {...}]
+    //[{product_name,product_price} , {...}, {...}]
     //cout << 購物車內的product_
 ?> 
