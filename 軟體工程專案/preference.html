@@ -3,116 +3,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>偏好設定</title>
+        <title>客製化設定</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 </head>
-<style>
-    /*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
-.clearfix::after,
-.calendar ol::after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-/* ================
-Calendar Styling */
-.calendar {
-  border-radius: 10px;
-}
-
-.month {
-  font-size: 2rem;
-}
-
-@media (min-width: 992px) {
-  .month {
-    font-size: 3.5rem;
-  }
-}
-.calendar ol li {
-  float: left;
-  width: 14.28571%;
-}
-
-.calendar .day-names {
-  border-bottom: 1px solid #eee;
-}
-
-.calendar .day-names li {
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.calendar .days li {
-  border-bottom: 1px solid #eee;
-  min-height: 8rem;
-}
-
-.calendar .days li .date {
-  margin: 0.5rem 0;
-}
-
-.calendar .days li .event {
-  font-size: 0.75rem;
-  padding: 0.4rem;
-  color: white;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 4rem;
-  margin-bottom: 1px;
-}
-
-.calendar .days li .event.span-2 {
-  width: 200%;
-}
-
-.calendar .days li .event.begin {
-  border-radius: 1rem 0 0 1rem;
-}
-
-.calendar .days li .event.end {
-  border-radius: 0 1rem 1rem 0;
-}
-
-.calendar .days li .event.clear {
-  background: none;
-}
-
-.calendar .days li:nth-child(n+29) {
-  border-bottom: none;
-}
-
-.calendar .days li.outside .date {
-  color: #ddd;
-}
-
-/*
-*
-* ==========================================
-* 使用者提示文字
-* ==========================================
-*
-*/
-body {
-  /* min-height: 100vh;*/
-  background-color: #3ca55c; 
-  background-image: linear-gradient(147deg, #3ca55c 0%, #b5ac49 100%);
-}
-</style>
     <nav class= "navbar navbar-default">        
         <div class= "container-fluid">
             <div class= "navbar-header">
@@ -139,7 +36,7 @@ body {
                             <li><a href="Account_Setting.html">Account Setting</a></li>
                             <li><a href="preference.html">My preference Setting</a></li>
                             <li><a href="customer_sign_in.html">Sign in</a></li>
-                            <li><a href="vistor_index.html">Sign out</a></li>
+                            <li><a href="visitor_index.html">Sign out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -156,190 +53,43 @@ body {
                 <p class="lead">OOXX@gmail.com</p>  
             </header>
         </div>
-        <div class = "col-sm-4">
-            <div class="card text-white bg-info mb-3" style="font-size:2em;max-width: 20rem; max-height: 100rem;">
-                <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" data-parent="#card-342570" href="#card-element-360127">客製化設定</a>
-                </div>
-                <div id="card-element-360127" class="collapse collapsing ">
-                    <div class="card-body">
-                        <a href = "#">購物車</a>
-                    </div>
-                    <div class="card-element-360127">
-                        <a href = "#">優惠卷</a>
-                    </div>
-                    <div class="card-element-360127">
-                        <a href = "#">歷史訂單</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                <div class="card-header"></div>
-                <div class="card-body">
-                  <h4 class="card-title">個人化設定</h4>
-                    第一個超連結-->
-                    <!-- <div class="col-md-12"> -->
-
-                    <!-- </div> -->
-                    <!-- <p class="card-text"><a href = "#">優惠卷</a> -->
-
-                    <!-- </p>  -->
-
-
-                    <!-- <p class="card-text"><a href = "#">購物車</a> -->
-
-
-                    <!-- </p> -->
-                <!-- </div> -->
-            <!-- </div> --> 
-            <!-- </div> -->           
-        </div>
     </div>
     <span>&nbsp</span><hr>
     <!--內容區-->
-    <!--\\\\\\\\\\ 日歷 ////////-->
-    <div class="container py-5">
-        <div class="row">  
-        
-        <!-- For Demo Purpose -->
-        <header class="text-center text-white mb-5">
-          <h1>每週早餐</h1>
-          <p class="font-italic mb-0"新的一天，由美好的早晨開始</p>
-          <p class="font-italic">以下進行預定<a href="food_menu.html" class="text-white">
-              <u>想不到要吃什麼嗎？</u></a>
-          </p>
-        </header>   
-            <!-- Calendar -->
-            <div class="calendar shadow bg-white p-5">
-            <div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
-                <h2 class="month font-weight-bold mb-0 text-uppercase">December 2019</h2>
-            </div>
-            <p class="font-italic text-muted mb-5">No events for this day.</p>
-            <ol class="day-names list-unstyled">
-                <li class="font-weight-bold text-uppercase">Sun</li>
-                <li class="font-weight-bold text-uppercase">Mon</li>
-                <li class="font-weight-bold text-uppercase">Tue</li>
-                <li class="font-weight-bold text-uppercase">Wed</li>
-                <li class="font-weight-bold text-uppercase">Thu</li>
-                <li class="font-weight-bold text-uppercase">Fri</li>
-                <li class="font-weight-bold text-uppercase">Sat</li>
-            </ol>
-                <ol class="days list-unstyled">
-                    <li>
-                    <div class="date">1</div>
-                    <div class="event bg-primary">Event with Long Name</div>
-                    </li>
-                    <li>
-                    <div class="date">2</div>
-                    </li>
-                    <li>
-                    <div class="date">3</div>
-                    </li>
-                    <li>
-                    <div class="date">4</div>
-                    </li>
-                    <li>
-                    <div class="date">5</div>
-                    </li>
-                    <li>
-                    <div class="date">6</div>
-                    </li>
-                    <li>
-                    <div class="date">7</div>
-                    </li>
-                    <li>
-                    <div class="date">8</div>
-                    </li>
-                    <li>
-                    <div class="date">9</div>
-                    </li>
-                    <li>
-                    <div class="date">10</div>
-                    </li>
-                    <li>
-                    <div class="date">11</div>
-                    </li>
-                    <li>
-                    <div class="date">12</div>
-                    </li>
-                    <li>
-                    <div class="date">13</div>
-                    <div class="event bg-primary">Event Name</div>
-                    <!-- <div class="event all-day begin span-2 bg-warning">Event Name</div> -->
-                    </li>
-                    <li>
-                    <div class="date">14</div>
-                    </li>
-                    <li>
-                    <div class="date">15</div>
-                    <div class="event bg-primary">Event Name</div>
-                    </li>
-                    <li>
-                    <div class="date">16</div>
-                    </li>
-                    <li>
-                    <div class="date">17</div>
-                    </li>
-                    <li>
-                    <div class="date">18</div>
-                    </li>
-                    <li>
-                    <div class="date">19</div>
-                    </li>
-                    <li>
-                    <div class="date">20</div>
-                    </li>
-                    <li>
-                    <div class="date">21</div>
-                    <div class="event bg-primary">Event Name</div>
-                    </li>
-                    <li>
-                    <div class="date">22</div>
-                    <div class="event bg-primary">Event with Longer Name</div>
-                    </li>
-                    <li>
-                    <div class="date">23</div>
-                    </li>
-                    <li>
-                    <div class="date">24</div>
-                    </li>
-                    <li>
-                    <div class="date">25</div>
-                    </li>
-                    <li>
-                    <div class="date">26</div>
-                    </li>
-                    <li>
-                    <div class="date">27</div>
-                    </li>
-                    <li>
-                    <div class="date">28</div>
-                    </li>
-                    <li>
-                    <div class="date">29</div>
-                    </li>
-                    <li>
-                    <div class="date">30</div>
-                    </li>
-                    <li>
-                    <div class="date">31</div>
-                    </li>
-                    <li class="outside">
-                    <div class="date">1</div>
-                    </li>
-                    <li class="outside">
-                    <div class="date">2</div>
-                    </li>
-                    <li class="outside">
-                    <div class="date">3</div>
-                    </li>
-                    <li class="outside">
-                    <div class="date">4</div>
-                    </li>
-                </ol>
-            </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-tab active" data-toggle="tab" href="#home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu" style="">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
         </div>
+      </li>
+    </ul>
+    <div class="tab show">
+      <div class="tab fade in active" id="home">
+        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+      </div>
+      <div class="tab fade" id="profile">
+        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+      </div>
+      <div class="tab fade" id="dropdown1">
+        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+      </div>
+      <div class="tab fade" id="dropdown2">
+        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+      </div>
     </div>
     
 </html>
