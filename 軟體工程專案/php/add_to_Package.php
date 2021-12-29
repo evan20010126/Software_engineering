@@ -3,6 +3,7 @@
     //input
     $user_account = $_REQUEST["user_account"];//"666";
     $product_id = $_REQUEST["product_id"];//5;
+    $product_name = $_REQUEST["product_name"];
 
     //check cost
     $query = ("SELECT  product_price FROM product WHERE product_id = ?");
