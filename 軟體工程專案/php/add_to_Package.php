@@ -3,7 +3,6 @@
     //input
     $user_account = $_REQUEST["user_account"];//"666";
     $product_id = $_REQUEST["product_id"];//5;
-    $T_stamp = $_REQUEST["T_stamp"];//'1970-01-01 08:00:00';
 
     //check cost
     $query = ("SELECT  product_price FROM product WHERE product_id = ?");
@@ -18,9 +17,9 @@
     $result = $stmt->fetchAll();
 
     if($result == NULL){
-        $query = ("INSERT INTO package (user_account, product_id01, cost, T_stamp)VALUES (?,?,?,?)");
+        $query = ("INSERT INTO package (user_account, product_id01, cost)VALUES (?,?,?)");
         $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
-        $error = $stmt->execute(array($user_account,$product_id,$cost,$T_stamp)); //執行sql語法
+        $error = $stmt->execute(array($user_account,$product_id,$cost)); //執行sql語法
         $bool = 0;//not find user creat
         echo json_encode($bool);
     }
