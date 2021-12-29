@@ -34,4 +34,6 @@
 
     echo json_encode($result);
     // json_encode
-?>
+    [{product_name,product_price} , {...}, {...}]
+    //cout << 購物車內的product_
+?> 
