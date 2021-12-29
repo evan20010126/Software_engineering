@@ -16,14 +16,16 @@
         array_push($product_arr, $result[0][$i]);        
     }
     //echo json_encode($product_arr);
-    $output_arr = array();
+    //$output_arr = array();
     for($i = 0 ; $i <count($product_arr); $i++){
         $query = ("SELECT  product_name,product_price FROM product WHERE product_id = ? ");
         $stmt = $db->prepare($query);
         $error = $stmt->execute(array($product_arr[$i])); //product_arr本身就是陣列
         //echo($product_arr[$i])
         $result = $stmt->fetchAll();
-        array_push($output_arr, array($result[0][0],$result[0][1]));
+        $output_arr[$i]["product_name"] = $result[0][0];
+        $output_arr[$i]["product_price"] = $result[0][1];
+        //array_push($output_arr, array($result[0][0],$result[0][1]));
     }
     echo json_encode($output_arr);
  
