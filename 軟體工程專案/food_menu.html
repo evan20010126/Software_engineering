@@ -154,16 +154,8 @@
 						</div>
 						
 						<div class="panel-body">
-							<ul>
-								<li>優惠卷1</li>
-								<li>2</li>
-								<li>期末成發12/19</li>
-								<li>寒假：
-									<ol type="I">
-										<li>寒訓</li>
-										<li>寒訓盃</li>
-									</ol>
-								</li>
+							<ul id="coupon_code_id">
+								<li>優惠卷1<span style="float: right;">-30$</span></li>
 							</ul>
 						</div>	
 					</div>
@@ -302,16 +294,18 @@
 				//console.log(obj);
                 var package_obj = JSON.parse(obj);
                 
-                //console.log(package_obj);
+                console.log(package_obj);
 				//console.log(package_obj[0].product_name);
 				//display first product
 				document.getElementById("package").innerHTML = '';
 				//display remain product
 				var index = 0;
+
                 while(package_obj[index].product_name != null){
                     document.getElementById("package").innerHTML += '<li>'+ package_obj[index].product_name +': <span style="float: right;">'+ package_obj[index].product_price +' $</span></li>';
 					index++;
 				}
+				//console.log(coupon_code);
 				showPackageSum();
             }
             
@@ -327,7 +321,7 @@
 				
 			}
 			
-			//console.log(coupon_code);
+			console.log(coupon_code);
 			xmlhttp.open("GET", "php/package_sum.php?q=" + User_test + "&s=" + coupon_code);
             	//xmlhttp.responseType = 'json';
             xmlhttp.send(); 
@@ -371,17 +365,48 @@
 		}
 		function addToPackage(button_index){
 			const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {}
-			xmlhttp.open("GET", "php/.php?q="+ User_test +"&p=" + product_name_Array[button_index]);
+            xmlhttp.onload = function() {
+				console.log(product_name_Array[button_index]);
+				showPackage();
+			}
+			xmlhttp.open("GET", "php/add_to_Package.php?user_account="+ User_test +"&product_id=" + product_name_Array[button_index]);
+            xmlhttp.send(); 
+			
+		}
+		function checkOut(){
+			var timestamp = Date.now();
+			var date = new Date(timestamp);
+			var time = date.getFullYear() +
+          		"-"+(date.getMonth()+1)+
+         		"-"+date.getDate()+
+         		"-"+date.getHours()+
+        		"-"+date.getMinutes()+
+        		"-"+date.getSeconds();	
+
+			const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+				console.log(time);
+			}
+			
+			xmlhttp.open("GET", "php/package_to_order_list.php?q="+ User_test + "&s=" + coupon_code + "&r=" + time);
             xmlhttp.send(); 
 			showPackage();
 		}
-		function checkOut(){
+		function showCoupon(){
+			//
 			const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {}
-			xmlhttp.open("GET", "php/package_to_order_list.php?q="+ User_test + "&s=" + coupon_code + "&r=");
+            xmlhttp.onload = function() {
+				var obj = this.responseText;
+				obj = obj.substring(11,obj.length);
+				var coupon_info = JSON.parse(obj);
+				var index;
+				while(coupon_info[index] != null){
+					document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].code+"<span style='float: right;'>"+coupon_info[index].discount+"$</span></li>";
+				}
+				//console.log(product_name_Array[button_index]);
+			}
+			xmlhttp.open("GET", "php/display_coupon.php");
             xmlhttp.send(); 
-			showPackage();
 		}
 		function use_coupon(coupon_str){
 			//console.log(coupon_str);
@@ -394,7 +419,8 @@
             showMenu();
 			showPackage();
 			showPackageSum();
-			console.log(Date.now);
+			showCoupon();
+			//console.log(Date.now);
         }
         window.addEventListener( "load", start, false );
     </script>
