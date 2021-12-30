@@ -11,7 +11,7 @@
     $result = $stmt->fetchAll();                //將所有搜尋結果存於result
     /*---------------------connect database & prepare statement----------------------*/
     $product_arr = array();
-    for ($i = 0; $i < 10 & $result[0][$i]!=NULL ; $i++) 
+    for ($i = 0; $i < 10 && $result[0][$i]!=NULL ; $i++) 
     {
         array_push($product_arr, $result[0][$i]);        
     }
