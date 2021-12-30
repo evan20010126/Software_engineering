@@ -1,10 +1,38 @@
 <?php
-    /*---------------------connect database & prepare statement----------------------*/
-    include "db_conn_software.php";
 
+    include "db_conn_software.php";
     $user_account = $_REQUEST["q"]; //web passing URL q=
     $coupon_code = $_REQUEST["s"]; //web passing URL s=
     $T_stamp = $_REQUEST["r"]; //web passing URL r=
+    /*---------------------to give sum----------------------*/
+    
+    $query = ("SELECT cost FROM package WHERE user_account =  ? ");
+    $stmt = $db->prepare($query);           //db為db_conn.php新建的連線物件 
+    $error = $stmt->execute(array($user_account)); //用array去傳進?
+    $result = $stmt->fetchAll();                //將所有搜尋結果存於result
+    if($result != NULL){
+        $nowtotal = $result[0][0];
+        if ($coupon_code != NULL){
+            $query = ("SELECT  * FROM coupon WHERE coupon_code = ? ");
+            $stmt = $db->prepare($query);
+            $error = $stmt->execute(array($coupon_code)); 
+            $result = $stmt->fetchAll();
+            if(isset($result[0])){
+                if($result[0]["is_persentoff"] == 1){
+                    $nowtotal = ceil($nowtotal * $result[0]["num"]);
+                }
+                else{
+                    $nowtotal = $nowtotal - $result[0]["num"];
+                }
+            }
+        }
+        echo json_encode($nowtotal);
+    }
+    else{
+        echo json_encode("error about give sum.\n");
+    }
+//------------------------------------------------------------------------------------
+    
     
     $query = ("SELECT  product_id01, product_id02, product_id03, product_id04, product_id05, product_id06, product_id07, product_id08, product_id09, product_id10 FROM package WHERE user_account =  ? ");
     $stmt = $db->prepare($query);           //db為db_conn.php新建的連線物件 
