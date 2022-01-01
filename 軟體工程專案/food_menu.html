@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- button -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
 	<!-- <script type="text/javascript">
@@ -30,11 +33,20 @@
 			transition-duration: 0.4s;
 			text-decoration: none;
 		}
-		.del_button {
-			font-size: 1px;
-			width: 1px;
-			height: 17px;
-		}
+		.btn_trash {
+            background-color:white;
+            border: none;
+            color: black;
+            padding: 1px 1px;
+            font-size: 4px;
+            cursor: pointer;
+            }
+
+            /* Darker background on mouse-over */
+            .btn_trash:hover {
+			color: white;
+            background-color:red;
+         }
     </style>
   </head>
   <body>
@@ -229,7 +241,7 @@
 				var max = i+6;
 				//display remain product
                 for(;i<max;i++){
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="'+i+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="'+i+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Cart</button> </div> </div>';
                 }
             }
 			xmlhttp.open("GET", "php/display_menu.php");
@@ -304,11 +316,11 @@
 				showPackageSum();
                 while(package_obj[index].product_name != null){
 
-                    document.getElementById("package").innerHTML += '<li>'+ package_obj[index].product_name +': <span style="float: right;">'+ package_obj[index].product_price +' $<button id="'+ package_obj[index].product_name +'" onclick="delete_package_product(this.id)" class="del_button" >X</button></span></li>';
+                    document.getElementById("package").innerHTML += '<li>'+ package_obj[index].product_name +': <span style="float: right;">'+ package_obj[index].product_price +' $<button id="'+ package_obj[index].product_name +'" onclick="delete_package_product(this.id)" style="float: right;" class="btn_trash" ><i class="fa fa-trash"></i></button></span>';
 					index++;
 				}
 				//console.log(coupon_code);
-				
+				//style="float: right;" class="btn_trash" ><i class="fa fa-trash"></i></button>
             }
             
 			xmlhttp.open("GET", "php/display_package.php?q=" + User_test);
@@ -388,10 +400,12 @@
 			console.log(str);
 			const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
+				console.log("enter searching onload");
                 var obj = this.responseText;
+				console.log(obj);
 				obj = obj.substring(11,obj.length);
 				var product_searching = JSON.parse(obj);
-
+				console.log(product_searching);
 				for(var j=0;j<product_searching.length;j++){
 					product_name_Array[j] = product_searching[j].product_name;
 				}
@@ -401,7 +415,7 @@
 				}
 				document.getElementById("menu").innerHTML = '';
 				for(;k<max;k++){
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '</p><button id="'+k+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '</p><button id="'+k+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Cart</button> </div> </div>';
 				}
 				//document.getElementById("totalPrice").innerHTML = sum;
 			}

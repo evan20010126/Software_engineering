@@ -9,9 +9,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <!-- button -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     	body {font-family: 微軟正黑體;}
+        .btn_trash {
+            background-color:white;
+            border: none;
+            color: black;
+            padding: 3px 7px;
+            font-size: 16px;
+            cursor: pointer;
+            }
+
+            /* Darker background on mouse-over */
+            .btn_trash:hover {
+			color: white;
+            background-color:red;
+         }
     </style>
   </head>
   <body>
@@ -239,7 +255,7 @@
 				var max = i+6;
 				//display remain product
                 for(;i<max;i++){
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p></div> </div>';
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<button  style="float: right;" class="btn_trash" id="'+i+'"><i class="fa fa-trash"></i></button></p></div> </div>';
                 }
             }
 			xmlhttp.open("GET", "php/display_menu.php");
