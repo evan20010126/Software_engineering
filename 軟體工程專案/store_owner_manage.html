@@ -12,6 +12,9 @@
     <!-- button -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- icon -->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <style>
     	body {font-family: 微軟正黑體;}
         .btn_trash {
@@ -182,7 +185,7 @@
 					</div> -->
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3>設定優惠券</h3>
+							<h3>設定優惠券 <i class='fas fa-pencil-alt' style="float: right;" onclick="set_coupon()"></i></h3>
                             
 						</div>
 						
@@ -377,6 +380,32 @@
 			xmlhttp.open("GET", "php/show_coupon.php");
             xmlhttp.send(); 
 		}
+        function set_coupon(){
+            var coup_code = window.prompt("請輸入優惠券碼: ");
+            var correct = false;
+            var is_per = window.prompt("請輸入為打折or折錢 (打折請輸入1、折錢請輸入0) :");
+                if(is_per=='1' || is_per == '0'){
+                    correct = true;
+                }
+            while(!correct){
+                is_per = window.prompt("ERROR!請重新輸入:(打折請輸入1、折錢請輸入0) :");
+                if(is_per=='1' || is_per == '0'){
+                    correct = true;
+                }
+            }
+            var num = window.prompt("請輸入折扣: ");
+            console.log("coup_code: "+coup_code);
+            console.log("_is_per: "+is_per);
+            console.log("num: "+num);
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                console.log("onload entry");
+				showCoupon();
+			}
+			xmlhttp.open("GET", "php/set_coupon.php?coupon_code="+coup_code+"&num="+num+"&is_persentoff="+is_per);
+            xmlhttp.send(); 
+            
+        }
         function start(){
 			i = 0;
             showCoupon();
