@@ -108,6 +108,8 @@
 	
 	
   <script>
+
+      sign_in.addEventListener('click',sign_in);
       /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
         // function send_is_ok(){	
         //     if(userid.value!="" && userpwd.value!=""){		
@@ -120,13 +122,14 @@
         //     }
         // }
         
-        function isload(){
-        if(localStorage.userid)
-            userid.value=localStorage.userid;
-        }
+        // function isload(){
+        // if(localStorage.userid)
+        //     userid.value=localStorage.userid;
+        // }
     /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
-
+    /*正式後端驗證機制 by 石貫志*/
       function sign_in(){
+          console.log("已點登入按鈕");
         const xmlhttp = new XMLHttpRequest();           
 
             xmlhttp.onload = function() {
@@ -144,7 +147,7 @@
                 window.location.reload();
                 sendok();
               }
-			      xmlhttp.open("GET", "php\\.php");     //待後端寫入
+			      xmlhttp.open("GET", "php\\user_validation.php");     //待後端寫入
             //xmlhttp.responseType = 'json';
             xmlhttp.send(); 
         }
