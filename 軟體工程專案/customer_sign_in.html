@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>麥味登顧客登入</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">     -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -65,25 +65,26 @@
 					<div class="col-sm-12">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p>
-                      <form method="post" action="food_menu.html" onsubmit ="return false"> /<!--onsubmit ="return sign_in()-->
-                                請輸入您的帳號：  
-                            </p>
-                            <p>   
-                                <input type="text" id="userid" value="" autofocus><br />
-                                請輸入您的密碼：
-                            </p>
-                            <p>  <input type="password" id="userpwd" value=""><br /><font style="font-size:12px">
-                                (測試帳號：guest 密碼:1234)</font>
-                            </p>
-                            <p>
-                                <!-- <input id="btn_send" type="submit" value="送出"> -->
-                                <div class="col-sm-12"></div>
+                            <form action = "php/user_validation.php" method = "post">     
+                                <label>                              
+                                    請輸入您的帳號：  
+                                </label>
+                                <p>     
+                                    <input type="text" name = "user_account" id ="user_account" value="" autofocus>
+                                </p>     
+                                <label> 
+                                    請輸入您的密碼：
+                                </label>
+                                <p>     
+                                    <input type="password" name = "user_password"  id = "user_password" value="">
+                                    <p> <font style="font-size:12px">
+                                    (測試帳號：guest 密碼:1234)</font>
+                                    </p> 
+                                <p>                                                                                  
+                                    <!-- <input id="btn_send" type="submit" value="送出"> -->
                                 <button type="submit" id = "sign_in" class="btn btn-dark">登入</button>                         
-                                <a href="#" class="forgot_password" role="button" aria-pressed="flase">忘記密碼</a>  
-
-                            </p>	
-                        </form>
+                                <a href="#" role="button" aria-pressed="flase">忘記密碼</a>  
+                            </form>
 						</div>
 					</div>
 				
@@ -105,11 +106,12 @@
 		</div>
 	</footer>
 	
-	
-	
+	<!-- 為了Form送出表單不跳轉頁面及動態修改，要引入jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
   <script>
+      const sign_in_btn = document.getElementById("sign_in");
 
-      sign_in.addEventListener('click',sign_in);
+      sign_in_btn.addEventListener('click',sign_in );
       /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
         // function send_is_ok(){	
         //     if(userid.value!="" && userpwd.value!=""){		
@@ -132,26 +134,51 @@
           console.log("已點登入按鈕");
         const xmlhttp = new XMLHttpRequest();           
 
-            xmlhttp.onload = function() {
-              var obj = this.responseText;
-              //console.log(obj);
-				      obj = obj.substring(11,obj.length);
-				      //console.log(obj);
-              var product = JSON.parse(obj);
+        xmlhttp.open("GET", "php/user_validation.php");     //待後端寫入
+        console.log("嘗試連線");
+        console.log('連線狀態', xmlhttp);
+        xmlhttp.onload = function() {
+            console.log("連線成功");
+            var obj = this.responseText;
+            console.log("responseText",responseText);
+            //console.log(obj);
+            obj = obj.substring(11,obj.length);
+            //console.log(obj);
+            var product = JSON.parse(obj);
 
-              if(obj == "True"){
+            if(obj == "True"){
                 document.location="food_menu.html";
-              }
-              else if(!obj){
-                alert("帳號或密碼錯誤!!");
-                window.location.reload();
-                sendok();
-              }
-			      xmlhttp.open("GET", "php\\user_validation.php");     //待後端寫入
-            //xmlhttp.responseType = 'json';
+            }
+            else if(!obj){
+            alert("帳號或密碼錯誤!!");
+            window.location.reload();
+            }
+			
+            xmlhttp.responseType = 'json';
+            }
             xmlhttp.send(); 
+
+            /************Ajax寫法************/
+            // console.log("已點登入按鈕");
+            // $('form').on('sign_in', function(){
+            // console.log("Ajax運作中");
+            // $('input[type="submit"]').text('傳送中......');
+            // $.ajax({
+            //     url: 'php/user_validation.php',
+            //     method: 'POST',
+            //     dataType: 'json',
+            //     data: $('form').serialize(),
+            //     success: function(res){
+            //         if(res.success === true){
+            //             alert('傳送成功');
+            //         }else{
+            //             alert('傳送失敗');
+            //         }
+            //     },
+            //     });
+            // return false;
+            // });
         }
-      }
   </script>
 
   </body>
