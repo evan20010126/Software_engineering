@@ -12,10 +12,12 @@
     // PRINT $user_password;    /*偵錯用：有沒有抓到user_password*/
     // PRINT $result;           /*偵錯用：有沒有抓到reslut*/
     if($result!=NULL){
-        $bool = "True";
+        $bool = "True";      
     } 
-    echo '{"success":'.$bool.'}';
+    // echo '{"success":'.$bool.'}';       /*回傳登入成功與否之布林值(自製JSON格式)*/
     // echo ($bool); //json_encode
-    header("Location:")
-    // header("Location:javascript://history.go(-1)");     /*讓前端來執行此php後，返回原本之頁面*/
+    if($bool === "True")  
+        header("Location:../food_menu.html");       /*登入成功，重新導向至菜單頁面*/ 
+    else 
+        header("Location:../customer_sign_in.html");    /*登入失敗，重整顧客登入頁面*/
 ?>

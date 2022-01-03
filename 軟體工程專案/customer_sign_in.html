@@ -78,7 +78,7 @@
                                 <p>     
                                     <input type="password" name = "user_password"  id = "user_password" value="">
                                     <p> <font style="font-size:12px">
-                                    (測試帳號：guest 密碼:1234)</font>
+                                    (測試帳號：evan 密碼:1234)</font>
                                     </p> 
                                 <p>                                                                                  
                                     <!-- <input id="btn_send" type="submit" value="送出"> -->
@@ -106,79 +106,13 @@
 		</div>
 	</footer>
 	
-	<!-- 為了Form送出表單不跳轉頁面及動態修改，要引入jquery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
   <script>
-      const sign_in_btn = document.getElementById("sign_in");
 
-      sign_in_btn.addEventListener('click',sign_in );
-      /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
-        // function send_is_ok(){	
-        //     if(userid.value!="" && userpwd.value!=""){		
-        //         localStorage.userid=userid.value;
-        //         sessionStorage.userpwd=userpwd.value;
-        //         return true;
-        //     }else{
-        //         alert("請輸入帳號或密碼");
-        //         return false;
-        //     }
-        // }
-        
-        // function isload(){
-        // if(localStorage.userid)
-        //     userid.value=localStorage.userid;
-        // }
-    /*我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志*/
-    /*正式後端驗證機制 by 石貫志*/
-      function sign_in(){
-          console.log("已點登入按鈕");
-        const xmlhttp = new XMLHttpRequest();           
+    //   const sign_in_btn = document.getElementById("sign_in");
 
-        xmlhttp.open("GET", "php/user_validation.php");     //待後端寫入
-        console.log("嘗試連線");
-        console.log('連線狀態', xmlhttp);
-        xmlhttp.onload = function() {
-            console.log("連線成功");
-            var obj = this.responseText;
-            console.log("responseText",responseText);
-            //console.log(obj);
-            obj = obj.substring(11,obj.length);
-            //console.log(obj);
-            var product = JSON.parse(obj);
+    //   sign_in_btn.addEventListener('click',sign_in );
 
-            if(obj == "True"){
-                document.location="food_menu.html";
-            }
-            else if(!obj){
-            alert("帳號或密碼錯誤!!");
-            window.location.reload();
-            }
-			
-            xmlhttp.responseType = 'json';
-            }
-            xmlhttp.send(); 
-
-            /************Ajax寫法************/
-            // console.log("已點登入按鈕");
-            // $('form').on('sign_in', function(){
-            // console.log("Ajax運作中");
-            // $('input[type="submit"]').text('傳送中......');
-            // $.ajax({
-            //     url: 'php/user_validation.php',
-            //     method: 'POST',
-            //     dataType: 'json',
-            //     data: $('form').serialize(),
-            //     success: function(res){
-            //         if(res.success === true){
-            //             alert('傳送成功');
-            //         }else{
-            //             alert('傳送失敗');
-            //         }
-            //     },
-            //     });
-            // return false;
-            // });
-        }
+    /*正式後端驗證機制由後端驗證後重新導向*/
   </script>
 
   </body>
