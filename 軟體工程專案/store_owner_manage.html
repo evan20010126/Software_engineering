@@ -238,7 +238,11 @@
 		var searching_str = '';
 		var product_name_Array = {};
 		var coupon_code = "";
+        var clickPage = false;
         function showMenu() {
+            if(!clickPage){
+                i = 0;
+            }
             const xmlhttp = new XMLHttpRequest();
             
             xmlhttp.onload = function() {
@@ -272,6 +276,7 @@
                 const xmlhttp = new XMLHttpRequest();
                 xmlhttp.onload = function() {
                     console.log("onload: deleteFunction");
+                    clickPage = false;
                     showMenu();
                 }
                 xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name); //待php改
@@ -281,7 +286,9 @@
                 return;
         }
         // <i class="fas fa-pencil-alt" style="float: right;" onclick="edit_product()" style="font-size: 24px;"></i>
+
 		function page1(){
+            clickPage = true;
 			i = 0;
 			k = 0;
 			if(is_searching){
@@ -292,6 +299,7 @@
 			}
 		}
 		function page2(){
+            clickPage = true;
 			i = 6;
 			k = 6;
 			if(is_searching){
@@ -302,6 +310,7 @@
 			}
 		}
 		function page3(){
+            clickPage = true;
 			i = 12;
 			k = 12;
 			if(is_searching){
@@ -312,6 +321,7 @@
 			}
 		}
 		function page4(){
+            clickPage = true;
 			i = 18;
 			k = 18;
 			if(is_searching){
@@ -322,6 +332,7 @@
 			}
 		}
 		function page5(){
+            clickPage = true;
 			i = 24;
 			k = 24;
 			if(is_searching){
@@ -332,6 +343,10 @@
 			}
 		}
         function searching_function(str){
+            if(!clickPage){
+                k = 0;
+            }
+            clickPage = false;
 			searching_str = str;
 			if (str.length == 0) {
 				i = 0;
