@@ -258,13 +258,29 @@
 				var max = i+6;
 				//display remain product
                 for(;i<max;i++){
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<button  style="float: right;" class="btn_trash" id="'+i+'"><i class="fa fa-trash"></i></button></p></div> </div>';
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<button  style="float: right;" class="btn_trash" id="'+product[i]["product_name"]+'" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div> </div>';
                 }
             }
 			xmlhttp.open("GET", "php/display_menu.php");
             //xmlhttp.responseType = 'json';
             xmlhttp.send();
         }
+        function delete_product(del_product_name){
+            var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
+            if(x=="YES"){
+                console.log(del_product_name);
+                const xmlhttp = new XMLHttpRequest();
+                xmlhttp.onload = function() {
+                    console.log("onload: deleteFunction");
+                    showMenu();
+                }
+                xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name); //待php改
+                xmlhttp.send(); 
+            }
+            else
+                return;
+        }
+        // <i class="fas fa-pencil-alt" style="float: right;" onclick="edit_product()" style="font-size: 24px;"></i>
 		function page1(){
 			i = 0;
 			k = 0;
@@ -340,7 +356,7 @@
 				}
 				document.getElementById("menu").innerHTML = '';
 				for(;k<max;k++){
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '</p><button id="'+k+'" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Package</button> </div> </div>';
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' +product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '<button  style="float: right;" class="btn_trash" id="'+product_searching[k]["product_name"]+'" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div> </div>';
 					//k++;
 				}
 				//document.getElementById("totalPrice").innerHTML = sum;
