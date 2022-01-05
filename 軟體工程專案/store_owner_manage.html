@@ -1,134 +1,155 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FBL早餐店(Owner)</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FBL早餐店(Owner)</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- button -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- icon -->
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- button -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- icon -->
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 	<!-- switch toggle -->
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <style>
-    	body {font-family: 微軟正黑體;}
-        .btn_trash {
-            background-color:white;
-            border: none;
-            color: black;
-            padding: 3px 7px;
-            font-size: 16px;
-            cursor: pointer;
-            }
+	<style>
+		body {
+			font-family: 微軟正黑體;
+		}
 
-            /* Darker background on mouse-over */
-            .btn_trash:hover {
+		.btn_trash {
+			background-color: white;
+			border: none;
+			color: black;
+			padding: 3px 7px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		/* Darker background on mouse-over */
+		.btn_trash:hover {
 			color: white;
-            background-color:red;
-         }
-    </style>
+			background-color: red;
+		}
+		.btn_trash2 {
+			background-color: white;
+			border: none;
+			color: black;
+			padding: 1px 4px;
+			font-size: 8px;
+			cursor: pointer;
+		}
+
+		/* Darker background on mouse-over */
+		.btn_trash2:hover {
+			color: white;
+			background-color: red;
+		}
+	</style>
 	<style>
 		.switch {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 17px;
-}
+			position: relative;
+			display: inline-block;
+			width: 30px;
+			height: 17px;
+		}
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 13px;
-  width: 13px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 13px;
+			width: 13px;
+			left: 2px;
+			bottom: 2px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+		input:checked+.slider {
+			background-color: #2196F3;
+		}
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+		input:focus+.slider {
+			box-shadow: 0 0 1px #2196F3;
+		}
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
-  transform: translateX(13px);
-}
+		input:checked+.slider:before {
+			-webkit-transform: translateX(13px);
+			-ms-transform: translateX(13px);
+			transform: translateX(13px);
+		}
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 17px;
-}
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: 17px;
+		}
 
-.slider.round:before {
-  border-radius: 50%;
-}
-/* loading */
-#preloader {/*   這是整個會蓋住畫面的底色色塊  */
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0%;
-  top: 0%;
-  background-color: #fff;
-  z-index: 9999;
-}
-#status {/*   這是中間loading的gif坐標css,我們盡量讓他畫面置中  */
-  position: fixed;
-  width: 218px;
-  height: 419px;
-  margin-left: -360px;
-  margin-top: -160px;
-  left: 50%;
-  top: 50%;
-}
+		.slider.round:before {
+			border-radius: 50%;
+		}
+
+		/* loading */
+		#preloader {
+			/*   這是整個會蓋住畫面的底色色塊  */
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0%;
+			top: 0%;
+			background-color: #fff;
+			z-index: 9999;
+		}
+
+		#status {
+			/*   這是中間loading的gif坐標css,我們盡量讓他畫面置中  */
+			position: fixed;
+			width: 218px;
+			height: 419px;
+			margin-left: 520px;
+			margin-top: 140px;
+		}
 	</style>
-  </head>
-  <body>
-    <nav class="navbar navbar-default">        
-      <div class="container-fluid">
-        <div class="navbar-header">
-		  <a class="navbar-brand" href="visitor_index.html">FBL</a>
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-              <span class="sr-only">導覽按鈕</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-          </button>          
-        </div>
-		<!-- <div id="navbar" class="navbar-collapse collapse">
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="visitor_index.html">FBL</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">導覽按鈕</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 		    <li><a href="dance00.html">首頁</a></li>
             <li class="active"><a href="dance01.html">心得</a></li>
@@ -149,34 +170,35 @@ input:checked + .slider:before {
 			<button type="submit" class="btn btn-default">搜尋</button>
 		  </form> 
 		</div> -->
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="store_owner_manage.html">Manage Menu</a></li>
-              <li><a href="owner_customer_manage.html">顧客資訊</a></li>
-              <li><a href="owner_order.html">檢視訂單</a></li>
-            </ul>
-                <ul class = "nav navbar-nav navbar-right">
-                <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                <span style="padding-right: 10px; color: navy;">Hi! boss_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
-                  <!-- <li><a href="preference.html">My preference Setting</a></li> -->
-                  <li><a href="store_owner_sign_in.html">Sign in</a></li>
-                  <li><a href="#">Sign out</a></li>
-              </ul>
-              </li>
-            </ul>
-            <!-- <form class="navbar-form navbar-right">
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="store_owner_manage.html">Manage Menu</a></li>
+					<li><a href="owner_customer_manage.html">顧客資訊</a></li>
+					<li><a href="owner_order.html">檢視訂單</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+							<span style="padding-right: 10px; color: navy;">Hi! boss_test</span><img
+								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
+							<!-- <li><a href="preference.html">My preference Setting</a></li> -->
+							<li><a href="store_owner_sign_in.html">Sign in</a></li>
+							<li><a href="#">Sign out</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- <form class="navbar-form navbar-right">
               <div class="form-group has-feedback">
                   <input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
               </div>
               <button type="submit" class="btn btn-default">搜尋</button>
             </form> -->
-          </div>
-	  </div>
+			</div>
+		</div>
 	</nav>
-	
+
 	<!--頁首-->
 	<header>
 		<div class="container">
@@ -193,7 +215,8 @@ input:checked + .slider:before {
 					<div>
 						<form class="navbar-form navbar-right">
 							<div class="form-group has-feedback">
-								<input type="search" class="form-control" placeholder="search" onkeyup="searching_function(this.value)">
+								<input type="search" class="form-control" placeholder="search"
+									onkeyup="searching_function(this.value)">
 							</div>
 							<!-- <button type="submit" class="btn btn-default" onclick="searching_function(this.value)">搜尋</button> -->
 						</form>
@@ -202,9 +225,9 @@ input:checked + .slider:before {
 					</div>
 					<hr>
 					<!-- 這邊是餐點 -->
-                    <p id="menu">
+					<p id="menu">
 
-                    </p>
+					</p>
 					<!-- <div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
@@ -243,7 +266,7 @@ input:checked + .slider:before {
 					</center>
 				</div>
 			</article>
-			
+
 			<aside>
 				<div class="col-sm-3 col-sm-offset-1">
 					<!-- <div class="panel panel-success">
@@ -268,130 +291,135 @@ input:checked + .slider:before {
 					</div> -->
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3>設定優惠券 <i class='fas fa-pencil-alt' style="float: right;" data-toggle="modal" data-target="#exampleModal2"></i></h3>
-                            
+							<h3>設定優惠券 <i class='fas fa-pencil-alt' style="float: right;" data-toggle="modal"
+									data-target="#exampleModal2"></i></h3>
+
 						</div>
-						
+
 						<div class="panel-body">
 							<ul id="coupon_code_id">
 								<!-- <li>優惠券1</li>
 								<li>2</li> -->
 							</ul>
-						</div>	
+						</div>
 					</div>
 					<div class="panel panel-danger">
 						<div class="panel-heading">
 							<h3>FBL早餐店</h3>
 							<br>[海大店]
 						</div>
-							
+
 						<div class="panel-body">
 							<ul>
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
 								<li>此處引入php店家資訊</li>
-								
+
 							</ul>
 						</div>
 					</div>
-					
+
 
 				</div>
 			</aside>
-		</div>	
+		</div>
 	</div>
 	<hr>
-	
+
 	<!-- jQuery Plugin -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
 	<div id="preloader">
-		<div id="status"><img src="img/loading.gif"/></div>
-	  </div>
-	
+		<div id="status"><img width="400px" src="img/loading.gif" /></div>
+	</div>
+
 	<!--頁尾-->
 	<footer>
 		<div class="container">
-			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+			<p>♂海洋大學&middot;資工系♀</p>
+			<p style="text-align:right"><a href="#">T O P</a></p>
 
 		</div>
 	</footer>
 	<!-- Modal -->
 	<!-- Modal__edit_product -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h3 class="modal-title" id="exampleModalLabel">更改餐點資訊</h3>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body" id="DKK">
-			<form>
-				<div class="form-group">
-				  <label for="edit_product_name" class="col-form-label">Product Name:</label>
-				  <input type="text" class="form-control" id="edit_product_name"></input>
-				</div>
-				<div class="form-group">
-				  <label for="edit_product_info" class="col-form-label">Product Info:</label>
-				  <input class="form-control" id="edit_product_info"></input>
-				</div>
-				<div class="form-group">
-					<label for="edit_product_picture" class="col-form-label">Picture:</label>
-					<input class="form-control" id="edit_product_picture"></input>
-				</div>
-				<div class="form-group">
-					<label for="edit_product_price" class="col-form-label">Price:</label>
-					<input class="form-control" id="edit_product_price"></input>
-				</div>
-			</form>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-		</div>
-	  </div>
-	</div>
-  </div>
-	
-	<!-- Modal__set_coupon -->
-	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h3 class="modal-title" id="exampleModalLabel">新增優惠券</h3>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">更改餐點資訊</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="DKK">
+					<form>
+						<div class="form-group">
+							<label for="edit_product_name" class="col-form-label">Product Name:</label>
+							<input type="text" class="form-control" id="edit_product_name"></input>
+						</div>
+						<div class="form-group">
+							<label for="edit_product_info" class="col-form-label">Product Info:</label>
+							<input class="form-control" id="edit_product_info"></input>
+						</div>
+						<div class="form-group">
+							<label for="edit_product_picture" class="col-form-label">Picture:</label>
+							<input class="form-control" id="edit_product_picture"></input>
+						</div>
+						<div class="form-group">
+							<label for="edit_product_price" class="col-form-label">Price:</label>
+							<input class="form-control" id="edit_product_price"></input>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+				</div>
 			</div>
-			<div class="modal-body" id="DKK">
-				<form>
-					<div class="form-group">
-					  <label for="set_coupon_code" class="col-form-label">優惠券代碼:</label>
-					  <input type="text" class="form-control" id="set_coupon_code" placeholder="任意輸入 Ex: 軟工100分"></input>
-					</div>
-					<div class="form-group">
-					  <label for="set_coupon_mode" class="col-form-label">折扣方式(打折請輸入1、折錢請輸入0):</label>
-					  <input class="form-control" id="set_coupon_mode" placeholder="0 or 1"></input>
-					</div>
-					<div class="form-group">
-						<label for="set_coupon_discount" class="col-form-label">折扣(若打折(請輸入0~1)):</label>
-						<input class="form-control" id="set_coupon_discount" placeholder="Ex: 150 or 0.7"></input>
-					</div>
-					</div>
+		</div>
+	</div>
+
+	<!-- Modal__set_coupon -->
+	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">新增優惠券</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="DKK">
+					<form>
+						<div class="form-group">
+							<label for="set_coupon_code" class="col-form-label">優惠券代碼:</label>
+							<input type="text" class="form-control" id="set_coupon_code"
+								placeholder="任意輸入 Ex: 軟工100分"></input>
+						</div>
+						<div class="form-group">
+							<label for="set_coupon_mode" class="col-form-label">折扣方式(打折請輸入1、折錢請輸入0):</label>
+							<input class="form-control" id="set_coupon_mode" placeholder="0 or 1"></input>
+						</div>
+						<div class="form-group">
+							<label for="set_coupon_discount" class="col-form-label">折扣(若打折(請輸入0~1)):</label>
+							<input class="form-control" id="set_coupon_discount" placeholder="Ex: 150 or 0.7"></input>
+						</div>
+				</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary"  onclick="set_coupon()" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="set_coupon()" data-dismiss="modal">Save</button>
 			</div>
-		  </div>
 		</div>
-	  </div>
+	</div>
+	</div>
 
 	<script>
-        var i = 0;	//display index
+		var i = 0;	//display index
 		var k = 0;	//searching index
 		var is_searching = 0;
 		var searching_str = '';
@@ -400,43 +428,43 @@ input:checked + .slider:before {
 		var product_picture_Array = {};
 		var product_price_Array = {};
 		var coupon_code = "";
-        var clickPage = false;
-        function showMenu() {
-            if(!clickPage){
-                i = 0;
-            }
-            const xmlhttp = new XMLHttpRequest();
-            
-            xmlhttp.onload = function() {
-                var obj = this.responseText;
+		var clickPage = false;
+		function showMenu() {
+			if (!clickPage) {
+				i = 0;
+			}
+			const xmlhttp = new XMLHttpRequest();
+
+			xmlhttp.onload = function () {
+				var obj = this.responseText;
 				//console.log(obj);
-				obj = obj.substring(11,obj.length);
+				obj = obj.substring(11, obj.length);
 				//console.log(obj);
-                var product = JSON.parse(obj);
+				var product = JSON.parse(obj);
 				console.log(product);
 				var j = 0;
-                for(;j<product.length;j++){
+				for (; j < product.length; j++) {
 					product_name_Array[j] = product[j]["product_name"];
 					product_info_Array[j] = product[j]["product_info"];
 					product_picture_Array[j] = product[j]["product_pic"];
 					product_price_Array[j] = product[j]["product_price"];
 				}
-                //console.log(product[0]);
+				//console.log(product[0]);
 				//console.log(product[0].product_pic);
 				document.getElementById("menu").innerHTML = '';
-				var max = i+6;
+				var max = i + 6;
 				//display remain product
-                for(;i<max;i++){
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product('+i+')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="'+product[i]["product_name"]+' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="'+product[i]["product_name"]+'_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
-                }
+				for (; i < max; i++) {
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + i + ')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product[i]["product_name"] + ' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product[i]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
+				}
 				//supply switch
 				//<label class="checkbox-inline"><input type="checkbox" checked data-toggle="toggle"> Supply </label>
-				
-            }
+
+			}
 			xmlhttp.open("GET", "php/display_menu.php");
-            //xmlhttp.responseType = 'json';
-            xmlhttp.send();
-        }
+			//xmlhttp.responseType = 'json';
+			xmlhttp.send();
+		}
 
 		//
 		function set_modal_product(p_index) {
@@ -449,86 +477,86 @@ input:checked + .slider:before {
 		//
 		function changeSupply(sup_product_name) {
 			var is_supply = document.getElementById(sup_product_name).checked;
-			
-		}
-        function delete_product(del_product_name){
-            var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
-            if(x=="YES"){
-                console.log(del_product_name);
-                const xmlhttp = new XMLHttpRequest();
-                xmlhttp.onload = function() {
-                    console.log("onload: deleteFunction");
-                    clickPage = false;
-                    showMenu();
-                }
-                xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name); //待php改
-                xmlhttp.send(); 
-            }
-            else
-                return;
-        }
-        // <i class="fas fa-pencil-alt" style="float: right;" onclick="edit_product()" style="font-size: 24px;"></i>
 
-		function page1(){
-            clickPage = true;
+		}
+		function delete_product(del_product_name) {
+			var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
+			if (x == "YES") {
+				console.log(del_product_name);
+				const xmlhttp = new XMLHttpRequest();
+				xmlhttp.onload = function () {
+					console.log("onload: deleteFunction");
+					clickPage = false;
+					showMenu();
+				}
+				xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name); //待php改
+				xmlhttp.send();
+			}
+			else
+				return;
+		}
+		// <i class="fas fa-pencil-alt" style="float: right;" onclick="edit_product()" style="font-size: 24px;"></i>
+
+		function page1() {
+			clickPage = true;
 			i = 0;
 			k = 0;
-			if(is_searching){
+			if (is_searching) {
 				searching_function(searching_str);
 			}
-			else{
+			else {
 				showMenu();
 			}
 		}
-		function page2(){
-            clickPage = true;
+		function page2() {
+			clickPage = true;
 			i = 6;
 			k = 6;
-			if(is_searching){
+			if (is_searching) {
 				searching_function(searching_str);
 			}
-			else{
+			else {
 				showMenu();
 			}
 		}
-		function page3(){
-            clickPage = true;
+		function page3() {
+			clickPage = true;
 			i = 12;
 			k = 12;
-			if(is_searching){
+			if (is_searching) {
 				searching_function(searching_str);
 			}
-			else{
+			else {
 				showMenu();
 			}
 		}
-		function page4(){
-            clickPage = true;
+		function page4() {
+			clickPage = true;
 			i = 18;
 			k = 18;
-			if(is_searching){
+			if (is_searching) {
 				searching_function(searching_str);
 			}
-			else{
+			else {
 				showMenu();
 			}
 		}
-		function page5(){
-            clickPage = true;
+		function page5() {
+			clickPage = true;
 			i = 24;
 			k = 24;
-			if(is_searching){
+			if (is_searching) {
 				searching_function(searching_str);
 			}
-			else{
+			else {
 				showMenu();
 			}
 		}
-        function searching_function(str){
-            if(!clickPage){
-                k = 0;
-            }
-            clickPage = false;
+		function searching_function(str) {
+			if (!clickPage) {
+				k = 0;
+			}
+			clickPage = false;
 			searching_str = str;
 			if (str.length == 0) {
 				i = 0;
@@ -539,99 +567,100 @@ input:checked + .slider:before {
 			is_searching = 1;
 			console.log(str);
 			const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {
-                var obj = this.responseText;
-				obj = obj.substring(11,obj.length);
+			xmlhttp.onload = function () {
+				var obj = this.responseText;
+				obj = obj.substring(11, obj.length);
 				var product_searching = JSON.parse(obj);
 
-				for(var j=0;j<product_searching.length;j++){
+				for (var j = 0; j < product_searching.length; j++) {
 					product_name_Array[j] = product_searching[j]["product_name"];
 					product_info_Array[j] = product_searching[j]["product_info"];
 					product_picture_Array[j] = product_searching[j]["product_pic"];
 					product_price_Array[j] = product_searching[j]["product_price"];
 				}
 				var max = product_searching.length;
-				if(product_searching.length>6){
-					max = k+6;
+				if (product_searching.length > 6) {
+					max = k + 6;
 				}
 				document.getElementById("menu").innerHTML = '';
-				for(;k<max;k++){
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product('+k+')"> <p><strong style="font-size:150%">' + product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="'+product_searching[k]["product_name"]+' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="'+product_searching[k]["product_name"]+'_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
+				for (; k < max; k++) {
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + k + ')"> <p><strong style="font-size:150%">' + product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product_searching[k]["product_name"] + ' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product_searching[k]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
 					//k++;
 				}
 				//document.getElementById("totalPrice").innerHTML = sum;
-				
+
 			}
-			
+
 			xmlhttp.open("GET", "php/searching.php?q=" + str);
-            xmlhttp.send(); 
+			xmlhttp.send();
 		}
-        function showCoupon(){
+		function showCoupon() {
 			//
 			const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {
+			xmlhttp.onload = function () {
 				var obj = this.responseText;
-				
-				obj = obj.substring(11,obj.length);
+
+				obj = obj.substring(11, obj.length);
 				console.log(obj);
 				var coupon_info = JSON.parse(obj);
 				console.log(coupon_info);
 				var index = 0;
 				document.getElementById("coupon_code_id").innerHTML = '';
-				while(coupon_info[index] != null){
-					console.log(typeof(coupon_info[index].is_persentoff));
+				while (coupon_info[index] != null) {
+					console.log(typeof (coupon_info[index].is_persentoff));
 					console.log(coupon_info[index].is_persentoff);
-					if(coupon_info[index].is_persentoff == 1){
+					if (coupon_info[index].is_persentoff == 1) {
 						var disc = coupon_info[index].num * 10;
-						console.log("disc: "+disc);
-						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
+						console.log("disc: " + disc);
+						document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>" + disc + "折<button id='" + coupon_info[index].coupon_code + "' onclick='delete_coupon(this.id)' style='float: right;' class='btn_trash2' ><i class='fa fa-trash'></i></button></span></li>";
 					}
-					else{
-						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>-"+coupon_info[index].num+"$</span></li>";
+					else {
+						document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>-" + coupon_info[index].num + "$<button id='" + coupon_info[index].coupon_code + "' onclick='delete_coupon(this.id)' style='float: right;' class='btn_trash2' ><i class='fa fa-trash'></i></button></span></li>";
 					}
 					index++;
 				}
 				//console.log(product_name_Array[button_index]);
 			}
 			xmlhttp.open("GET", "php/show_coupon.php");
-            xmlhttp.send(); 
+			xmlhttp.send();
 		}
-        function set_coupon(){
-            var coup_code = document.getElementById("set_coupon_code").value;
-            var is_per = document.getElementById("set_coupon_mode").value;
-            //     if(is_per=='1' || is_per == '0'){
-            //         correct = true;
-            //     }
-            // while(!correct){
-            //     is_per = window.prompt("ERROR!請重新輸入:(打折請輸入1、折錢請輸入0) :");
-            //     if(is_per=='1' || is_per == '0'){
-            //         correct = true;
-            //     }
-            // }
-            var num = document.getElementById("set_coupon_discount").value;
-            // console.log("coup_code: "+coup_code);
-            // console.log("_is_per: "+is_per);
-            // console.log("num: "+num);
-            const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {
-                console.log("onload entry");
+		function set_coupon() {
+			var coup_code = document.getElementById("set_coupon_code").value;
+			var is_per = document.getElementById("set_coupon_mode").value;
+			//     if(is_per=='1' || is_per == '0'){
+			//         correct = true;
+			//     }
+			// while(!correct){
+			//     is_per = window.prompt("ERROR!請重新輸入:(打折請輸入1、折錢請輸入0) :");
+			//     if(is_per=='1' || is_per == '0'){
+			//         correct = true;
+			//     }
+			// }
+			var num = document.getElementById("set_coupon_discount").value;
+			// console.log("coup_code: "+coup_code);
+			// console.log("_is_per: "+is_per);
+			// console.log("num: "+num);
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.onload = function () {
+				console.log("onload entry");
 				showCoupon();
 			}
-			xmlhttp.open("GET", "php/set_coupon.php?coupon_code="+coup_code+"&num="+num+"&is_persentoff="+is_per);
-            xmlhttp.send(); 
-            
-        }
-        function start(){
+			xmlhttp.open("GET", "php/set_coupon.php?coupon_code=" + coup_code + "&num=" + num + "&is_persentoff=" + is_per);
+			xmlhttp.send();
+
+		}
+		function start() {
 			i = 0;
-            showCoupon();
-            showMenu();
+			showCoupon();
+			showMenu();
 			//console.log(Date.now);
-        }
-		$(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
-			$("#status").delay(1000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
-			$("#preloader").delay(1000).fadeOut(500);
+		}
+		$(window).load(function () { // 確認整個頁面讀取完畢再將這三個div隱藏起來
+			$("#status").delay(2000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
+			$("#preloader").delay(2000).fadeOut(500);
 		})
-        window.addEventListener( "load", start, false );
-    </script>
-  </body>
+		window.addEventListener("load", start, false);
+	</script>
+</body>
+
 </html>
