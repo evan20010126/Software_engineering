@@ -95,6 +95,25 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* loading */
+#preloader {/*   這是整個會蓋住畫面的底色色塊  */
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  top: 0%;
+  background-color: #fff;
+  z-index: 9999;
+}
+#status {/*   這是中間loading的gif坐標css,我們盡量讓他畫面置中  */
+  position: fixed;
+  width: 218px;
+  height: 419px;
+  margin-left: -360px;
+  margin-top: -160px;
+  left: 50%;
+  top: 50%;
+}
 	</style>
   </head>
   <body>
@@ -284,8 +303,11 @@ input:checked + .slider:before {
 	</div>
 	<hr>
 	
- 
-	
+	<!-- jQuery Plugin -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<div id="preloader">
+		<div id="status"><img src="img/loading.gif"/></div>
+	  </div>
 	
 	<!--頁尾-->
 	<footer>
@@ -605,6 +627,10 @@ input:checked + .slider:before {
             showMenu();
 			//console.log(Date.now);
         }
+		$(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
+			$("#status").delay(1000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
+			$("#preloader").delay(1000).fadeOut(500);
+		})
         window.addEventListener( "load", start, false );
     </script>
   </body>
