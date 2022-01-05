@@ -85,7 +85,7 @@
 			height: 13px;
 			width: 13px;
 			left: 2px;
-			bottom: 2px;
+			bottom: 2.2px;
 			background-color: white;
 			-webkit-transition: .4s;
 			transition: .4s;
@@ -132,7 +132,7 @@
 			width: 218px;
 			height: 419px;
 			margin-left: 520px;
-			margin-top: 140px;
+			margin-top: 170px;
 		}
 	</style>
 </head>
@@ -375,7 +375,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+					<button type="button" class="btn btn-primary" onclick="edit_product()" data-dismiss="modal">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -429,6 +429,7 @@
 		var product_price_Array = {};
 		var coupon_code = "";
 		var clickPage = false;
+		var edit_temp_name = '';
 		function showMenu() {
 			if (!clickPage) {
 				i = 0;
@@ -469,15 +470,39 @@
 		//
 		function set_modal_product(p_index) {
 			//document.getElementById("DKK").innerHTML = "hello edmund";
+			edit_temp_name = product_name_Array[p_index];
 			document.getElementById("edit_product_name").value = product_name_Array[p_index];
 			document.getElementById("edit_product_info").value = product_info_Array[p_index];
 			document.getElementById("edit_product_picture").value = product_picture_Array[p_index];
 			document.getElementById("edit_product_price").value = product_price_Array[p_index];
 		}
+		function edit_product(){
+			var edit_name = window.document.getElementById("edit_product_name").value;
+			var edit_info = window.document.getElementById("edit_product_info").value;
+			var edit_pic = window.document.getElementById("edit_product_picture").value;
+			var edit_price = window.document.getElementById("edit_product_price").value;
+			const xmlhttp = new XMLHttpRequest();
+				xmlhttp.onload = function () {
+					showMenu();
+				}
+				xmlhttp.open("GET", "php/edit_product.php?product_name=" + edit_temp_name +"&edit_product_name="+ edit_name +"&edit_product_info="+ edit_info +"&edit_product_picture="+ edit_pic +"&edit_product_price="+edit_price); //待php檢查
+				xmlhttp.send();
+		}
 		//
 		function changeSupply(sup_product_name) {
 			var is_supply = document.getElementById(sup_product_name).checked;
-
+			var supply_str = '';
+			if(is_supply){
+				supply_str = '1';
+			}
+			else{
+				supply_str = '0';
+			}
+			const xmlhttp = new XMLHttpRequest();
+				xmlhttp.onload = function () {
+				}
+				xmlhttp.open("GET", "php/supply.php?supply=" + supply_str); //待php檢查
+				xmlhttp.send();
 		}
 		function delete_product(del_product_name) {
 			var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
@@ -627,15 +652,6 @@
 		function set_coupon() {
 			var coup_code = document.getElementById("set_coupon_code").value;
 			var is_per = document.getElementById("set_coupon_mode").value;
-			//     if(is_per=='1' || is_per == '0'){
-			//         correct = true;
-			//     }
-			// while(!correct){
-			//     is_per = window.prompt("ERROR!請重新輸入:(打折請輸入1、折錢請輸入0) :");
-			//     if(is_per=='1' || is_per == '0'){
-			//         correct = true;
-			//     }
-			// }
 			var num = document.getElementById("set_coupon_discount").value;
 			// console.log("coup_code: "+coup_code);
 			// console.log("_is_per: "+is_per);
@@ -648,6 +664,14 @@
 			xmlhttp.open("GET", "php/set_coupon.php?coupon_code=" + coup_code + "&num=" + num + "&is_persentoff=" + is_per);
 			xmlhttp.send();
 
+		}
+		function delete_coupon(del_coupon_code){
+			const xmlhttp = new XMLHttpRequest();
+			xmlhttp.onload = function () {
+				showCoupon();
+			}
+			xmlhttp.open("GET", "php/delete_coupon.php?coupon_code=" + del_coupon_code);
+			xmlhttp.send();
 		}
 		function start() {
 			i = 0;
