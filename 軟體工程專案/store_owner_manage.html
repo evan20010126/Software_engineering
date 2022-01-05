@@ -19,6 +19,7 @@
 	<!-- switch toggle -->
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
 	<style>
 		body {
 			font-family: 微軟正黑體;
@@ -134,6 +135,10 @@
 			margin-left: 520px;
 			margin-top: 170px;
 		}
+		.add_button{
+			border: 0px;
+			background-color: white;
+		}
 	</style>
 </head>
 
@@ -220,7 +225,10 @@
 							</div>
 							<!-- <button type="submit" class="btn btn-default" onclick="searching_function(this.value)">搜尋</button> -->
 						</form>
-						<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
+						<h1 style="font-family:微軟正黑體 ; text-align:center"> <button data-toggle="modal" data-target="#exampleModal3" style="float: left;" class="add_button"><svg   xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
+							<path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+						  </svg></button>ღMenuღ</h1>
 
 					</div>
 					<hr>
@@ -381,6 +389,48 @@
 		</div>
 	</div>
 
+	<!-- Modal_add_product -->
+	<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel3">新增餐點</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="DKK">
+					<form>
+						<div class="form-group">
+							<label for="add_product_name" class="col-form-label">Product Name:</label>
+							<input type="text" class="form-control" id="add_product_name"></input>
+						</div>
+						<div class="form-group">
+							<label for="add_product_info" class="col-form-label">Product Info:</label>
+							<input class="form-control" id="add_product_info"></input>
+						</div>
+						<div class="form-group">
+							<label for="add_product_picture" class="col-form-label">Picture:</label>
+							<input class="form-control" id="add_product_picture"></input>
+						</div>
+						<div class="form-group">
+							<label for="add_product_price" class="col-form-label">Price:</label>
+							<input class="form-control" id="add_product_price"></input>
+						</div>
+						<div class="form-group">
+							<label for="add_product_supply" class="col-form-label">Supply:</label>
+							<input class="form-control" id="add_product_supply" value="1"></input>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" onclick="add_product()" data-dismiss="modal">Save Addition</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Modal__set_coupon -->
 	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
@@ -456,7 +506,7 @@
 				var max = i + 6;
 				//display remain product
 				for (; i < max; i++) {
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + i + ')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product[i]["product_name"] + '_check" onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product[i]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + i + ')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product[i]["product_name"] + '_check" onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product[i]["product_name"] + '"  onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
 				}
 				//supply switch
 				//<label class="checkbox-inline"><input type="checkbox" checked data-toggle="toggle"> Supply </label>
@@ -507,17 +557,32 @@
 				xmlhttp.open("GET", "php/supply.php?changeSupply="+ tempName +"&supply=" + supply_str); //待php檢查
 				xmlhttp.send();
 		}
+		function add_product(){
+			var add_name = document.getElementById("add_product_name").value;
+			var add_info = document.getElementById("add_product_info").value;
+			var add_pic = document.getElementById("add_product_picture").value;
+			var add_price = document.getElementById("add_product_price").value;
+			var add_supply = document.getElementById("add_product_supply").value;
+			const xmlhttp = new XMLHttpRequest();
+				xmlhttp.onload = function () {
+					console.log("onload: add product");
+					clickPage = false;
+					showMenu();
+				}
+				xmlhttp.open("GET", "php/add_menu_product.php?product_name=" + add_name + "&product_info=" + add_info + "&product_pic=" + add_pic +"&product_price=" + add_price +"&product_supply=" + add_supply); //待php改
+				xmlhttp.send();
+		}
 		function delete_product(del_product_name) {
 			var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
 			if (x == "YES") {
-				//console.log(del_product_name);
+				console.log(del_product_name);
 				const xmlhttp = new XMLHttpRequest();
 				xmlhttp.onload = function () {
 					console.log("onload: deleteFunction");
 					clickPage = false;
 					showMenu();
 				}
-				xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name); //待php改
+				xmlhttp.open("GET", "php/delete_product.php?product_name=" + del_product_name);
 				xmlhttp.send();
 			}
 			else
@@ -639,7 +704,7 @@
 					//console.log(coupon_info[index].is_persentoff);
 					if (coupon_info[index].is_persentoff == 1) {
 						var disc = coupon_info[index].num * 10;
-						console.log("disc: " + disc);
+						//console.log("disc: " + disc);
 						document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>" + disc + "折<button id='" + coupon_info[index].coupon_code + "' onclick='delete_coupon(this.id)' style='float: right;' class='btn_trash2' ><i class='fa fa-trash'></i></button></span></li>";
 					}
 					else {
