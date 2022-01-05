@@ -442,7 +442,7 @@
 				obj = obj.substring(11, obj.length);
 				//console.log(obj);
 				var product = JSON.parse(obj);
-				console.log(product);
+				//console.log(product);
 				var j = 0;
 				for (; j < product.length; j++) {
 					product_name_Array[j] = product[j]["product_name"];
@@ -456,7 +456,7 @@
 				var max = i + 6;
 				//display remain product
 				for (; i < max; i++) {
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + i + ')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product[i]["product_name"] + ' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product[i]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + i + ')"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product[i]["product_name"] + '_check" onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product[i]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
 				}
 				//supply switch
 				//<label class="checkbox-inline"><input type="checkbox" checked data-toggle="toggle"> Supply </label>
@@ -498,16 +498,19 @@
 			else{
 				supply_str = '0';
 			}
+			console.log("supply: " + supply_str);
+			var tempName = sup_product_name.substring(0,sup_product_name.length-6);
+			console.log("supply tempName: " + tempName);
 			const xmlhttp = new XMLHttpRequest();
 				xmlhttp.onload = function () {
 				}
-				xmlhttp.open("GET", "php/supply.php?supply=" + supply_str); //待php檢查
+				xmlhttp.open("GET", "php/supply.php?changeSupply="+ tempName +"&supply=" + supply_str); //待php檢查
 				xmlhttp.send();
 		}
 		function delete_product(del_product_name) {
 			var x = window.prompt('確定要刪除此項product嗎?(確定請輸入"YES")');
 			if (x == "YES") {
-				console.log(del_product_name);
+				//console.log(del_product_name);
 				const xmlhttp = new XMLHttpRequest();
 				xmlhttp.onload = function () {
 					console.log("onload: deleteFunction");
@@ -609,7 +612,7 @@
 				}
 				document.getElementById("menu").innerHTML = '';
 				for (; k < max; k++) {
-					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + k + ')"> <p><strong style="font-size:150%">' + product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product_searching[k]["product_name"] + ' onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product_searching[k]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
+					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product_searching[k]["product_pic"] + ' " alt="2" width="400" height="300" data-toggle="modal" data-target="#exampleModal" onclick = "set_modal_product(' + k + ')"> <p><strong style="font-size:150%">' + product_searching[k]["product_name"] + '</strong></p> <p>' + product_searching[k]["product_info"] + '</p><p>Price: ' + product_searching[k]["product_price"] + '<br><br><label class="switch"><input type="checkbox" checked  id="' + product_searching[k]["product_name"] + '_check"  onclick="changeSupply(this.id)"><span class="slider round"></span></label><button  style="float: right;" class="btn_trash" id="' + product_searching[k]["product_name"] + '_checkbox" onclick="delete_product(this.id)"><i class="fa fa-trash"></i></button></p></div></div>';
 					//k++;
 				}
 				//document.getElementById("totalPrice").innerHTML = sum;
@@ -626,14 +629,14 @@
 				var obj = this.responseText;
 
 				obj = obj.substring(11, obj.length);
-				console.log(obj);
+				//console.log(obj);
 				var coupon_info = JSON.parse(obj);
-				console.log(coupon_info);
+				//console.log(coupon_info);
 				var index = 0;
 				document.getElementById("coupon_code_id").innerHTML = '';
 				while (coupon_info[index] != null) {
-					console.log(typeof (coupon_info[index].is_persentoff));
-					console.log(coupon_info[index].is_persentoff);
+					//console.log(typeof (coupon_info[index].is_persentoff));
+					//console.log(coupon_info[index].is_persentoff);
 					if (coupon_info[index].is_persentoff == 1) {
 						var disc = coupon_info[index].num * 10;
 						console.log("disc: " + disc);
@@ -658,7 +661,7 @@
 			// console.log("num: "+num);
 			const xmlhttp = new XMLHttpRequest();
 			xmlhttp.onload = function () {
-				console.log("onload entry");
+				//console.log("onload entry");
 				showCoupon();
 			}
 			xmlhttp.open("GET", "php/set_coupon.php?coupon_code=" + coup_code + "&num=" + num + "&is_persentoff=" + is_per);
