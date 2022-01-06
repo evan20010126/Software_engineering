@@ -69,6 +69,7 @@
 			<article>
 				<div class="col-sm-8">
                     <ul class="nav nav-tabs">
+						<li><a href="#tab3" data-toggle="tab">待確認</a></li>
                         <li class="active"><a href="#tab1" data-toggle="tab">進行中</a></li>	
                         <li ><a href="#tab2" data-toggle="tab">歷史訂單</a></li>
                         
@@ -141,7 +142,47 @@
                                 </div>
                             </div>
                         </div>
+						<!-- tab3(待確認訂單) -->
+					<div class="tab-pane fade" id="tab3">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h1>待確認</h1>
+								<br>
+									<!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
+							</div>
+							<div class="panel-body">
+								<table class="table table-hover">
+									<thead>
+									<tr>
+										<th>訂單編號</th>
+										<th>下訂時間</th>
+										<th>下訂清單</th>        
+										<th>金額</th>
+										<th style="float: right;">訂單狀態</tr>
+									</tr>
+									</thead>
+									<tbody id="order_unchecked">
+									<tr>
+										<!-- <td>01</td>
+										<td>12:00</td>
+										<td>漢堡 薯條 薯餅</td>
+										<td>160</td>
+										<td>
+											<button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button>
+											<button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button>
+										</td> -->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="panel-footer">
+								FBL早餐店
+							</div>
+						</div>
+					</div>
+					<!--  -->
                     </div>
+					
 				</div>
 			</article>
 			
@@ -225,7 +266,7 @@
                 var index = 0;
                 while(orderObj[index] != null){
                     var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
                     index++;
                 }
             }
@@ -244,11 +285,40 @@
                 var index = 0;
                 while(orderObj[index] != null){
                     var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_history").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    document.getElementById("order_history").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
                     index++;
                 }
             }
 			xmlhttp.open("GET", "php/user_history_order.php?user_account=" + User_test);
+            xmlhttp.send(); 
+        }
+		function showOrderList_uncheck(){
+            //test button
+            document.getElementById("order_unchecked").innerHTML = '<tr><td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;">尚未被接單</td></tr>';
+            //test end
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+                //console.log(obj);
+				obj = obj.substring(11,obj.length);
+				var orderObj = JSON.parse(obj);
+                //console.log(orderObj);
+                document.getElementById("order_unchecked").innerHTML = "";
+				var str_state = '';
+				if(orderObj[index].is_finish==-2){
+					str_state = "已被拒絕";
+				}
+				else if(orderObj[index].is_finish==-1){
+					str_state = "尚未被接單";
+				}
+                var index = 0;
+                while(orderObj[index] != null){
+                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
+                    document.getElementById("order_unchecked").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td><td>"+str_state+"</td></tr>";
+                    index++;
+                }
+            }
+			xmlhttp.open("GET", "php/user_unchecked_order.php");
             xmlhttp.send(); 
         }
         function showCoupon(){
@@ -284,6 +354,7 @@
         function start(){
             showOrderList_ing();
             showOrderList_history();
+			showOrderList_uncheck();
             showCoupon();
         }
         window.addEventListener("load", start, false);
