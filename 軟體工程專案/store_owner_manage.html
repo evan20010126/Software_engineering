@@ -525,12 +525,14 @@
 			document.getElementById("edit_product_info").value = product_info_Array[p_index];
 			document.getElementById("edit_product_picture").value = product_picture_Array[p_index];
 			document.getElementById("edit_product_price").value = product_price_Array[p_index];
+			
 		}
 		function edit_product(){
 			var edit_name = window.document.getElementById("edit_product_name").value;
 			var edit_info = window.document.getElementById("edit_product_info").value;
 			var edit_pic = window.document.getElementById("edit_product_picture").value;
 			var edit_price = window.document.getElementById("edit_product_price").value;
+			console.log("edit_info: " + edit_info);
 			const xmlhttp = new XMLHttpRequest();
 				xmlhttp.onload = function () {
 					showMenu();
@@ -554,7 +556,7 @@
 			const xmlhttp = new XMLHttpRequest();
 				xmlhttp.onload = function () {
 				}
-				xmlhttp.open("GET", "php/supply.php?changeSupply="+ tempName +"&supply=" + supply_str); //待php檢查
+				xmlhttp.open("GET", "php/supply.php?product_name="+ tempName +"&product_supply=" + supply_str); //待php檢查
 				xmlhttp.send();
 		}
 		function add_product(){

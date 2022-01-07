@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>檢視訂單</title>
+    <title>檢視訂單(Customer)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -69,9 +69,9 @@
 			<article>
 				<div class="col-sm-8">
                     <ul class="nav nav-tabs">
-						<li><a href="#tab3" data-toggle="tab">待確認</a></li>
-                        <li class="active"><a href="#tab1" data-toggle="tab">進行中</a></li>	
-                        <li ><a href="#tab2" data-toggle="tab">歷史訂單</a></li>
+						<li><a href="#tab3" data-toggle="tab" onclick="showOrderList_uncheck()">待確認</a></li>
+                        <li class="active"><a href="#tab1" data-toggle="tab" onclick="showOrderList_ing()">進行中</a></li>	
+                        <li ><a href="#tab2" data-toggle="tab" onclick="showOrderList_history()">歷史訂單</a></li>
                         
                     </ul>
                     <div class="tab-content">
@@ -258,10 +258,10 @@
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                console.log(obj);
+                //console.log(obj);
 				obj = obj.substring(11,obj.length);
 				var orderObj = JSON.parse(obj);
-                console.log(orderObj);
+                //console.log(orderObj);
                 document.getElementById("order_ing").innerHTML = "";
                 var index = 0;
                 while(orderObj[index] != null){
@@ -294,31 +294,33 @@
         }
 		function showOrderList_uncheck(){
             //test button
-            document.getElementById("order_unchecked").innerHTML = '<tr><td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;">尚未被接單</td></tr>';
+            //document.getElementById("order_unchecked").innerHTML = '<tr><td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;">尚未被接單</td></tr>';
             //test end
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                //console.log(obj);
+                console.log("uncheck: "+ obj);
 				obj = obj.substring(11,obj.length);
 				var orderObj = JSON.parse(obj);
-                //console.log(orderObj);
+                console.log("order_unchecked: "+ orderObj);
                 document.getElementById("order_unchecked").innerHTML = "";
 				var str_state = '';
+				var index = 0;
 				if(orderObj[index].is_finish==-2){
 					str_state = "已被拒絕";
 				}
 				else if(orderObj[index].is_finish==-1){
 					str_state = "尚未被接單";
 				}
-                var index = 0;
+				
+                
                 while(orderObj[index] != null){
                     var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_unchecked").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td><td>"+str_state+"</td></tr>";
+                    document.getElementById("order_unchecked").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>"+orderObj[index].cost+"</td><td>"+str_state+"</td></tr>";
                     index++;
                 }
             }
-			xmlhttp.open("GET", "php/user_unchecked_order.php");
+			xmlhttp.open("GET", "php/user_unchecked_order.php?user_account="+User_test);
             xmlhttp.send(); 
         }
         function showCoupon(){
@@ -328,17 +330,17 @@
 				var obj = this.responseText;
 				
 				obj = obj.substring(11,obj.length);
-				console.log(obj);
+				//console.log(obj);
 				var coupon_info = JSON.parse(obj);
-				console.log(coupon_info);
+				//console.log(coupon_info);
 				var index = 0;
 				document.getElementById("coupon_code_id").innerHTML = '';
 				while(coupon_info[index] != null){
-					console.log(typeof(coupon_info[index].is_persentoff));
-					console.log(coupon_info[index].is_persentoff);
+					//console.log(typeof(coupon_info[index].is_persentoff));
+					//console.log(coupon_info[index].is_persentoff);
 					if(coupon_info[index].is_persentoff == 1){
 						var disc = coupon_info[index].num * 10;
-						console.log("disc: "+disc);
+						//console.log("disc: "+disc);
 						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
 					}
 					else{
