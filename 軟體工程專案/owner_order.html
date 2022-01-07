@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>檢視訂單</title>
+    <title>檢視訂單(Owner)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -88,9 +88,9 @@
 			<article>
 				<div class="col-sm-8">
                     <ul class="nav nav-tabs">
-                        <li><a href="#tab3" data-toggle="tab">待確認</a></li>	
-                        <li class="active"><a href="#tab1" data-toggle="tab">進行中</a></li>	
-                        <li ><a href="#tab2" data-toggle="tab">歷史訂單</a></li>
+                        <li><a href="#tab3" data-toggle="tab" onclick="showOrderList_uncheck()">待確認</a></li>	
+                        <li class="active"><a href="#tab1" data-toggle="tab" onclick="showOrderList_ing()">進行中</a></li>	
+                        <li ><a href="#tab2" data-toggle="tab" onclick="showOrderList_history()">歷史訂單</a></li>
                         
                     </ul>
                     <div class="tab-content">
@@ -284,7 +284,7 @@
                 var index = 0;
                 while(orderObj[index] != null){
                     var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+orderObj[index].order_id+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td><td><button type='button' class='btn btn-success' id='"+orderObj[index].order_id+"' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
                     index++;
                 }
             }

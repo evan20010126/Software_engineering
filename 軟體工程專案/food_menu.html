@@ -283,7 +283,7 @@
 					document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="' + i + '" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Cart</button> </div> </div>';
 				}
 			}
-			xmlhttp.open("GET", "php/display_menu.php");
+			xmlhttp.open("GET", "php/user_display_menu.php");
 			//xmlhttp.responseType = 'json';
 			xmlhttp.send();
 		}
