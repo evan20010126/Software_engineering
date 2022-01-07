@@ -91,5 +91,7 @@
     $stmt = $db->prepare($query);
     $result = $stmt->execute($the_order); 
     ///////////沒寫把購物車東西全部刪掉的code/////////////////
+    $stmt = $db->prepare("delete from package where user_account=?");
+	$result = $stmt->execute(array($user_account));
     // json_encode
 ?>
