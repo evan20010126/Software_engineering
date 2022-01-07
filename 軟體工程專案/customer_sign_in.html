@@ -78,12 +78,12 @@
 					<div class="col-sm-12">
 						<div class="thumbnail">
 							<img src="img\\demo.png" alt="2" width="400" height="300">
-                            <form action = "php/login.php" method = "post">     
+                            <!-- <form action = "php/login.php" method = "post">      -->
                                 <label>                              
                                     請輸入您的帳號：  
                                 </label>
                                 <p>     
-                                    <input type="text" name = "user_account" id ="user_account" value="">
+                                    <input type="text" name = "user_account" id ="user_account" value="" >
                                 </p>     
                                 <label> 
                                     請輸入您的密碼：
@@ -95,9 +95,10 @@
                                     </p> 
                                 <p>                                                                                  
                                     <!-- <input id="btn_send" type="submit" value="送出"> -->
-                                <button type="submit" id = "sign_in" class="btn btn-dark">登入</button>                         
+                                <button type="submit" id = "sign_in" class="btn btn-dark" onclick="check_account()">登入</button>   
+								<br>                      
                                 <a href="#" role="button" aria-pressed="flase">忘記密碼</a>  
-                            </form>
+                            <!-- </form> -->
 						</div>
 					</div>
 				
@@ -124,7 +125,35 @@
     //   const sign_in_btn = document.getElementById("sign_in");
 
     //   sign_in_btn.addEventListener('click',sign_in );
-
+	var correct = true;
+	function check_account(){
+		var account_str = document.getElementById("user_account").value;
+		var password_str = document.getElementById("user_password").value;
+		const xmlhttp = new XMLHttpRequest();
+		xmlhttp.onload = function () {
+			var correct = this.responseText;
+			console.log("correct: " + correct);
+			correct = correct.substring(11,correct.length);
+			if(correct=="False"){
+				window.alert("帳號或密碼錯誤 !");
+				window.location.reload();
+			}
+			else if(correct == "True"){
+				localStorage.setItem("user_account", account_str);
+				window.location.href = "food_menu.html";
+			}
+		}
+		xmlhttp.open("GET", "php/login.php?user_account="+account_str+"&user_password="+password_str );
+		xmlhttp.send();
+		// if(correct){
+		// 	localStorage.setItem("user_account", account_str);
+		// 	window.location.href("food_menu.html");
+		// }
+	}
+	function start(){
+		localStorage.clear();
+	}
+	window.addEventListener("load",start,false);
     /*正式後端驗證機制由後端驗證後重新導向*/
   </script>
 
