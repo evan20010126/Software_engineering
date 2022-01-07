@@ -353,9 +353,12 @@
 				var obj = this.responseText;
 				//console.log(obj);
 				obj = obj.substring(11, obj.length);
-				console.log("showPackage: " + obj);
+				//console.log("showPackage: " + obj);
+				if(!isJSON(obj)){
+					document.getElementById("package").innerHTML = '';
+					return;
+				}
 				var package_obj = JSON.parse(obj);
-
 				console.log(package_obj);
 				//console.log(package_obj[0].product_name);
 				//display first product
@@ -388,6 +391,25 @@
 			xmlhttp.open("GET", "php/package_sum.php?q=" + User_test + "&s=" + coupon_code);
 			//xmlhttp.responseType = 'json';
 			xmlhttp.send();
+		}
+		function isJSON(str){
+			if(!str){
+				return false;
+			}
+			if(typeof str == 'string'){
+				try{
+					var obj=JSON.parse(str);
+					if(typeof obj == 'object' && obj){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				catch(e){
+					return false;
+				}
+			}
 		}
 		// product_name_to_id(product_name_Array[button_index]).then(
 		// 		function(pro_id){
