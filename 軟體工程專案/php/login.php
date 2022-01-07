@@ -14,10 +14,11 @@
     if($result!=NULL){
         $bool = "True";      
     } 
+    echo $bool;
     // echo '{"success":'.$bool.'}';       /*回傳登入成功與否之布林值(自製JSON格式)*/
     // echo ($bool); //json_encode
-    if($bool === "True")  
-        header("Location:../food_menu.html");       /*登入成功，重新導向至菜單頁面*/ 
-    else 
-        header("Location:../customer_sign_in.html");    /*登入失敗，重整顧客登入頁面*/
+    // if($bool === "True")  
+    //     header("Location:../food_menu.html");       /*登入成功，重新導向至菜單頁面*/ 
+    // else 
+    //     header("Location:../customer_sign_in.html");    /*登入失敗，重整顧客登入頁面*/
 ?>
