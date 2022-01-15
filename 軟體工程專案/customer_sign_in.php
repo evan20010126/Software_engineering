@@ -1,8 +1,7 @@
 <?php
 	session_start();
-	print_r($_session);
-
-	$user = $_session[user];
+	$user = isset($_session['user']) ? $session['user'] : 'Guest';
+	// print_r($_session);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-							<span style="padding-right: 10px; color: navy;">Hi! <?php $user ?></span><img
+							<span style="padding-right: 10px; color: navy;">Hi! <?php echo($user) ?></span><img
 								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="Account_Setting.html">Account Setting</a></li>
