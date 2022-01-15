@@ -13,6 +13,9 @@
     // PRINT $result;           /*偵錯用：有沒有抓到reslut*/
     if($result!=NULL){
         $bool = "True";      
+        session_start();
+        $_SESSION['user']=$user_account;
+        $_SESSION['password']=$user_password;
     } 
     echo $bool;
     // echo '{"success":'.$bool.'}';       /*回傳登入成功與否之布林值(自製JSON格式)*/
