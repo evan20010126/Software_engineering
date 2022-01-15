@@ -150,27 +150,16 @@
 	// }
 	// axios by 石貫志
 	function check_account(){
-
-		//=====GLOBAL Variable=====//
-		axios.defaults.headers.common['user-Auth-Token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJldmFuIiwidXNlcl9wYXNzd29yZCI6IjEyMzQifQ.CRGktkfa3PNqHrBjBfP1gGcQJ1y2i3H0FEcl9oFRqEA';
-		//=========================//
 		let account_str = document.getElementById("user_account").value;
 		let password_str = document.getElementById("user_password").value;
 		let response;
 		let correct = true;
-		let session = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJldmFuIiwidXNlcl9wYXNzd29yZCI6IjEyMzQifQ.CRGktkfa3PNqHrBjBfP1gGcQJ1y2i3H0FEcl9oFRqEA';
-		const config = {
-			headers: {
-			'Content-Type': 'application/json',
-			Authorization: session
-			}
-  		};
 		axios
 			.get('php/login.php' , { params:{
 				user_account : account_str,
 				user_password : password_str	
 			}},
-			config )
+			)
 			.then( res => {
 				response = res.data;
 				console.log(response.substring(11,));	//不知為何回傳會有其它雜訊
