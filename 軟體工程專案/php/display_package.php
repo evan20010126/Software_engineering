@@ -11,35 +11,42 @@
     $result = $stmt->fetchAll();                //將所有搜尋結果存於result
     /*---------------------connect database & prepare statement----------------------*/
     $product_arr = array();
-    for ($i = 0; $i < 10 && $result[0][$i]!=NULL ; $i++) 
+    if(isset($result[0][0]) == NULL)
     {
-        array_push($product_arr, $result[0][$i]);        
+        echo json_encode(null);
     }
-    //echo json_encode($product_arr);
-    //$output_arr = array();
-    for($i = 0 ; $i <count($product_arr); $i++){
-        if($product_arr[$i]!=-999999){
-            $counter=1;
-            for($j = 0; $j<count($product_arr); $j++){
-                if($product_arr[$i]==$product_arr[$j]&&$i!=$j){
-                    $counter++;
-                    $product_arr[$j]=-999999;
-                }
-            }
-            $query = ("SELECT  product_name,product_price FROM product WHERE product_id = ? ");
-            $stmt = $db->prepare($query);
-            $error = $stmt->execute(array($product_arr[$i])); //product_arr本身就是陣列
-            $result = $stmt->fetchAll();
-            $output_arr[$i]["product_name"] = $result[0][0];
-            $output_arr[$i]["product_price"] = $result[0][1];
-            $output_arr[$i]["product_number"] = $counter; 
-            
-            $product_arr[$i]=-999999;
+    else{
+        for ($i = 0; $i < 10 && isset($result[0][$i]) !=NULL ; $i++) 
+        {
+            array_push($product_arr, $result[0][$i]);        
         }
+        //echo json_encode($product_arr);
+        //$output_arr = array();
+        for($i = 0 ; $i <count($product_arr); $i++){
+            if($product_arr[$i]!=-999999){
+                $counter=1;
+                for($j = 0; $j<count($product_arr); $j++){
+                    if($product_arr[$i]==$product_arr[$j]&&$i!=$j){
+                        $counter++;
+                        $product_arr[$j]=-999999;
+                    }
+                }
+                $query = ("SELECT  product_name,product_price FROM product WHERE product_id = ? ");
+                $stmt = $db->prepare($query);
+                $error = $stmt->execute(array($product_arr[$i])); //product_arr本身就是陣列
+                $result = $stmt->fetchAll();
+                $output_arr[$i]["product_name"] = $result[0][0];
+                $output_arr[$i]["product_price"] = $result[0][1];
+                $output_arr[$i]["product_number"] = $counter; 
+                
+                $product_arr[$i]=-999999;
+            }
+        }
+        echo json_encode($output_arr);
+     
+        // json_encode
+        //[{product_name,product_price} , {...}, {...}]
+        //cout << 購物車內的product_
     }
-    echo json_encode($output_arr);
- 
-    // json_encode
-    //[{product_name,product_price} , {...}, {...}]
-    //cout << 購物車內的product_
+    
 ?> 

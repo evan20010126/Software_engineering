@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--我有試做前端驗證機制，顯示錯誤跳轉回登錄頁面是正常的，可以將其註解掉(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
 <html>
 
 <head>
@@ -14,17 +13,6 @@
 	<!-- button -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
-	<!-- <script type="text/javascript">
-		//模擬檢測帳號、密碼
-		  if(localStorage.userid!="guest" || sessionStorage.userpwd!="1234"){
-			  alert("帳號密碼錯誤,請回首頁登入!!");							
-			  sessionStorage.removeItem('userpwd');							
-			  document.location="customer_sign_in.html";								
-		  }
-	</script> -->
-	<!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
 	<style>
 		body {
 			font-family: 微軟正黑體;
@@ -96,7 +84,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-							<span style="padding-right: 10px; color: navy;">Hi! user_test</span><img
+							<span id = user_nav_bar style="padding-right: 10px; color: navy;">Hi! user_test</span><img
 								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="Account_Setting.html">Account Setting</a></li>
@@ -349,13 +337,14 @@
 		}
 		function showPackage() {
 			const xmlhttp = new XMLHttpRequest();
+			var obj = '';
 			xmlhttp.onload = function () {
-				var obj = this.responseText;
-				//console.log(obj);
+				obj = this.responseText
+				console.log(obj);
 				obj = obj.substring(11, obj.length);
 				//console.log("showPackage: " + obj);
-				if(!isJSON(obj)){
-					document.getElementById("package").innerHTML = '';
+				if(!isJSON(obj) || obj === 'null'){
+					document.getElementById("package").innerHTML = '溫馨提醒：您尚未登入唷';
 					return;
 				}
 				var package_obj = JSON.parse(obj);
@@ -381,13 +370,16 @@
 		function showPackageSum() {
 			const xmlhttp = new XMLHttpRequest();
 			xmlhttp.onload = function () {
-				var sum = this.responseText;
-				console.log(sum);
-				document.getElementById("totalPrice").innerHTML = "Total: " + sum + " $";
-
+				let obj = this.responseText;
+				var sum = obj.substring(11,obj.length);
+				// console.log('sum：' , sum);
+				if(sum != 'null')
+					document.getElementById("totalPrice").innerHTML = "Total: " + sum + " $";
+				else
+					document.getElementById("totalPrice").innerHTML = "Total: 0 $";
 			}
 
-			console.log(coupon_code);
+			// console.log(coupon_code);
 			xmlhttp.open("GET", "php/package_sum.php?q=" + User_test + "&s=" + coupon_code);
 			//xmlhttp.responseType = 'json';
 			xmlhttp.send();
@@ -426,7 +418,7 @@
 		// 		}
 		// 	);
 		function addToPackage(button_index) {
-			console.log("user_test: " + User_test);
+			console.log('user_test: ' , User_test);
 			if(User_test==null){
 				window.alert("尚未登入! 即將切換至登錄畫面!");
 				window.location.href = "customer_sign_in.html";
@@ -547,17 +539,17 @@
 				var obj = this.responseText;
 
 				obj = obj.substring(11, obj.length);
-				console.log(obj);
+				// console.log(obj);
 				var coupon_info = JSON.parse(obj);
-				console.log(coupon_info);
+				// console.log(coupon_info);
 				var index = 0;
 				document.getElementById("coupon_code_id").innerHTML = '';
 				while (coupon_info[index] != null) {
-					console.log(typeof (coupon_info[index].is_persentoff));
-					console.log(coupon_info[index].is_persentoff);
+					// console.log(typeof (coupon_info[index].is_persentoff));
+					// console.log(coupon_info[index].is_persentoff);
 					if (coupon_info[index].is_persentoff == 1) {
 						var disc = coupon_info[index].num * 10;
-						console.log("disc: " + disc);
+						// console.log("disc: " + disc);	
 						document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>" + disc + "折</span></li>";
 					}
 					else {
@@ -577,11 +569,17 @@
 			showPackage();
 		}
 		function check_login(){
+			
 			User_test = localStorage.getItem("user_account");
+			sessionStorage.setItem('user_account',User_test);
+			localStorage.clear();
+			console.log(User_test);
 			if(User_test==null){
+				document.getElementById("user_nav_bar").innerHTML = "Hi！Guest ";
 				document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
 			}
 			else{
+				document.getElementById("user_nav_bar").innerHTML = "Hi！ " + User_test;
 				document.getElementById("user_mode").innerHTML = "顧客模式";
 			}
 		}

@@ -12,32 +12,38 @@
      $result = $stmt->fetchAll();                //將所有搜尋結果存於result
      /*---------------------connect database & prepare statement----------------------*/
      $nowtotal = 0;
-     for ($i = 0; $i < 10 && $result[0][$i]!=NULL ; $i++) 
+     if(isset($result[0][0]) == NULL)
      {
-        //array_push($product_arr, $result[0][$i]);  
-        $query = ("SELECT product_price FROM product WHERE product_id  =  ? ");
-        $stmt = $db->prepare($query);
-        $error = $stmt->execute(array($result[0][$i])); //product_arr本身就是陣列
-        $newresult = $stmt->fetchAll();
-        $nowtotal += $newresult[0][0];
+         echo json_encode(null);
      }
-                //將所有搜尋結果存於result
-    /*---------------------connect database & prepare statement----------------------*/
-    if($result[0][0] != NULL){
-        if ($coupon_code != NULL){
-            $query = ("SELECT  * FROM coupon WHERE coupon_code = ? ");
-            $stmt = $db->prepare($query);
-            $error = $stmt->execute(array($coupon_code)); 
-            $result = $stmt->fetchAll();
-            if(isset($result[0])){
-                if($result[0]["is_persentoff"] == 1){
-                    $nowtotal = ceil($nowtotal * $result[0]["num"]);
-                }
-                else{
-                    $nowtotal = $nowtotal - $result[0]["num"];
-                }
-            }
+     else{
+        for ($i = 0; $i < 10 && isset($result[0][$i]) !=NULL ; $i++) 
+        {
+           //array_push($product_arr, $result[0][$i]);  
+           $query = ("SELECT product_price FROM product WHERE product_id  =  ? ");
+           $stmt = $db->prepare($query);
+           $error = $stmt->execute(array($result[0][$i])); //product_arr本身就是陣列
+           $newresult = $stmt->fetchAll();
+           $nowtotal += $newresult[0][0];
         }
-        echo json_encode($nowtotal);
-    }
+                   //將所有搜尋結果存於result
+       /*---------------------connect database & prepare statement----------------------*/
+       if(isset($result[0][0]) != NULL){
+           if ($coupon_code != NULL){
+               $query = ("SELECT  * FROM coupon WHERE coupon_code = ? ");
+               $stmt = $db->prepare($query);
+               $error = $stmt->execute(array($coupon_code)); 
+               $result = $stmt->fetchAll();
+               if(isset($result[0])){
+                   if($result[0]["is_persentoff"] == 1){
+                       $nowtotal = ceil($nowtotal * $result[0]["num"]);
+                   }
+                   else{
+                       $nowtotal = $nowtotal - $result[0]["num"];
+                   }
+               }
+           }
+           echo json_encode($nowtotal);
+       }
+     }  
 ?>
