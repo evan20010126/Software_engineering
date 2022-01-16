@@ -1,6 +1,8 @@
 <?php
 require_once('vendor/autoload.php');
 
+//C:\xampp\php\PEAR download ->  composer require google/apiclient # apt install composer
+
 // https://developers.google.com/identity/protocols/googlescopes
 // * Google_Service_Oauth2::USERINFO_EMAIL = https://www.googleapis.com/auth/userinfo.email
 // * Google_Service_Oauth2::USERINFO_PROFILE = https://www.googleapis.com/auth/userinfo.profile
