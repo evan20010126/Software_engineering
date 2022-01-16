@@ -44,7 +44,15 @@
 							<li><a href="Account_Setting.html">Account Setting</a></li>
 							<li><a href="preference.html">My preference Setting</a></li>
 							<li class="active"><a href="customer_sign_in.html">Sign in</a></li>
-							<li><a href="#">Sign out</a></li>
+							<li><botton id = "sign_out" onclick = log_out() 
+							style =	"border: none;
+								align-content: center;
+								border: none;
+								background: none;"
+							onmouseover:color = "this.style.color= 'black'"> 
+								Sign out>		
+							</botton>>
+						</li>
 						</ul>
 					</li>
 				</ul>
@@ -123,6 +131,7 @@
 	</footer>
 	
   <script>
+	/*ajax原生*/
 	// var correct = true;
 	// function check_account(){
 	// 	var account_str = document.getElementById("user_account").value;
@@ -148,7 +157,7 @@
 		// 	window.location.href("food_menu.html");
 		// }
 	// }
-	// axios by 石貫志
+	// axios(from node.js框架) by 石貫志
 	function check_account(){
 		let account_str = document.getElementById("user_account").value;
 		let password_str = document.getElementById("user_password").value;
@@ -158,35 +167,38 @@
 			.get('php/login.php' , { params:{
 				user_account : account_str,
 				user_password : password_str	
-			}},
-			)
+			}})
+
 			.then( res => {
 				response = res.data;
 				console.log(response.substring(11,));	//不知為何回傳會有其它雜訊
 				correct = response.substring(11,);
+
 				if(correct=="False"){
 					window.alert("帳號或密碼錯誤 !");
 					window.location.reload();
 				}
 				else if(correct == "True"){
-					
-					localStorage.setItem("user_account", account_str);
+					localStorage.setItem('user_account',account_str);
 					window.location.href = "food_menu.html";
 				}
-				// if(correct){
-				// 	localStorage.setItem("user_account", user_account);
-				// 	window.location.href("food_menu.html");
-				// }
 			})
 			.catch(function (error) {
             console.log(error);
           });
 	}
+
+	function log_out(){
+		console.log("登出中");
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.reload;
+	}
+
 	function start(){
 		localStorage.clear();
 	}
 	window.addEventListener("load",start,false);
-    /*正式後端驗證機制由後端驗證後重新導向*/
   </script>
 
   </body>

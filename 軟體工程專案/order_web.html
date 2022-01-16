@@ -35,7 +35,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-							<span style="padding-right: 10px; color: navy;">Hi! user_test</span><img
+							<span id = "user_nav_bar" style="padding-right: 10px; color: navy;">Hi! user_test</span><img
 								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="Account_Setting.html">Account Setting</a></li>
@@ -59,7 +59,7 @@
 	<header>
 		<div class="container">
 			<h1>檢視訂單</h1>
-			<p class="lead">下標</p>
+			<p class="lead" id="user_mode">下標</p>
 			<hr>
 		</div>
 	</header>
@@ -258,8 +258,9 @@
 	
 	
 	<script>
-        var User_test = "414";
+        let User_test;
         function showOrderList_ing(){
+			User_test = check_login();
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
@@ -282,10 +283,10 @@
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                console.log(obj);
+                // console.log(obj);
 				obj = obj.substring(11,obj.length);
 				var orderObj = JSON.parse(obj);
-                console.log(orderObj);
+                // console.log(orderObj);
                 document.getElementById("order_history").innerHTML = "";
                 var index = 0;
                 while(orderObj[index] != null){
@@ -304,7 +305,7 @@
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                console.log("uncheck: "+ obj);
+                // console.log("uncheck: "+ obj);
 				obj = obj.substring(11,obj.length);
 				var orderObj = JSON.parse(obj);
                 console.log("order_unchecked: "+ orderObj);
@@ -363,7 +364,38 @@
             showOrderList_history();
 			showOrderList_uncheck();
             showCoupon();
+			check_login();
         }
+
+		function check_login(){
+				
+				if (!sessionStorage.length) {
+				console.log("session是空的");
+				User_test = localStorage.getItem("user_account");
+				sessionStorage.setItem('user_account',User_test);
+				console.log(User_test);
+				User_test = sessionStorage.getItem("user_account");
+				localStorage.clear();
+				}	
+	
+				else{
+					console.log("session存在");
+					User_test = sessionStorage.getItem("user_account");
+					console.log(User_test);
+				}
+	
+				if(User_test === 'null'){	//session 存在但卻 === 'null'
+					console.log("訪客模式");
+					document.getElementById("user_nav_bar").innerHTML = "Hi！Guest ";
+					document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
+				}
+				else{
+					console.log("顧客模式");
+					document.getElementById("user_nav_bar").innerHTML = "Hi！ " + User_test;
+					document.getElementById("user_mode").innerHTML = "顧客模式";
+				}		
+				return User_test;			
+			}
         window.addEventListener("load", start, false);
     </script>
   </body>
