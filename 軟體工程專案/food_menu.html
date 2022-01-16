@@ -90,7 +90,12 @@
 							<li><a href="Account_Setting.html">Account Setting</a></li>
 							<li><a href="preference.html">My preference Setting</a></li>
 							<li><a href="customer_sign_in.html">Sign in</a></li>
-							<li><a href="#">Sign out</a></li>
+							<li><button id = "sign_out" onclick = log_out() style = "border:none;
+								align-content: center;
+								border: none;
+								background: none;">
+								Sign out</button>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -569,11 +574,22 @@
 			showPackage();
 		}
 		function check_login(){
-			
+				
+			if (!sessionStorage.length) {
+			console.log("session是空的");
 			User_test = localStorage.getItem("user_account");
 			sessionStorage.setItem('user_account',User_test);
-			localStorage.clear();
 			console.log(User_test);
+			User_test = sessionStorage.getItem("user_account");
+			localStorage.clear();
+			}	
+
+			else{
+				console.log("session是滿的");
+				User_test = sessionStorage.getItem("user_account");
+				// console.log(User_test);
+			}
+
 			if(User_test==null){
 				document.getElementById("user_nav_bar").innerHTML = "Hi！Guest ";
 				document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
@@ -581,8 +597,9 @@
 			else{
 				document.getElementById("user_nav_bar").innerHTML = "Hi！ " + User_test;
 				document.getElementById("user_mode").innerHTML = "顧客模式";
-			}
+			}					
 		}
+	
 		function start() {
 			i = 0;
 			k = 0;
@@ -592,8 +609,14 @@
 			showPackageSum();
 			showCoupon();
 			check_login();
-			//console.log(Date.now);
 		}
+
+		function log_out(){
+			localStorage.clear();
+			sessionStorage.clear();
+			window.location.href = "customer_sign_in.html";
+		}
+
 		$(window).load(function () { // 確認整個頁面讀取完畢再將這三個div隱藏起來
 			$("#status").delay(2000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
 			$("#preloader").delay(2000).fadeOut(500);
