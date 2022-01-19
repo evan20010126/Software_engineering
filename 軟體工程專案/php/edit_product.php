@@ -3,7 +3,7 @@
     
     $product_name = $_REQUEST["product_name"];
     $edit_product_name = $_REQUEST["edit_product_name"];
-    $product_info = $_RESQUEST["edit_product_info"];
+    $product_info = $_REQUEST["edit_product_info"];
     $product_pic = $_REQUEST["edit_product_picture"];
     $product_price = $_REQUEST["edit_product_price"];
     //$product_supply = $_RESQUEST["product_supply"];
