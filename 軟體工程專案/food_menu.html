@@ -72,6 +72,7 @@
             margin-top: 140px;
         }
     </style>
+    <!-- <script src='index_client.js'></script> -->
 </head>
 
 <body>
@@ -536,11 +537,12 @@
                 console.log(time);
                 showPackage();
                 showPackageSum();
+                ws.send('a');
+                window.location.reload();
             }
 
             xmlhttp.open("GET", "php/package_to_order_list.php?q=" + User_test + "&s=" + coupon_code + "&r=" + time);
             xmlhttp.send();
-
         }
 
         function showCoupon() {
@@ -633,6 +635,17 @@
             $("#preloader").delay(2000).fadeOut(500);
         })
         window.addEventListener("load", start, false);
+        let ws = new WebSocket('ws://localhost:3000')
+
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('client');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+
     </script>
 </body>
 

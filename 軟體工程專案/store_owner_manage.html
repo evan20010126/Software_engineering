@@ -190,8 +190,8 @@
                         <ul class="dropdown-menu">
                             <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
                             <!-- <li><a href="preference.html">My preference Setting</a></li> -->
-                            <li><a href="store_owner_sign_in.html">Sign in</a></li>
-                            <li><a href="#">Sign out</a></li>
+                            <!-- <li><a href="store_owner_sign_in.html">Sign in</a></li> -->
+                            <li><a href="#" onclick="signout()">Sign out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -768,6 +768,11 @@
                 } //<li>此處引入php店家資訊</li>
             xmlhttp.open("GET", "php/display_boss_info.php");
             xmlhttp.send();
+        }
+
+        function signout() {
+            window.location.href = "store_owner_sign_in.html";
+
         }
 
         function start() {

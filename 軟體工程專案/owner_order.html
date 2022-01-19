@@ -15,6 +15,7 @@
             font-family: 微軟正黑體;
         }
     </style>
+    <!-- <script src='index_owner.js'></script> -->
 </head>
 
 <body>
@@ -402,6 +403,11 @@
             xmlhttp.send();
         }
 
+        function signout() {
+            window.location.href = "store_owner_sign_in.html";
+
+        }
+
         function start() {
             showOrderList_ing();
             showOrderList_history();
@@ -410,6 +416,23 @@
             showBossInfo();
         }
         window.addEventListener("load", start, false);
+
+        let ws = new WebSocket('ws://localhost:3000')
+
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('owner');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+
+        //接收 Server 發送的訊息
+        ws.onmessage = event => {
+            console.log(event.data);
+            alert("Store have new order!!");
+        }
     </script>
 </body>
 
