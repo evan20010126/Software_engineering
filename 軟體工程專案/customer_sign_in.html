@@ -1,222 +1,306 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>麥味登顧客登入</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">     -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- 採用axios，與ajax效果一樣 -->
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 採用axios，與ajax效果一樣 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
-        body {font-family: 微軟正黑體;}
+        body {
+            font-family: 微軟正黑體;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="visitor_index.html">FBL</a>
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="visitor_index.html">FBL</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">導覽按鈕</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="food_menu.html">即時點餐</a></li>
-					<li><a href="auto_eat.html">自動取eat</a></li>
-					<li><a href="order_web.html">檢視訂單</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-							<span style="padding-right: 10px; color: navy;">Hi! Guest</span><img
-								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="Account_Setting.html">Account Setting</a></li>
-							<li><a href="preference.html">My preference Setting</a></li>
-							<li class="active"><a href="customer_sign_in.html">Sign in</a></li>
-							<li><botton id = "sign_out" onclick = log_out() 
-							style =	"border: none;
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="food_menu.html">即時點餐</a></li>
+                    <li><a href="auto_eat.html">自動取eat</a></li>
+                    <li><a href="order_web.html">檢視訂單</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <span style="padding-right: 10px; color: navy;">Hi! Guest</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Account_Setting.html">Account Setting</a></li>
+                            <li><a href="preference.html">My preference Setting</a></li>
+                            <li class="active"><a href="customer_sign_in.html">Sign in</a></li>
+                            <li>
+                                <botton id="sign_out" onclick=l og_out() style="border: none;
 								align-content: center;
 								border: none;
-								background: none;"
-							onmouseover:color = "this.style.color= 'black'"> 
-								Sign out>		
-							</botton>>
-						</li>
-						</ul>
-					</li>
-				</ul>
-				<!-- <form class="navbar-form navbar-right">
+								background: none;" onmouseover:color="this.style.color= 'black'">
+                                    Sign out>
+                                </botton>>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- <form class="navbar-form navbar-right">
 			<div class="form-group has-feedback">
 				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
 			</div>
 			<button type="submit" class="btn btn-default">搜尋</button>
 		  </form> -->
-			</div>
-		</div>
-	</nav>
-	
-	<!--頁首-->
-	<header>
-		<div class="container">
-			<h1>瀏覽菜單&即時點餐</h1>
-			<p class="lead">下標</p>
-			<hr>
-		</div>
-	</header>
-	<!--內容區-->
+            </div>
+        </div>
+    </nav>
+
+    <!--頁首-->
+    <header>
+        <div class="container">
+            <h1>瀏覽菜單&即時點餐</h1>
+            <p class="lead">下標</p>
+            <hr>
+        </div>
+    </header>
+    <!--內容區-->
     <center>
-	<div class="container">   
-		<div class="d-flex justify-content-center">
-			<article>
-				<div class="col-sm-12">
-					<h1 style="font-family:微軟正黑體 ; text-align:center">ღLOGINღ</h1>
-					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
-					<hr>
-					<!--  -->
-                    
-					<div class="col-sm-12">
-						<div class="thumbnail">
-							<img src="img\\demo.png" alt="2" width="400" height="300">
-                            <!-- <form action = "php/login.php" method = "post">      -->
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <article>
+                    <div class="col-sm-12">
+                        <h1 style="font-family:微軟正黑體 ; text-align:center">ღLOGINღ</h1>
+                        <!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
+                        <hr>
+                        <!--  -->
+
+                        <div class="col-sm-12">
+                            <div class="thumbnail">
+                                <img src="img\\demo.png" alt="2" width="400" height="300">
+                                <!-- <form action = "php/login.php" method = "post">      -->
                                 <label>                              
                                     請輸入您的帳號：  
                                 </label>
-                                <p>     
-                                    <input type="text" name = "user_account" id ="user_account" value="" >
-                                </p>     
+                                <p>
+                                    <input type="text" name="user_account" id="user_account" value="">
+                                </p>
                                 <label> 
                                     請輸入您的密碼：
                                 </label>
-                                <p>     
-                                    <input type="password" name = "user_password"  id = "user_password" value="">
-                                    <p> <font style="font-size:12px">
-                                    (測試帳號：evan 密碼:1234)</font>
-                                    </p> 
-                                <p>                                                                                  
-                                    <!-- <input id="btn_send" type="submit" value="送出"> -->
-                                <button type="button" id = "sign_in" class="btn btn-dark" onclick="check_account()">登入</button>   
-								<button type="button" id = "sign_in" class="btn btn-dark" onclick="google_login()">
+                                <p>
+                                    <input type="password" name="user_password" id="user_password" value="">
+                                    <p>
+                                        <font style="font-size:12px">
+                                            (測試帳號：evan 密碼:1234)</font>
+                                    </p>
+                                    <p>
+                                        <!-- <input id="btn_send" type="submit" value="送出"> -->
+                                        <button type="button" id="sign_in" class="btn btn-dark" onclick="check_account()">登入</button>
+                                        <button type="button" id="sign_in" class="btn btn-dark" onclick="google_login()">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
 										<path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
 									  </svg>
 								</button>
-								<br>       
-								<a href="#" role="button" aria-pressed="flase">註冊帳號&nbsp&nbsp</a>                 
-                                <a href="#" role="button" aria-pressed="flase">忘記密碼</a> 						
-                            <!-- </form> -->
-						</div>
-					</div>
-				
-				</div>
-			</article>
-			
-		</div>	       
-	</div>
+                                        <br>
+                                        <a role="button" aria-pressed="flase" data-toggle="modal" data-target="#exampleModal">註冊帳號&nbsp&nbsp</a>
+                                        <a href="#" role="button" aria-pressed="flase">忘記密碼</a>
+                                        <!-- </form> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+            </div>
+        </div>
     </center>
-	<hr>
-	
-	
-	
-	<!--頁尾-->
-	<footer>
-		<div class="container">
-			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+    <hr>
 
-		</div>
-	</footer>
-	
-  <script>
-	/*ajax原生*/
-	// var correct = true;
-	// function check_account(){
-	// 	var account_str = document.getElementById("user_account").value;
-	// 	var password_str = document.getElementById("user_password").value;
-	// 	const xmlhttp = new XMLHttpRequest();
-	// 	xmlhttp.onload = function () {
-	// 		var correct = this.responseText;
-	// 		console.log("correct: " + correct);
-	// 		correct = correct.substring(11,correct.length);
-	// 		if(correct=="False"){
-	// 			window.alert("帳號或密碼錯誤 !");
-	// 			window.location.reload();
-	// 		}
-	// 		else if(correct == "True"){
-	// 			localStorage.setItem("user_account", account_str);
-	// 			window.location.href = "food_menu.html";
-	// 		}
-	// 	}
-	// 	xmlhttp.open("GET", "php/login.php?user_accoun	t="+account_str+"&user_password="+password_str );
-	// 	xmlhttp.send();
-		// if(correct){
-		// 	localStorage.setItem("user_account", account_str);
-		// 	window.location.href("food_menu.html");
-		// }
-	// }
-	// axios(from node.js框架) by 石貫志
-	function check_account(){
-		let account_str = document.getElementById("user_account").value;
-		let password_str = document.getElementById("user_password").value;
-		let response;
-		let correct = true;
-		axios
-			.get('php/login.php' , { params:{
-				user_account : account_str,
-				user_password : password_str	
-			}})
 
-			.then( res => {
-				response = res.data;
-				// console.log(response.substring(11,));	//不知為何回傳會有其它雜訊
-				correct = response.substring(11,);
 
-				if(correct=="False"){
-					window.alert("帳號或密碼錯誤 !");
-					window.location.reload();
-				}
-				else if(correct == "True"){
-					localStorage.setItem('user_account',account_str);
-					window.location.href = "food_menu.html";
-				}
-			})
-			.catch(function (error) {
-            console.log(error);
-          });
-	}
+    <!--頁尾-->
+    <footer>
+        <div class="container">
+            <p>♂海洋大學&middot;資工系♀</p>
+            <p style="text-align:right"><a href="#">T O P</a></p>
 
-	function log_out(){
-		console.log("登出中");
-		localStorage.clear();
-		sessionStorage.clear();
-		window.location.reload;
-	}
+        </div>
+    </footer>
 
-	function google_login(){
-	axios
-		.get('php/link_google.php')
-		.then (res => function(){
+    <!-- Modal_register -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Register</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                </div>
+                <div class="modal-body" id="DKK">
+                    <!-- <form> -->
+                    <div class="form-group">
+                        <label for="add_product_name" class="col-form-label">Account:</label>
+                        <input type="text" class="form-control" id="new_user_account"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_info" class="col-form-label">Password:</label>
+                        <input class="form-control" id="new_user_password" type="password"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_picture" class="col-form-label">請再次輸入Password:</label>
+                        <input class="form-control" id="new_user_password2" type="password" onkeyup="checkpass(this.value)"></input>
+                        <div id="second_pass"></div>
+                        <!-- </form> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_info" class="col-form-label">Nickname:</label>
+                        <input class="form-control" id="new_nickname"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_info" class="col-form-label">Email:</label>
+                        <input class="form-control" id="new_email" type="email"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_info" class="col-form-label">Phone:</label>
+                        <input class="form-control" id="new_phone"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="add_product_info" class="col-form-label">Birthday:</label>
+                        <input class="form-control" id="new_birthday" type="date"></input>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        <button type="button" class="btn btn-primary" onclick="register_func()" data-dismiss="modal">註冊</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		})
-		.catch(function (error){
-			
-		})
-	}
 
-	function start(){
-		localStorage.clear();
-	}
-	window.addEventListener("load",start,false);
-  </script>
+        <script>
+            /*ajax原生*/
+            // var correct = true;
+            // function check_account(){
+            // 	var account_str = document.getElementById("user_account").value;
+            // 	var password_str = document.getElementById("user_password").value;
+            // 	const xmlhttp = new XMLHttpRequest();
+            // 	xmlhttp.onload = function () {
+            // 		var correct = this.responseText;
+            // 		console.log("correct: " + correct);
+            // 		correct = correct.substring(11,correct.length);
+            // 		if(correct=="False"){
+            // 			window.alert("帳號或密碼錯誤 !");
+            // 			window.location.reload();
+            // 		}
+            // 		else if(correct == "True"){
+            // 			localStorage.setItem("user_account", account_str);
+            // 			window.location.href = "food_menu.html";
+            // 		}
+            // 	}
+            // 	xmlhttp.open("GET", "php/login.php?user_accoun	t="+account_str+"&user_password="+password_str );
+            // 	xmlhttp.send();
+            // if(correct){
+            // 	localStorage.setItem("user_account", account_str);
+            // 	window.location.href("food_menu.html");
+            // }
+            // }
+            // axios(from node.js框架) by 石貫志
+            function check_account() {
+                let account_str = document.getElementById("user_account").value;
+                let password_str = document.getElementById("user_password").value;
+                let response;
+                let correct = true;
+                axios
+                    .get('php/login.php', {
+                        params: {
+                            user_account: account_str,
+                            user_password: password_str
+                        }
+                    })
 
-  </body>
+                .then(res => {
+                        response = res.data;
+                        // console.log(response.substring(11,));	//不知為何回傳會有其它雜訊
+                        correct = response.substring(11, );
+
+                        if (correct == "False") {
+                            window.alert("帳號或密碼錯誤 !");
+                            window.location.reload();
+                        } else if (correct == "True") {
+                            localStorage.setItem('user_account', account_str);
+                            window.location.href = "food_menu.html";
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            }
+
+            function checkpass(str) {
+                var new_pass = document.getElementById("new_user_password").value;
+                if (new_pass != str) {
+                    document.getElementById("second_pass").innerHTML = '<span style="float: right; color:firebrick">兩次密碼不符</span>';
+                } else {
+                    document.getElementById("second_pass").innerHTML = '<span style="float: right; color:limegreen">密碼相符</span>';
+                }
+            }
+
+            function log_out() {
+                console.log("登出中");
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.reload;
+            }
+
+            function google_login() {
+                axios
+                    .get('php/link_google.php')
+                    .then(res => function() {
+
+                    })
+                    .catch(function(error) {
+
+                    })
+            }
+
+            function register_func() {
+                var new_acc = document.getElementById("new_user_account").value;
+                var new_pass = document.getElementById("new_user_password").value;
+                var new_nickname = document.getElementById("new_nickname").value;
+                var new_email = document.getElementById("new_email").value;
+                var new_phone = document.getElementById("new_phone").value;
+                var new_birthday = document.querySelector("input[type='date']").value;
+
+                //var p2 = document.document.getElementById("new_user_password2").value;
+
+                const xmlhttp = new XMLHttpRequest();
+                xmlhttp.onload = function() {
+
+                }
+                xmlhttp.open("GET", "php/Vistitor_Info_Register.php?user_account=" + new_acc + "&user_password=" + new_pass + "&nickname=" + new_nickname + "&email=" + new_email + "&phone=" + new_phone + "&birthday=" + new_birthday);
+                xmlhttp.send();
+            }
+
+            function start() {
+                localStorage.clear();
+            }
+            window.addEventListener("load", start, false);
+        </script>
+
+</body>
+
 </html>

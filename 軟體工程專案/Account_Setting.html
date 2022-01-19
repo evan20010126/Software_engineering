@@ -253,10 +253,10 @@ select:focus {
                 // console.log(response);
                 // console.log(response[0].user_account);
                 // console.log(response[0].birthday);
-                user_account.placeholder = response[0].user_account;
-                nickname.placeholder = response[0].nickname;
-                email.placeholder = response[0].email;
-                telphone.placeholder = response[0].telphone;
+                user_account.value = response[0].user_account;
+                nickname.value = response[0].nickname;
+                email.value = response[0].email;
+                telphone.value = response[0].telphone;
                 // console.log('birthday：' ,birthday);
                 birthday.value= response[0].birthday;
                 console.log("執行完畢");                   

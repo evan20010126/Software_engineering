@@ -87,7 +87,7 @@
 //************************************************************************** 
     //insert to order_list
     $the_order = array();
-    array_push($the_order, $user_account, $product_list, $nowtotal, $T_stamp, 0);
+    array_push($the_order, $user_account, $product_list, $nowtotal, $T_stamp, -1);
     $query = ("INSERT INTO order_list (user_account,product_list,cost,T_stamp,is_finish) VALUES (?, ?, ?, ?, ?)");
     $stmt = $db->prepare($query);
     $result = $stmt->execute($the_order); 
