@@ -317,7 +317,7 @@
                         </div>
 
                         <div class="panel-body">
-                            <ul>
+                            <ul id="boss_info">
                                 <li>此處引入php店家資訊</li>
                                 <li>此處引入php店家資訊</li>
                                 <li>此處引入php店家資訊</li>
@@ -754,10 +754,27 @@
             xmlhttp.send();
         }
 
+        function showBossInfo() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                    var obj = this.responseText;
+                    obj = obj.substring(11, obj.length);
+                    var boss_info = JSON.parse(obj);
+                    console.log(boss_info);
+                    document.getElementById("boss_info").innerHTML = '<li> 店名: ' + boss_info["0"]["store_name"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 地址: ' + boss_info["0"]["store_address"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 電話: ' + boss_info["0"]["store_phone"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 評分: ' + boss_info["0"]["score"] + '</li>';
+                } //<li>此處引入php店家資訊</li>
+            xmlhttp.open("GET", "php/display_boss_info.php");
+            xmlhttp.send();
+        }
+
         function start() {
             i = 0;
             showCoupon();
             showMenu();
+            showBossInfo();
             //console.log(Date.now);
         }
         $(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
