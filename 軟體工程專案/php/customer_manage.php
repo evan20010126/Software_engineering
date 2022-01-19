@@ -5,19 +5,22 @@
     $birthday  = $_REQUEST['birthday']; //前端需同步
     $string = "";
     if($nickname!=NULL){
-        if($string!=NULL){
+        if($string!=""){
             $string=$string." AND ";
         }
-        $string=$string." nickname = ".$nickname;
+        $string=$string."nickname = ";
+        $string=$string."'";
+        $string=$string.$nickname;
+        $string=$string."'";
     }
     if($phone!=NULL){
-        if($string!=NULL){
+        if($string!=""){
             $string=$string." AND ";
         }
         $string=$string." phone = ".$phone;
     }
     if($birthday!=NULL){
-        if($string!=NULL){
+        if($string!=""){
             $string=$string." AND ";
         }
         $string=$string." birthday = ".$birthday;
@@ -30,11 +33,14 @@
             }
         }
     }
-    $query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE ".$string);
     
-    $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
-    $error = $stmt->execute(); //執行sql語法
-    $result = $stmt->fetchAll();//執行結果儲存在 $result這個變數中
+    $query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE ".$string );
+    //$query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE nickname = 'hihi'");
+    //echo($query);
+
+    $stmt = $db->prepare($query);        //db為db_conn.php新建的連線物件 
+    $error = $stmt->execute();
+    $result = $stmt->fetchAll();        //將所有搜尋結果存於result
 
     echo json_encode($result);
 ?>
