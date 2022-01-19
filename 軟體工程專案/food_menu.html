@@ -217,7 +217,7 @@
                         </div>
 
                         <div class="panel-body">
-                            <ul>
+                            <ul id="boss_info">
                                 <li>此處引入php店家資訊</li>
                                 <li>此處引入php店家資訊</li>
                                 <li>此處引入php店家資訊</li>
@@ -367,7 +367,7 @@
                 showPackageSum();
                 while (package_obj[index].product_name != null) {
 
-                    document.getElementById("package").innerHTML += '<li>' + package_obj[index].product_name + ': <span style="float: right;">' + package_obj[index].product_price + ' $<button id="' + package_obj[index].product_name + '" onclick="delete_package_product(this.id)" style="float: right;" class="btn_trash" ><i class="fa fa-trash"></i></button></span>';
+                    document.getElementById("package").innerHTML += '<li>' + package_obj[index].product_name + ': *' + package_obj[index].product_number + '<span style="float: right;">' + package_obj[index].product_price + ' $<button id="' + package_obj[index].product_name + '" onclick="delete_package_product(this.id)" style="float: right;" class="btn_trash" ><i class="fa fa-trash"></i></button></span>';
                     index++;
                 }
                 //console.log(coupon_code);
@@ -592,20 +592,40 @@
                 document.getElementById("user_mode").innerHTML = "顧客模式";
             }
         }
-        function logout(){
+
+        function logout() {
             localStorage.clear();
             window.location.href = "customer_sign_in.html";
         }
+
+        function showBossInfo() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                    var obj = this.responseText;
+                    obj = obj.substring(11, obj.length);
+                    var boss_info = JSON.parse(obj);
+                    console.log(boss_info);
+                    document.getElementById("boss_info").innerHTML = '<li> 店名: ' + boss_info["0"]["store_name"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 地址: ' + boss_info["0"]["store_address"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 電話: ' + boss_info["0"]["store_phone"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 評分: ' + boss_info["0"]["score"] + '</li>';
+                } //<li>此處引入php店家資訊</li>
+            xmlhttp.open("GET", "php/display_boss_info.php");
+            xmlhttp.send();
+        }
+
         function start() {
             i = 0;
             k = 0;
             clickPage = false;
+
+            check_login();
             showMenu();
             showPackage();
             showPackageSum();
             showCoupon();
-            check_login();
-            //console.log(Date.now);
+            showBossInfo()
+                //console.log(Date.now);
         }
         $(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
             $("#status").delay(2000).fadeOut(500); //delay --> 延遲幾秒才fadeOut

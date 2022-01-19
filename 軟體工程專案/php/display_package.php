@@ -21,7 +21,8 @@
             array_push($product_arr, $result[0][$i]);        
         }
         //echo json_encode($product_arr);
-        //$output_arr = array();
+        // $output_arr = array();
+        $answer_arr = array();
         for($i = 0 ; $i <count($product_arr); $i++){
             if($product_arr[$i]!=-999999){
                 $counter=1;
@@ -38,11 +39,15 @@
                 $output_arr[$i]["product_name"] = $result[0][0];
                 $output_arr[$i]["product_price"] = $result[0][1];
                 $output_arr[$i]["product_number"] = $counter; 
-                
+                // 改寫
+                $sub_obj["product_name"] = $output_arr[$i]["product_name"];
+                $sub_obj["product_price"] = $output_arr[$i]["product_price"];
+                $sub_obj["product_number"] = $output_arr[$i]["product_number"];
+                array_push($answer_arr, $sub_obj);
                 $product_arr[$i]=-999999;
             }
         }
-        echo json_encode($output_arr);
+        echo json_encode($answer_arr);
      
         // json_encode
         //[{product_name,product_price} , {...}, {...}]
