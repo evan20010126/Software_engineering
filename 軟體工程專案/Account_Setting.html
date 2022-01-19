@@ -117,13 +117,13 @@ select:focus {
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-							<span style="padding-right: 10px; color: navy;">Hi! user_test</span><img
+							<span style="padding-right: 10px; color: navy;" id="hi"></span><img
 								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" id="logInOut">
 							<li class="active"><a href="Account_Setting.html">Account Setting</a></li>
 							<li><a href="preference.html">My preference Setting</a></li>
-							<li><a href="customer_sign_in.html">Sign in</a></li>
-							<li><a href="#">Sign out</a></li>
+							<!-- <li><a href="customer_sign_in.html">Sign in</a></li> -->
+							<!-- <li><a href="#">Sign out</a></li> -->
 						</ul>
 					</li>
 				</ul>
@@ -141,7 +141,7 @@ select:focus {
     <!--頁首-->
 	<header>
         <h1 class="pb-4 border-bottom">帳號設定</h1>
-        <p class="lead">OOXX@gmail.com</p>
+        <p class="lead" id="user_mode"></p>
         <hr>
     </header>
     <!--內容區-->
@@ -152,15 +152,15 @@ select:focus {
                             <div class="d-flex align-items-start py-3 border-bottom">
                                 <div class= "text-center"><img src="img/food_table.png" class="img" style = "max-height:15em;" alt="無法顯示附圖"></div> 
                                 
-                                <div class="pl-sm-4 pl-2" id="img-section"> <b>名字 照片</b>
-                                    <p>說明說明說明說明</p> <button class="btn button border"><b>Upload</b></button>
+                                <!-- <div class="pl-sm-4 pl-2" id="img-section"> <b>名字 照片</b> -->
+                                    <!-- <p>說明說明說明說明</p> <button class="btn button border"><b>Upload</b></button> -->
                                 </div>
                             </div>
                             <div class="py-2">
                                 <div class="row py-2">
                                     <div class="col-md-6"> 
-                                        <label for="firstname">名字</label> 
-                                        <input type="text" class="bg-light form-control" id = "user_account" placeholder="Mary Jane Watson"> </div>
+                                        <label for="firstname">帳戶</label> 
+                                        <input type="text" class="bg-light form-control" id = "user_account" placeholder="Mary Jane Watson" disabled> </div>
                                     <div class="col-md-6 pt-md-0 pt-3"> 
                                         <label for="lastname">暱稱</label> 
                                         <input type="text" class="bg-light form-control" id = "nickname" placeholder="MJ "> 
@@ -202,13 +202,14 @@ select:focus {
                                     </div>
                                 </div>  -->
                                 <div class="py-3 pb-4 border-bottom"> 
+                                    <br>
                                     <button id = "save_btn" class="btn btn-primary mr-3">儲存</button> 
-                                    <button id = "cancel_btn" class="btn border button">取消</button></div>
+                                    <!-- <button id = "cancel_btn" class="btn border button">取消</button></div> -->
                                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                                    <div> <b>刪除帳戶<b>
-                                        <p>注意！帳戶一經刪除便不能還原！！！</p>
+                                    <!-- <div> <b>刪除帳戶<b> -->
+                                        <!-- <p>注意！帳戶一經刪除便不能還原！！！</p> -->
                                     </div>
-                                    <div class="ml-auto"> <button class="btn danger">刪除帳戶</button> </div>
+                                    <!-- <div class="ml-auto"> <button class="btn danger">刪除帳戶</button> </div> -->
                                 </div>
                             </div>
                         </div>
@@ -223,13 +224,17 @@ select:focus {
             </div> 		          
     </div> 
     <script>
+    //全域變數
+    let User_test = null;
+
     function start() {
         save_btn = document.getElementById('save_btn');
         save_btn.addEventListener('click',edit_user_info);
         
         cancel_btn = document.getElementById('cancel_btn');
-        cancel_btn.addEventListener('click',cancel_edit);
+        // cancel_btn.addEventListener('click',cancel_edit);
 
+        check_login();
         show_default_user_info();
     }
 
@@ -242,10 +247,9 @@ select:focus {
         let telphone = document.getElementById('telphone');
         let birthday = document.querySelector('input[type="date"]');
         
-        let user_test = 'evan';     //後面將改為以session傳遞
         let response;
         axios 
-            .get(`php/edit_user_info_1.php?user_account=${user_test}`)
+            .get(`php/edit_user_info_1.php?user_account=${User_test}`)
             .then (res => {
                 response =  res.data;
                 response = JSON.parse(response.substring(11,response.length));
@@ -256,7 +260,7 @@ select:focus {
                 user_account.value = response[0].user_account;
                 nickname.value = response[0].nickname;
                 email.value = response[0].email;
-                telphone.value = response[0].telphone;
+                telphone.value = response[0].phone;
                 // console.log('birthday：' ,birthday);
                 birthday.value= response[0].birthday;
                 console.log("執行完畢");                   
@@ -271,7 +275,8 @@ select:focus {
     function edit_user_info()
     {
         //==========抓取id的value==========//
-        let user_account = document.getElementById('user_account').value;
+        // let user_account = document.getElementById('user_account').value;
+        let user_account = User_test;
         let nickname = document.getElementById('nickname').value;
         let email = document.getElementById('email').value;
         let telphone = document.getElementById('telphone').value;
@@ -316,7 +321,24 @@ select:focus {
     }
     function cancel_edit(){
 
-    }    
+    }
+    
+    function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                location.href = 'customer_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+                document.getElementById("user_mode").innerHTML = "顧客模式";
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
+
     window.addEventListener("load", start, false);
     </script> 
     </body>
