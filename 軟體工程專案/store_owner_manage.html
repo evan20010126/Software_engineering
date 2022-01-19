@@ -534,11 +534,11 @@
 			var edit_price = window.document.getElementById("edit_product_price").value;
 			console.log("edit_info: " + edit_info);
 			const xmlhttp = new XMLHttpRequest();
-				xmlhttp.onload = function () {
-					showMenu();
-				}
-				xmlhttp.open("GET", "php/edit_product.php?product_name=" + edit_temp_name +"&edit_product_name="+ edit_name +"&edit_product_info="+ edit_info +"&edit_product_picture="+ edit_pic +"&edit_product_price="+edit_price); //待php檢查
-				xmlhttp.send();
+			xmlhttp.onload = function () {
+				showMenu();
+			}
+			xmlhttp.open("GET", "php/edit_product.php?product_name=" + edit_temp_name +"&edit_product_name="+ edit_name +"&edit_product_info="+ edit_info +"&edit_product_picture="+ edit_pic +"&edit_product_price="+edit_price); //待php檢查
+			xmlhttp.send();
 		}
 		//
 		function changeSupply(sup_product_name) {
