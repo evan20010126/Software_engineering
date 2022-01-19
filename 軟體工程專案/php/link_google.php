@@ -39,9 +39,6 @@ if (isset($_GET['code']) && $gclient->authenticate($_GET['code'])) {
     header('Location: ' . $google_login_url);
     exit;
 }*/
-echo "<pre>";    //想要印出前端傳回的陣列資料可以這樣寫(在前端f12的Network的Response可以看到) by石貫志
-print_r("hello");
-echo "</pre>";
 $client = new Google_Client();
 // 代入從 API console 下載下來的 client_secret
 $client->setAuthConfig('credentials.json');
@@ -51,7 +48,7 @@ $client->setAuthConfig('credentials.json');
 $client->addScope(['profile', Google_Service_Drive::DRIVE_METADATA_READONLY]);
 
 // 設定 redirect URI，登入認證完成會導回此頁
-$client->setRedirectUri('http://localhost/Software_engineering/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%B0%88%E6%A1%88/customer_sign_in.html');
+$client->setRedirectUri('http://ntou.ddns.net/%e8%bb%9f%e9%ab%94%e5%b7%a5%e7%a8%8b%e5%b0%88%e6%a1%88/food_menu.html');
 
 // 不需要透過使用者介面就可以 refresh token
 $client->setAccessType('offline');
@@ -84,7 +81,7 @@ $service = new Google_Service_Oauth2($client);
 $user_info = $service->userinfo->get();
 
 $open_id = $user_info->id;
-$_SESSION['user']=$open_id;
+$_SESSION['user']=$oauth;
 
 //session_start();
 //$_SESSION['user']=$oauth;
