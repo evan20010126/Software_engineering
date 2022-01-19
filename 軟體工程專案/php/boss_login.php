@@ -1,11 +1,11 @@
 <?php
     include "db_conn_software.php";
-    $boos_account = $_REQUEST["boos_account"];
-    $boos_password = $_REQUEST["boos_password"];
+    $boss_account = $_REQUEST["boss_account"];
+    $boss_password = $_REQUEST["boss_password"];
 
-    $query = ("SELECT admin_account FROM administrator WHERE admin_account = ? AND admin_password = ?");
+    $query = ("SELECT boss_account FROM storeowner WHERE boss_account = ? AND boss_password = ?");
     $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
-    $error = $stmt->execute(array($boos_account,$boos_password)); //執行sql語法
+    $error = $stmt->execute(array($boss_account,$boss_password)); //執行sql語法
     $result = $stmt->fetchAll();
     $bool = "False";
     // PRINT $boos_account;     /*偵錯用：有沒有抓到boos_account*/
@@ -15,7 +15,7 @@
     if($result!=NULL){
         $bool = "True";      
         session_start();
-        $_SESSION['boos']=$user_account;
+        $_SESSION['boss']=$boss_account;
         //$_SESSION['password']=$user_password;
     } 
     echo $bool;
