@@ -4,7 +4,7 @@
     $phone = $_REQUEST['phone']; //前端需同步
     $birthday  = $_REQUEST['birthday']; //前端需同步
     $string = "";
-    if($nickname!=NULL){
+    if($nickname!=" "){
         if($string!=""){
             $string=$string." AND ";
         }
@@ -13,21 +13,21 @@
         $string=$string.$nickname;
         $string=$string."'";
     }
-    if($phone!=NULL){
+    if($phone!=" "){
         if($string!=""){
             $string=$string." AND ";
         }
         $string=$string." phone = ".$phone;
     }
-    if($birthday!=NULL){
+    if($birthday!=" "){
         if($string!=""){
             $string=$string." AND ";
         }
         $string=$string." birthday = ".$birthday;
     }
-    if($nickname==NULL){
-        if($nickname==NULL){
-            if($birthday==NULL){
+    if($nickname==" "){
+        if($nickname==" "){
+            if($birthday==" "){
                 echo json_encode(NULL);
                 exit;
             }
