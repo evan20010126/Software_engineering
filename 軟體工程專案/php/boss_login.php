@@ -10,6 +10,7 @@
     $bool = "False";
     // PRINT $boos_account;     /*偵錯用：有沒有抓到boos_account*/
     // PRINT $boos_password;    /*偵錯用：有沒有抓到boos_password*/
+
     // PRINT $result;           /*偵錯用：有沒有抓到reslut*/
     if($result!=NULL){
         $bool = "True";      
