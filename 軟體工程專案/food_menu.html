@@ -635,7 +635,7 @@
             $("#preloader").delay(2000).fadeOut(500);
         })
         window.addEventListener("load", start, false);
-        let ws = new WebSocket('ws://localhost:3000')
+        let ws = new WebSocket('ws://20.212.218.184:443')
 
         ws.onopen = () => {
             // console.log('open connection')

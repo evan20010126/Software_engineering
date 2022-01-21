@@ -3,7 +3,7 @@ const express = require('express')
 const SocketServer = require('ws').Server
 
 //指定開啟的 port
-const PORT = 3000
+const PORT = 443
 
 //創建 express 的物件，並綁定及監聽 3000 port ，且設定開啟後在 console 中提示
 const server = express()

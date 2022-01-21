@@ -13,7 +13,7 @@ $gclient->setAuthConfig('credentials.json');
 $gclient->setAccessType('offline'); // offline access
 $gclient->setIncludeGrantedScopes(true); // incremental auth
 $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
-$gclient->setRedirectUri('http://ntoucise.ddns.net/%e8%bb%9f%e9%ab%94%e5%b7%a5%e7%a8%8b%e5%b0%88%e6%a1%88/food_menu.html'); // 寫憑證設定：「已授權的重新導向 URI 」的網址
+$gclient->setRedirectUri('http://ntou.ddns.net/%e8%bb%9f%e9%ab%94%e5%b7%a5%e7%a8%8b%e5%b0%88%e6%a1%88/food_menu.html'); // 寫憑證設定：「已授權的重新導向 URI 」的網址
 
 $google_login_url = $gclient->createAuthUrl(); // 取得要點擊登入的網址
 

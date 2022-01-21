@@ -32,12 +32,12 @@
                 <ul class = "nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                        <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                        <span style="padding-right: 10px; color: navy;" id="hi"></span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="logInOut">
                             <li><a href="Account_Setting.html">Account Setting</a></li>
                             <li class="active"><a href="preference.html">My preference Setting</a></li>
-                            <li><a href="customer_sign_in.html">Sign in</a></li>
-                            <li><a href="visitor_index.html">Sign out</a></li>
+                            <!-- <li><a href="customer_sign_in.html">Sign in</a></li> -->
+                            <!-- <li><a href="visitor_index.html">Sign out</a></li> -->
                         </ul>
                     </li>
                 </ul>
@@ -51,14 +51,14 @@
         <div class = "col-sm-8">
             <header>
                 <h1 >偏好設定</h1>
-                <p class="lead">OOXX@gmail.com</p>  
+                <p class="lead" id = "user_mode"></p>  
             </header>
         </div>
     </div>
     <span>&nbsp</span><hr>
     <!--內容區-->
     <!-- tab linker：菜單偏好設定 -->
-    <ul class="nav nav-tabs">
+    <!-- <ul class="nav nav-tabs">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">菜單偏好設定</a>
         <div class="dropdown-menu">
@@ -70,11 +70,11 @@
             <p><a class="dropdown-item" href="#">精選飲品</a></p>
         </div>
       </li>
-      <!-- tab linker：客製化輸入 -->
-      <li class="nav-item in active">
+      tab linker：客製化輸入 -->
+      <!-- <li class="nav-item in active">
         <a class="nav-link" data-toggle="tab" href="#custom_input">客製化輸入</a>
       </li>
-    </ul>
+    </ul> -->
     <div class="tab">
     <!-- tab list：產品一覽 -->
       <div class="tab fade" id="special_food">
@@ -205,13 +205,14 @@
   //=============Global variable===========
 
     function start() {
+      check_login();
       show_default_preference();
       all_preference = "";
     }
     
     function show_default_preference(){
       let preference_text = document.getElementById("preference_text");
-      let user_test = "evan";     /*為測試用，先暫時寫死*/
+      let user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
       let response;
       axios      
       .get(`php/show_default_preference_setting.php?user_account=${user_test}`)
@@ -233,7 +234,7 @@
       let preference_text = document.getElementById("preference_text").value;
       all_preference += " " + preference_text;
       //連線用參數
-      let user_test = "evan";     /*為測試用，先暫時寫死*/
+      let user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
       let response;
       //抓取checkbox(飲料客製化選項)的函式，all_preference會把飲料客製化選項加進去
       wrap_beverages_class();
@@ -288,6 +289,23 @@
         if (item !== checkbox) item.checked =  false;
       })
     }
+
+    function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                location.href = 'customer_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+                document.getElementById("user_mode").innerHTML = "顧客模式";
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
+        
     window.addEventListener("load",start,false);
   </script>
   </body>

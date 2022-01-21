@@ -296,7 +296,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>暫無</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
+                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>"+ orderObj[index].preference +"</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
                     index++;
                 }
             }
@@ -417,7 +417,7 @@
         }
         window.addEventListener("load", start, false);
 
-        let ws = new WebSocket('ws://localhost:3000')
+        let ws = new WebSocket('ws://20.212.218.184:443')
 
         ws.onopen = () => {
             // console.log('open connection')
