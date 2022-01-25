@@ -326,7 +326,7 @@
 
         function showOrderList_uncheck() {
             //test button
-            document.getElementById("order_unchecked").innerHTML += '<td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;"><button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button><button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button></td>';
+            // document.getElementById("order_unchecked").innerHTML += '<td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;"><button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button><button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button></td>';
             //test end
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
@@ -417,8 +417,8 @@
         }
         window.addEventListener("load", start, false);
 
-        let ws = new WebSocket('ws://20.212.218.184:443')
-
+        // let ws = new WebSocket('ws://20.212.218.184:443')
+        let ws = new WebSocket('ws://localhost:443')
         ws.onopen = () => {
             // console.log('open connection')
             console.log('owner');
@@ -431,7 +431,9 @@
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            alert("Store have new order!!");
+            if(event.data == "new"){
+                alert("Store have new order!!");
+            }
         }
 
         function logout() {

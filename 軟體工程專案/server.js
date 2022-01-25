@@ -37,11 +37,11 @@ wss.on('connection', ws => {
 
     ws.on('message', data => {
         //取得所有連接中的 client
-        console.log(data)
+        console.log(data.toString())
         let clients = wss.clients
         //做迴圈，發送訊息至每個 client
         clients.forEach(client => {
-            client.send(data[0])
+            client.send(data.toString())
         })
     })
 
