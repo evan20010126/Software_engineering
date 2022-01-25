@@ -23,7 +23,11 @@
         if($string!=""){
             $string=$string." AND ";
         }
-        $string=$string." birthday = ".$birthday;
+       
+        $string=$string." birthday = ";
+        $string=$string."'";
+        $string=$string.$birthday;
+        $string=$string."'";
     }
     if(strval($string)==strval("")){
         echo json_encode(NULL);
