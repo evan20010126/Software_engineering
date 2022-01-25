@@ -350,6 +350,20 @@
         function change_order_state(ord_id, state) {
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
+                var user_name = this.responseText;
+                console.log(user_name);
+                user_name = user_name.substring(12, user_name.length);
+                user_name = user_name.substring(0, user_name.length - 1);
+                var s = user_name;
+                if (state == -2) {
+                    s += "reject";
+                } else if (state == 0) {
+                    s += "accept";
+                } else if (state == 1) {
+                    s += "finish";
+                }
+                console.log(s);
+                ws.send(s);
                 showOrderList_uncheck();
                 showOrderList_ing();
             }
