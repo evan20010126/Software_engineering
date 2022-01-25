@@ -48,7 +48,9 @@ $client->setAuthConfig('credentials.json');
 $client->addScope(['profile', Google_Service_Drive::DRIVE_METADATA_READONLY]);
 
 // 設定 redirect URI，登入認證完成會導回此頁
-$client->setRedirectUri('http://ntou.ddns.net/%e8%bb%9f%e9%ab%94%e5%b7%a5%e7%a8%8b%e5%b0%88%e6%a1%88/food_menu.html');
+//$client->setRedirectUri('http://ntou.ddns.net/%e8%bb%9f%e9%ab%94%e5%b7%a5%e7%a8%8b%e5%b0%88%e6%a1%88/food_menu.html');
+$client->setRedirectUri('https://reurl.cc/mGloRA');
+
 
 // 不需要透過使用者介面就可以 refresh token
 $client->setAccessType('offline');
