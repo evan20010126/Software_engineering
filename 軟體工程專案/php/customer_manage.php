@@ -4,7 +4,7 @@
     $phone = $_REQUEST['phone']; //前端需同步
     $birthday  = $_REQUEST['birthday']; //前端需同步
     $string = "";
-    if(strval($nickname)!=strval(" ")){
+    if($nickname!=NULL){
         if($string!=""){
             $string=$string." AND ";
         }
@@ -13,13 +13,13 @@
         $string=$string.$nickname;
         $string=$string."'";
     }
-    if(strval($phone)!=strval(" ")){
+    if($phone!=NULL){
         if($string!=""){
             $string=$string." AND ";
         }
         $string=$string." phone = ".$phone;
     }
-    if(strval($birthday)!=strval(" ")){
+    if($birthday!=NULL){
         if($string!=""){
             $string=$string." AND ";
         }
@@ -30,8 +30,8 @@
             exit;
     }
     
-    //$query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE ".$string );
-    $query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE nickname = 22222");
+    $query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE ".$string );
+    //$query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE nickname = 22222");
     //echo($query);
 
     $stmt = $db->prepare($query);        //db為db_conn.php新建的連線物件 
