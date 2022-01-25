@@ -350,6 +350,8 @@
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var user_name = this.responseText;
+                console.log(user_name);
+                user_name = user_name.substring(11, user_name.length);
                 var s = user_name;
                 if (state == -2) {
                     s += "reject";
