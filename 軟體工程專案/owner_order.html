@@ -316,7 +316,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_history").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>暫無</td><td>" + orderObj[index].cost + "</td></tr>";
+                    document.getElementById("order_history").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].cost + "</td></tr>";
                     index++;
                 }
             }
@@ -339,7 +339,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_unchecked").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>暫無</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-secondary btn-sm' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,-2)'>拒絕</button><button type='button' class='btn btn-primary btn-sm' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,0)'>接受</button></td></tr>";
+                    document.getElementById("order_unchecked").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-secondary btn-sm' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,-2)'>拒絕</button><button type='button' class='btn btn-primary btn-sm' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,0)'>接受</button></td></tr>";
                     index++;
                 }
             }
