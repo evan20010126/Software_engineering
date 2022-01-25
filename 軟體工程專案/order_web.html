@@ -447,6 +447,29 @@
         }
 
         window.addEventListener("load", start, false);
+
+        let ws = new WebSocket('ws://20.212.218.184:443')
+        // let ws = new WebSocket('ws://localhost:443');
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('client');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+        
+        //接收 Server 發送的訊息
+        ws.onmessage = event => {
+            console.log(event.data);
+            if(event.data == User_test + "accept"){
+                alert("Your order were accept. :)");
+            }else if(event.data == User_test + "reject"){
+                alert("Your order were reject. Q_Q");
+            }else if(event.data == User_test + "finish"){
+                alert("Your order are finish!!!");
+            }
+        }
     </script>
 </body>
 

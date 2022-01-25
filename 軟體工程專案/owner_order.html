@@ -431,8 +431,7 @@
         }
         window.addEventListener("load", start, false);
 
-        // let ws = new WebSocket('ws://20.212.218.184:443')
-        let ws = new WebSocket('ws://localhost:443')
+        let ws = new WebSocket('ws://20.212.218.184:443')
         ws.onopen = () => {
             // console.log('open connection')
             console.log('owner');
@@ -447,7 +446,7 @@
             console.log(event.data);
             if(event.data == "new"){
                 alert("Store have new order!!");
-                window.location.reload();
+                showOrderList_uncheck();
             }
         }
 
