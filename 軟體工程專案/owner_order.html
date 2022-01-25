@@ -296,7 +296,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>"+ orderObj[index].preference +"</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
+                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].preference + "</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
                     index++;
                 }
             }
@@ -326,7 +326,6 @@
 
         function showOrderList_uncheck() {
             //test button
-            // document.getElementById("order_unchecked").innerHTML += '<td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;"><button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button><button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button></td>';
             //test end
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
@@ -350,6 +349,18 @@
         function change_order_state(ord_id, state) {
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
+                var user_name = this.responseText;
+                console.log(user_name);
+                user_name = user_name.substring(11, user_name.length);
+                var s = user_name;
+                if (state == -2) {
+                    s += "reject";
+                } else if (state == 0) {
+                    s += "accept";
+                } else if (state == 1) {
+                    s += "finish";
+                }
+                ws.send(s);
                 showOrderList_uncheck();
                 showOrderList_ing();
             }
@@ -417,8 +428,8 @@
         }
         window.addEventListener("load", start, false);
 
-        // let ws = new WebSocket('ws://20.212.218.184:443')
-        let ws = new WebSocket('ws://localhost:443')
+        let ws = new WebSocket('ws://20.212.218.184:443')
+
         ws.onopen = () => {
             // console.log('open connection')
             console.log('owner');
@@ -431,9 +442,7 @@
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            if(event.data == "new"){
-                alert("Store have new order!!");
-            }
+            alert("Store have new order!!");
         }
 
         function logout() {
