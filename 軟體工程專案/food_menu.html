@@ -26,6 +26,9 @@
 	</script> -->
     <!--我加的前端驗證機制(試作概念，後面要改成後端，為方便修改此html可改成註解) by 石貫志-->
     <style>
+        .thumbnail{
+            height: 600px;
+        }
         body {
             font-family: 微軟正黑體;
         }
@@ -285,7 +288,7 @@
                 var max = i + 6;
                 //display remain product
                 for (; i < max; i++) {
-                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail" ><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="' + i + '" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Cart</button> </div> </div>';
+                    document.getElementById("menu").innerHTML += '<div class="col-sm-4" ><div class="thumbnail"><img src="img/' + product[i]["product_pic"] + ' " alt="2" width="400" height="300"> <p><strong style="font-size:150%">' + product[i]["product_name"] + '</strong></p> <p>' + product[i]["product_info"] + '</p><p>Price: ' + product[i]["product_price"] + '</p><button id="' + i + '" onclick="addToPackage(this.id)" class="btn" data-toggle="modal" data-target="#myModal" >Add to Cart</button> </div> </div>';
                 }
             }
             xmlhttp.open("GET", "php/user_display_menu.php");
@@ -652,19 +655,19 @@
         ws.onclose = () => {
             console.log('close connection')
         }
-
-
+        
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            if (event.data == User_test + "accept") {
+            if(event.data == User_test + "accept"){
                 alert("Your order were accept. :)");
-            } else if (event.data == User_test + "reject") {
+            }else if(event.data == User_test + "reject"){
                 alert("Your order were reject. Q_Q");
-            } else if (event.data == User_test + "finish") {
+            }else if(event.data == User_test + "finish"){
                 alert("Your order are finish!!!");
             }
         }
+
     </script>
 </body>
 
