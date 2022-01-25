@@ -276,7 +276,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>"+ "no ice no suger" +"</td><td>" + orderObj[index].cost + "</td></tr>";
+                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].preference + "</td><td>" + orderObj[index].cost + "</td></tr>";
                     index++;
                 }
             }
@@ -449,7 +449,7 @@
         window.addEventListener("load", start, false);
 
         let ws = new WebSocket('ws://20.212.218.184:443')
-        // let ws = new WebSocket('ws://localhost:443');
+            // let ws = new WebSocket('ws://localhost:443');
         ws.onopen = () => {
             // console.log('open connection')
             console.log('client');
@@ -458,15 +458,15 @@
         ws.onclose = () => {
             console.log('close connection')
         }
-        
+
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            if(event.data == User_test + "accept"){
+            if (event.data == User_test + "accept") {
                 alert("Your order were accept. :)");
-            }else if(event.data == User_test + "reject"){
+            } else if (event.data == User_test + "reject") {
                 alert("Your order were reject. Q_Q");
-            }else if(event.data == User_test + "finish"){
+            } else if (event.data == User_test + "finish") {
                 alert("Your order are finish!!!");
             }
         }
