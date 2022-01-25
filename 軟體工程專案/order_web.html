@@ -441,12 +441,10 @@
             }
         }
 
-        function log_out() {
-                console.log("登出中");
-                localStorage.clear();
-                sessionStorage.clear();
-                window.location.reload;
-            }
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
 
         window.addEventListener("load", start, false);
     </script>
