@@ -1,7 +1,7 @@
 <?php
     include "db_conn_software.php";
     
-    $user_account = "tzuyu123";//$_REQUEST("user_account");
+    $user_account = $_REQUEST("user_account");
 
     $query = ("SELECT is_blank FROM customer WHERE user_account = ?");
     $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
