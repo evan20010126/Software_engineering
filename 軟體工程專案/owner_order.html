@@ -211,7 +211,7 @@
 
             <aside>
                 <div class="col-sm-3 col-sm-offset-1">
-                    <div class="panel panel-success">
+                    <!-- <div class="panel panel-success">
                         <div class="panel-heading">
                             <h3>顧客名單</h3>
                         </div>
@@ -229,7 +229,7 @@
                             </ul>
                             <button value="submit">管理</button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <h3>優惠卷<svg style="float: right;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
@@ -326,6 +326,7 @@
 
         function showOrderList_uncheck() {
             //test button
+            // document.getElementById("order_unchecked").innerHTML += '<td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;"><button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button><button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button></td>';
             //test end
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
@@ -351,7 +352,8 @@
             xmlhttp.onload = function() {
                 var user_name = this.responseText;
                 console.log(user_name);
-                user_name = user_name.substring(11, user_name.length);
+                user_name = user_name.substring(12, user_name.length);
+                user_name = user_name.substring(0, user_name.length - 1);
                 var s = user_name;
                 if (state == -2) {
                     s += "reject";
@@ -360,6 +362,7 @@
                 } else if (state == 1) {
                     s += "finish";
                 }
+                console.log(s);
                 ws.send(s);
                 showOrderList_uncheck();
                 showOrderList_ing();
@@ -429,7 +432,6 @@
         window.addEventListener("load", start, false);
 
         let ws = new WebSocket('ws://20.212.218.184:443')
-
         ws.onopen = () => {
             // console.log('open connection')
             console.log('owner');
@@ -442,7 +444,10 @@
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            alert("Store have new order!!");
+            if (event.data == "new") {
+                alert("Store have new order!!");
+                showOrderList_uncheck();
+            }
         }
 
         function logout() {
