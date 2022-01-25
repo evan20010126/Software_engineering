@@ -652,19 +652,19 @@
         ws.onclose = () => {
             console.log('close connection')
         }
-        
+
+
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            if(event.data == User_test + "accept"){
+            if (event.data == User_test + "accept") {
                 alert("Your order were accept. :)");
-            }else if(event.data == User_test + "reject"){
+            } else if (event.data == User_test + "reject") {
                 alert("Your order were reject. Q_Q");
-            }else if(event.data == User_test + "finish"){
+            } else if (event.data == User_test + "finish") {
                 alert("Your order are finish!!!");
             }
         }
-
     </script>
 </body>
 
