@@ -210,9 +210,10 @@
       all_preference = "";
     }
     
+    var user_test;
     function show_default_preference(){
       let preference_text = document.getElementById("preference_text");
-      let user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
+      user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
       let response;
       axios      
       .get(`php/show_default_preference_setting.php?user_account=${user_test}`)

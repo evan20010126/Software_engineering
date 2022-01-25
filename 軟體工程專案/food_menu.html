@@ -374,7 +374,7 @@
                 showPackageSum();
                 while (package_obj[index].product_name != null) {
 
-                    document.getElementById("package").innerHTML += '<li>' + package_obj[index].product_name + ': *' + package_obj[index].product_number + '<span style="float: right;">' + package_obj[index].product_price + ' $<button id="' + package_obj[index].product_name + '" onclick="delete_package_product(this.id)" style="float: right;" class="btn_trash" ><i class="fa fa-trash"></i></button></span>';
+                    document.getElementById("package").innerHTML += '<li class = "col-sm-12 list-group-item" style = "color: white; background-color: navy;">' + package_obj[index].product_name + ': '  + '<li class = "col-sm-12 list-group-item">' + package_obj[index].product_price + '$ *' +package_obj[index].product_number + ' <button id="' + package_obj[index].product_name + '" onclick="delete_package_product(this.id)" class="btn_trash" ><i class="fa fa-trash"></i></button></li></li>';
                     index++;
                 }
                 //console.log(coupon_code);
