@@ -211,7 +211,7 @@
 
             <aside>
                 <div class="col-sm-3 col-sm-offset-1">
-                    <div class="panel panel-success">
+                    <!-- <div class="panel panel-success">
                         <div class="panel-heading">
                             <h3>顧客名單</h3>
                         </div>
@@ -229,7 +229,7 @@
                             </ul>
                             <button value="submit">管理</button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <h3>優惠卷<svg style="float: right;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
@@ -296,7 +296,7 @@
                 var index = 0;
                 while (orderObj[index] != null) {
                     var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
-                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>"+ orderObj[index].preference +"</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
+                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].preference + "</td><td>" + orderObj[index].cost + "</td><td><button type='button' class='btn btn-success' id='" + orderObj[index].order_id + "' onclick='change_order_state(this.id,1)'>完成</button></td></tr>";
                     index++;
                 }
             }
@@ -445,7 +445,7 @@
         //接收 Server 發送的訊息
         ws.onmessage = event => {
             console.log(event.data);
-            if(event.data == "new"){
+            if (event.data == "new") {
                 alert("Store have new order!!");
             }
         }
