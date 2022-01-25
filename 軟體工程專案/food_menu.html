@@ -260,6 +260,7 @@
         var coupon_code = "";
         var p_id = "";
         var clickPage = false;
+        var cartEmpty = true;
 
         function showMenu() {
             if (!clickPage) {
@@ -355,9 +356,11 @@
                 obj = obj.substring(11, obj.length);
                 //console.log("showPackage: " + obj);
                 if (!isJSON(obj)) {
+                    cartEmpty = true;
                     document.getElementById("package").innerHTML = '';
                     return;
                 }
+                cartEmpty = false;
                 var package_obj = JSON.parse(obj);
                 console.log(package_obj);
                 //console.log(package_obj[0].product_name);
@@ -523,6 +526,10 @@
         }
 
         function checkOut() {
+            if (cartEmpty) {
+                window.alert("Cart is Empty !");
+                return;
+            }
             var timestamp = Date.now();
             var date = new Date(timestamp);
             var time = date.getFullYear() +
@@ -635,7 +642,7 @@
             $("#preloader").delay(2000).fadeOut(500);
         })
         window.addEventListener("load", start, false);
-        let ws = new WebSocket('ws://20.212.218.184:443')
+        let ws = new WebSocket('ws://localhost:3000')
 
         ws.onopen = () => {
             // console.log('open connection')
@@ -645,7 +652,6 @@
         ws.onclose = () => {
             console.log('close connection')
         }
-
     </script>
 </body>
 
