@@ -275,7 +275,7 @@
             });
         }
 
-      function set_blank_list(customer_user_account,index){
+      function set_blank_list(customer_user_account,button_index){
         // console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -296,14 +296,14 @@
                 if(res[0].is_blank === 0){              
                   is_blank_text = "否";
                 }
-                let change_index = "is_blank"+index;
+                let change_index = "is_blank"+button_index;
                 document.getElementById(change_index).innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>"
                 + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
-                                  onclick = "set_blank_list('${customer_user_account}','${index}')">  
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
                             加入  
                           </button>
                   <button type = "button" class = "btn btn-danger btn-sm" 
-                          onclick = "clear_blank_list('${customer_user_account}','${index}')">
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
                     刪除
                   </button>`;
             })
@@ -312,7 +312,7 @@
             });
       }
 
-      function clear_blank_list(customer_user_account,index){
+      function clear_blank_list(customer_user_account,button_index){
         console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -334,14 +334,14 @@
                 }
                 // console.log(res);
                 // renderResult(res);
-                let change_index = "is_blank"+index;
+                let change_index = "is_blank"+button_index;
                 document.getElementById(change_index).innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"
                 + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
-                                  onclick = "set_blank_list('${customer_user_account}','${index}')">  
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
                             加入  
                           </button>
                   <button type = "button" class = "btn btn-danger btn-sm" 
-                          onclick = "clear_blank_list('${customer_user_account}','${index}')">
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
                     刪除
                   </button>`; 
             })
