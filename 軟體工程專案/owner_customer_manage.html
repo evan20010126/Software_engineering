@@ -1,4 +1,3 @@
-<!-- 待定 -->
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -15,8 +14,12 @@
 </head>
 <body>
     <style>
-      table, th, td {  
-        border: 1px solid black;
+      .row{
+		    margin-top:40px;
+		    padding: 10px;
+		}
+      table, td{
+        height: 40px;
       }
     </style>
     <nav class="navbar navbar-default">        
@@ -60,12 +63,12 @@
                   <ul class = "nav navbar-nav navbar-right">
                   <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                  <span style="padding-right: 10px; color: navy;">Hi! boss_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
+                  <span style="padding-right: 10px; color: navy;" id = "hi">Hi!</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" id = "logInOut">
                     <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
                     <!-- <li><a href="preference.html">My preference Setting</a></li> -->
-                    <li><a href="store_owner_sign_in.html">Sign in</a></li>
-                    <li><a href="#">Sign out</a></li>
+                    <!-- <li><a href="store_owner_sign_in.html">Sign in</a></li> -->
+                    <!-- <li><a href="#">Sign out</a></li> -->
                 </ul>
                 </li>
               </ul>
@@ -115,35 +118,40 @@
       <hr>
       <!-- 搜尋結果Table -->
       <div class="row">
-        <table id="customer_searching_result">
+        <table class = "table table-hover table-bordered" style id="customer_searching_result">
           
         </table>
     </div>
-  </div>
+  </div>  
   <script>
+    //全域變數
+    let User_test = null;
+
     function start(){
       let search_btn = document.getElementById('search_btn');
       search_btn.addEventListener("click", get_customer_list);
+      check_login();
     }
 
     function get_customer_list(){ // 用字串串接
-            console.log('搜尋按鈕按下去');
+            // console.log('搜尋按鈕按下去');。
             let nickname = document.getElementById('nickname').value;
             let phone = document.getElementById('phone').value;
             let birthday = document.getElementById('birthday').value;
             let response = ' ';
+            let res;
 
             if(nickname.length == 0){
-              console.log("nickname NULL");
+              // console.log("nickname NULL");
               nickname = ' ';
             }
             if(phone.length == 0){
-              console.log("phone NULL");
+              // console.log("phone NULL");
               phone = ' ';
-              console.log('phone：' , phone);
+              // console.log('phone：' , phone);
             }
             if(birthday.length == 0){
-              console.log("birthday NULL");
+              // console.log("birthday NULL");
               birthday = ' ';
             }
             /*後端空值不好處理，故前端如果沒輸入把字串型態的null給後端*/
@@ -167,7 +175,8 @@
                 // console.log(res);
                 res = response.data;
                 res = res.substring(11,res.length);
-                // console.table(response);
+                res = JSON.parse(res);
+                console.log(res);
                 renderResult(res);
             })
             .catch(function (error) {
@@ -177,31 +186,103 @@
 
         
   function renderResult(res){
-          let output = ' ';
-          if(res == 'null'){
+          let output = `
+                        <tr>
+                        <th> # </th>
+                        <th>帳號</th>
+                        <th>email</th>
+                        <th>暱稱</th>
+                        <th>手機</th>
+                        <th>生日</th>
+                        <th>黑名單</th>
+                        <th>客製化</th>
+                        </tr>
+                        `;
+          if(res == null){
               output += `<tr>
                             <td colspan="7">查無資料</td>
                           </tr>`;
               //output += `<tr><td colspan="3"></td><td colspan="1">找不到想找的店家嗎?</td><td colspan="2"><a href="addStore.html"><button class="btn btn-success" >點我新增店家</button></a></td></tr>`;
-          }
+          }        
           else{
+            let is_blank_text = "是";
               for(let i=0;i < res.length ;i++){
+                if(res[i].is_blank === 0){
+                    // console.log("yes");
+                  
+                }  
+                  let customer_user_account = res[i].user_account;
+                  // console.log('typeof(customer_user_account)：',typeof(customer_user_account));
+                  // console.log('customer_user_account',customer_user_account);
+                  //加入按鈕按下後將customer_user_account傳進去edit_blank_list函數中
+                  //刪除按鈕按下後將customer_user_account傳進去edit_blank_list函數中
                   output += `
                   <tr>
-                      <th scope="row">${i+1}</th>
+                      <td >${i+1}</td>
                       <td>${res[i].user_account}</td>
                       <td>${res[i].email}</td>
                       <td>${res[i].nickname}</td>
                       <td>${res[i].phone}</td>
-                      <td>${res[i].is_blank}</td>
+                      <td>${res[i].birthday} 
+                          <button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "edit_blank_list('${customer_user_account}')">  
+                            加入  
+                          </button>
+                          <button type = "button" class = "btn btn-danger btn-sm" 
+                                  onclick = "edit_blank_list(customer_user_account)">
+                            刪除
+                          </button>
+                      </td>
+                      <td id = "is_blank">${res[i].is_blank}</td>
                       <td>${res[i].preference}</td>
                   </tr>
                   `;
               }
           }
-          console.log(output);
+          // console.log(output);
           document.getElementById('customer_searching_result').innerHTML = output;
       }
+
+      function edit_blank_list(customer_user_account){
+        console.log('customer_user_account：', customer_user_account);
+        let add_blank_list = document.getElementById('add_blank_list').value;
+        axios
+            .get('php/boss_show_isblank.php', {
+              params:
+              { 
+                user_account : customer_user_account
+              }
+            })
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                console.log(res);
+                renderResult(res);
+                // is_blank.innerHTML += res; 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      }
+
+      function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                // alert("尚未登入");
+                location.href = 'store_owner_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "store_owner_sign_in.html";
+        }
+
       window.addEventListener('load',start,false);
   </script>
 </body>

@@ -34,7 +34,7 @@
             exit;
     }
     
-    $query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE ".$string );
+    $query = ("SELECT user_account, email, nickname, phone, birthday, is_blank, preference FROM customer WHERE ".$string );
     //$query = ("SELECT user_account, email, nickname, phone, birthday, preference FROM customer WHERE nickname = 22222");
     //echo($query);
 
