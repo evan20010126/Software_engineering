@@ -298,11 +298,11 @@
                 }
                 let change_index = "is_blank"+button_index;
                 document.getElementById(change_index).innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>"
-                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-danger btn-sm" id = "add_blank_list" 
                                   onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
                             加入  
                           </button>
-                  <button type = "button" class = "btn btn-danger btn-sm" 
+                  <button type = "button" class = "btn btn-success btn-sm" 
                           onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
                     刪除
                   </button>`;
@@ -336,11 +336,11 @@
                 // renderResult(res);
                 let change_index = "is_blank"+button_index;
                 document.getElementById(change_index).innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"
-                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-danger btn-sm" id = "add_blank_list" 
                                   onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
                             加入  
                           </button>
-                  <button type = "button" class = "btn btn-danger btn-sm" 
+                  <button type = "button" class = "btn btn-success btn-sm" 
                           onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
                     刪除
                   </button>`; 
