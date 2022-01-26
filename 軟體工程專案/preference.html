@@ -200,27 +200,19 @@
     </div> 
   <script>
   //=============Global variable===========
-  //   class beverages {
-  //   constructor(sugar,ice)    {   //sugar甜度, ice冰塊
-  //     this.sugar = sugar;
-  //     this.ice = ice;
-  //   }
-  // }
-
-    /*------飲料冰塊------*/
-     let all_preference = "";
+  let all_preference = "";
+  let user_test;
   //=============Global variable===========
-
+     
     function start() {
       check_login();
       show_default_preference();
       all_preference = "";
     }
     
-    var user_test;
     function show_default_preference(){
       let preference_text = document.getElementById("preference_text");
-      user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
+      user_test = localStorage.getItem("user_account");     
       let response;
       axios      
       .get(`php/show_default_preference_setting.php?user_account=${user_test}`)
@@ -242,7 +234,7 @@
       let preference_text = document.getElementById("preference_text").value;
       all_preference += " " + preference_text;
       //連線用參數
-      let user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
+      let user_test = localStorage.getItem("user_account");     
       let response;
       //抓取checkbox(飲料客製化選項)的函式，all_preference會把飲料客製化選項加進去
       wrap_beverages_class();
