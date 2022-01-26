@@ -206,16 +206,18 @@
           }        
           else{
             let is_blank_text = "是";
+            let text_color = "red";
               for(let i=0;i < res.length ;i++){
                 if(res[i].is_blank === 0){
                     // console.log("yes");
-                  
+                  is_blank_text = "否";
+                  text_color = "green";
                 }  
                   let customer_user_account = res[i].user_account;
                   // console.log('typeof(customer_user_account)：',typeof(customer_user_account));
                   // console.log('customer_user_account',customer_user_account);
-                  //加入按鈕按下後將customer_user_account傳進去edit_blank_list函數中
-                  //刪除按鈕按下後將customer_user_account傳進去edit_blank_list函數中
+                  //加入按鈕按下後將customer_user_account傳進去set_blank_list函數中
+                  //刪除按鈕按下後將customer_user_account傳進去clear_blank_list函數中
                   output += `
                   <tr>
                       <td >${i+1}</td>
@@ -225,15 +227,15 @@
                       <td>${res[i].phone}</td>
                       <td>${res[i].birthday} 
                           <button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
-                                  onclick = "edit_blank_list('${customer_user_account}')">  
+                                  onclick = "set_blank_list('${customer_user_account}')">  
                             加入  
                           </button>
                           <button type = "button" class = "btn btn-danger btn-sm" 
-                                  onclick = "edit_blank_list(customer_user_account)">
+                                  onclick = "clear_blank_list('${customer_user_account}')">
                             刪除
                           </button>
                       </td>
-                      <td id = "is_blank">${res[i].is_blank}</td>
+                      <td id = "is_blank"><span style = 'color:${text_color};'>${is_blank_text}</span></td>
                       <td>${res[i].preference}</td>
                   </tr>
                   `;
@@ -243,11 +245,11 @@
           document.getElementById('customer_searching_result').innerHTML = output;
       }
 
-      function edit_blank_list(customer_user_account){
-        console.log('customer_user_account：', customer_user_account);
+      function set_blank_list(customer_user_account){
+        // console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
-            .get('php/boss_show_isblank.php', {
+            .get('php/boss_set_isblank.php', {
               params:
               { 
                 user_account : customer_user_account
@@ -258,9 +260,43 @@
                 res = response.data;
                 res = res.substring(11,res.length);
                 res = JSON.parse(res);
-                console.log(res);
-                renderResult(res);
-                // is_blank.innerHTML += res; 
+                console.log(res[0].is_blank);
+
+                let is_blank_text = "是";
+                if(res[0].is_blank === 0){              
+                  is_blank_text = "否";
+                }
+
+                is_blank.innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>";
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      }
+
+      function clear_blank_list(customer_user_account){
+        console.log('customer_user_account：', customer_user_account);
+        let add_blank_list = document.getElementById('add_blank_list').value;
+        axios
+            .get('php/boss_clear_isblank.php', {
+              params:
+              { 
+                user_account : customer_user_account
+              }
+            })
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                
+                let is_blank_text = "是";
+                if(res[0].is_blank === 0){              
+                  is_blank_text = "否";
+                }
+                // console.log(res);
+                // renderResult(res);
+                is_blank.innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"; 
             })
             .catch(function (error) {
                 console.log(error);
