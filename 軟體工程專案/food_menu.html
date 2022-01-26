@@ -387,11 +387,13 @@
 
         function showPackageSum() {
             const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function() {
+            xmlhttp.onload = function() {              
                 var sum = this.responseText;
+                sum = sum.substring(11,sum.length);
                 console.log(sum);
+                if(sum == "null")
+                    sum = 0;
                 document.getElementById("totalPrice").innerHTML = "Total: " + sum + " $";
-
             }
 
             // console.log(coupon_code);
