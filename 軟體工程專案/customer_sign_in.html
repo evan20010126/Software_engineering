@@ -284,8 +284,16 @@
                 var new_email = document.getElementById("new_email").value;
                 var new_phone = document.getElementById("new_phone").value;
                 var new_birthday = document.querySelector("input[type='date']").value;
-
-                //var p2 = document.document.getElementById("new_user_password2").value;
+                var p2 = document.getElementById("new_user_password2").value;
+                console.log("new_acc" + new_acc);
+                if (new_acc == '' || new_pass == '' || new_nickname == '' || new_email == '' || new_phone == '' || new_birthday == '') {
+                    window.alert("註冊失敗，表格尚有空缺!");
+                    return;
+                }
+                if (new_pass != p2) {
+                    window.alert("註冊失敗，兩次密碼輸入不同!");
+                    return;
+                }
 
                 const xmlhttp = new XMLHttpRequest();
                 xmlhttp.onload = function() {
