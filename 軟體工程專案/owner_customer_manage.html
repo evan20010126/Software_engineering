@@ -240,13 +240,13 @@
                       <td>${res[i].phone}</td>
                       <td>${res[i].birthday} 
                       </td>
-                      <td id = "is_blank"><span style = 'color:${text_color};'>${is_blank_text}</span>\u00A0
+                      <td id = "is_blank${i}"><span style = 'color:${text_color};'>${is_blank_text}</span>\u00A0
                       <button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
-                                  onclick = "set_blank_list('${customer_user_account}')">  
+                                  onclick = "set_blank_list('${customer_user_account}','${i}')">  
                             加入  
                           </button>
                           <button type = "button" class = "btn btn-danger btn-sm" 
-                                  onclick = "clear_blank_list('${customer_user_account}')">
+                                  onclick = "clear_blank_list('${customer_user_account}','${i}')">
                             刪除
                           </button>
                       </td>
@@ -275,7 +275,7 @@
             });
         }
 
-      function set_blank_list(customer_user_account){
+      function set_blank_list(customer_user_account,index){
         // console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -296,15 +296,23 @@
                 if(res[0].is_blank === 0){              
                   is_blank_text = "否";
                 }
-
-                is_blank.innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>";
+                let change_index = "is_blank"+index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-danger btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${index}')">
+                    刪除
+                  </button>`;
             })
             .catch(function (error) {
                 console.log(error);
             });
       }
 
-      function clear_blank_list(customer_user_account){
+      function clear_blank_list(customer_user_account,index){
         console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -326,7 +334,16 @@
                 }
                 // console.log(res);
                 // renderResult(res);
-                is_blank.innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"; 
+                let change_index = "is_blank"+index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-danger btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${index}')">
+                    刪除
+                  </button>`; 
             })
             .catch(function (error) {
                 console.log(error);
