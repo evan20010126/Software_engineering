@@ -294,7 +294,8 @@ select:focus {
         // default_info = show_default_user_info();
         // console.log(typeof( show_default_user_info()));
         // console.log(default_info);
-
+        
+        //=======================設定空值防呆=======================//
         if(nickname == "" || email == "" || telphone == "" || birthday == ""){
             window.alert("修改失敗，表格尚有空缺!");
             return;
