@@ -369,7 +369,13 @@
             }
             xmlhttp.open("GET", "php/change_order_state.php?order_id=" + ord_id + "&is_finish=" + state);
             xmlhttp.send();
+            window.location.reload();
         }
+        /*與change_order_state函式不同的是，重整頁面的active初始位置不一樣*/
+        /*這算是優化功能，未完成*/
+        // function change_order_state_accept_reject(){
+
+        // }
 
         function showCoupon() {
             //
