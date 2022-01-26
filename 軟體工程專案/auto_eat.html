@@ -118,33 +118,47 @@ body {
   /* background-image: linear-gradient(147deg, #3ca55c 0%, #b5ac49 100%); */
 }
 </style>
-    <nav class= "navbar navbar-default">        
-        <div class= "container-fluid">
-            <div class= "navbar-header">
-                <a class= "navbar-brand" href="visitor_index.html">FBL</a>       
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                <li><a href="food_menu.html">即時點餐</a></li>
-                <li class="active"><a href="auto_eat.html">自動取eat</a></li>
-                <li><a href="order_web.html">檢視訂單</a></li>
-            </ul>
-                <ul class = "nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                        <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="Account_Setting.html">Account Setting</a></li>
-                            <li><a href="preference.html">My preference Setting</a></li>
-                            <li><a href="customer_sign_in.html">Sign in</a></li>
-                            <li><a href="visitor_index.html">Sign out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> 
-    <div class="container">                        
+  <nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="visitor_index.html">FBL</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">導覽按鈕</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="food_menu.html">即時點餐</a></li>
+					<li class="active"><a href="auto_eat.html">自動取eat</a></li>
+					<li><a href="order_web.html">檢視訂單</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+							<span style="padding-right: 10px; color: navy;">Hi! user_test</span><img
+								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="Account_Setting.html">Account Setting</a></li>
+							<li><a href="preference.html">My preference Setting</a></li>
+							<li><a href="customer_sign_in.html">Sign in</a></li>
+							<li><a href="#">Sign out</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- <form class="navbar-form navbar-right">
+			<div class="form-group has-feedback">
+				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-default">搜尋</button>
+		  </form> -->
+			</div>
+		</div>
+	</nav>
+  <div class="container">                         
     <!--頁首-->
     <!-- 偏好設定 -->
     <div class = "row">      
@@ -339,5 +353,8 @@ body {
             </div>
         </div>
     </div>
-    
+  </div>
+  <script>
+    alert("此網頁未完成");
+  </script>
 </html>

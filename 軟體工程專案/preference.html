@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>客製化設定</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">     -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+        <!-- 採用axios，與ajax效果一樣 -->  
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body style = 
               "background-image: 
@@ -21,6 +22,13 @@
         <div class= "container-fluid">
             <div class= "navbar-header">
                 <a class= "navbar-brand" href="visitor_index.html">FBL</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                  <span class="sr-only">導覽按鈕</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -31,12 +39,12 @@
                 <ul class = "nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                        <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                        <span style="padding-right: 10px; color: navy;" id="hi">Hi! 陌生人~</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="logInOut">
                             <li><a href="Account_Setting.html">Account Setting</a></li>
                             <li class="active"><a href="preference.html">My preference Setting</a></li>
-                            <li><a href="customer_sign_in.html">Sign in</a></li>
-                            <li><a href="visitor_index.html">Sign out</a></li>
+                            <!-- <li><a href="customer_sign_in.html">Sign in</a></li> -->
+                            <!-- <li><a href="visitor_index.html">Sign out</a></li> -->
                         </ul>
                     </li>
                 </ul>
@@ -50,14 +58,14 @@
         <div class = "col-sm-8">
             <header>
                 <h1 >偏好設定</h1>
-                <p class="lead">OOXX@gmail.com</p>  
+                <p class="lead" id = "user_mode"></p>  
             </header>
         </div>
     </div>
     <span>&nbsp</span><hr>
     <!--內容區-->
     <!-- tab linker：菜單偏好設定 -->
-    <ul class="nav nav-tabs">
+    <!-- <ul class="nav nav-tabs">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">菜單偏好設定</a>
         <div class="dropdown-menu">
@@ -69,11 +77,11 @@
             <p><a class="dropdown-item" href="#">精選飲品</a></p>
         </div>
       </li>
-      <!-- tab linker：客製化輸入 -->
-      <li class="nav-item in active">
+      tab linker：客製化輸入 -->
+      <!-- <li class="nav-item in active">
         <a class="nav-link" data-toggle="tab" href="#custom_input">客製化輸入</a>
       </li>
-    </ul>
+    </ul> -->
     <div class="tab">
     <!-- tab list：產品一覽 -->
       <div class="tab fade" id="special_food">
@@ -105,7 +113,7 @@
         <!-- 第一區 -->
             <div class="col-md-6 well">
                 <h2>
-                    主餐
+                    偏好
                 </h2>
                 <form role="form">
                   <div class="form-group">
@@ -113,7 +121,7 @@
                     <label for="exampleInputEmail1">
                       e.g. 主餐撇除麵類本來就有的醬，一律不加醬，包括醬油、番茄醬、甜辣醬
                     </label>
-                    <input type="text" class="form-control" id="text" />
+                    <input type="text" class="form-control" id="preference_text" />
                   </div>
             </div>
         <!-- 第二區 -->
@@ -131,19 +139,18 @@
                 </li>
                 <div class = "col-md-6"><ol class = "list-unstyled"> 
                   <li ><h3>甜度</h3></li>
-                  <li><input type="checkbox" /> 全糖</li>
-                  <li><input type="checkbox" /> 少糖</li>
-                  <li><input type="checkbox" /> 半糖</li>
-                  <li><input type="checkbox" /> 微糖</li>
-                  <li><input type="checkbox" /> 無糖</li>
+                  <li><input id = "full_sugar" value = "full_sugar" name = "sugar_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)" /> 全糖</input></li>
+                  <li><input id = "less_sugar" value = "less_sugar" name = "sugar_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 少糖</li>
+                  <li><input id = "half_sugar" value = "half_sugar" name = "sugar_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 半糖</li>
+                  <li><input id = "quarter_sugar" value = "quarter_sugar" name = "sugar_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 微糖</li>
+                  <li><input id = "no_sugar" value = "no_sugar" name = "sugar_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 無糖</li>
                 </ol>
               </div>
               <div class = "col-md-6"><ol class = "list-unstyled"> 
                 <ol class = "list-unstyled"> <li ><h3>冰塊</h3></li>
-                  <li><input type="checkbox" /> 正常</li>
-                  <li><input type="checkbox" /> 少冰</li>
-                  <li><input type="checkbox" /> 去冰</li>
-                  <li><input type="checkbox" /> 不冰</li>
+                  <li><input id = "more_ice" value = "more_ice" name = "ice_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 正常</li>
+                  <li><input id = "less_ice" value = "less_ice" name = "ice_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 少冰</li>
+                  <li><input id = "ice_free" value = "ice_free" name = "ice_degree" type="checkbox" onclick = "check_box_single_select(this,this.name)"/> 去冰</li>
                 </ol>
               </div>
                 </div>
@@ -185,11 +192,152 @@
                </div> -->
               <div class = "row">
                 <div class = "col-md-12"> 
-                  <button  type="submit" class="btn btn-primary float:left">全部儲存</button> 
+                  <button type = "button" class="btn btn-primary float:left" onclick = "save_all()">全部儲存</button> <!--onclick = "save_all()" -->
                 </div>
               </div>
           </div>        
         </div>        
     </div> 
+  <script>
+  //=============Global variable===========
+  //   class beverages {
+  //   constructor(sugar,ice)    {   //sugar甜度, ice冰塊
+  //     this.sugar = sugar;
+  //     this.ice = ice;
+  //   }
+  // }
+
+    /*------飲料冰塊------*/
+     let all_preference = "";
+  //=============Global variable===========
+
+    function start() {
+      check_login();
+      show_default_preference();
+      all_preference = "";
+    }
+    
+    var user_test;
+    function show_default_preference(){
+      let preference_text = document.getElementById("preference_text");
+      user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
+      let response;
+      axios      
+      .get(`php/show_default_preference_setting.php?user_account=${user_test}`)
+
+        .then(res => {
+            response = res.data;
+            response = JSON.parse(response.substring(11,response.length));
+            preference_text.value = response[0].preference;
+            console.log('result:' , response);
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+    function save_all(){
+      //取得客製化設定輸入之值
+      /*------文字輸入------*/
+      let preference_text = document.getElementById("preference_text").value;
+      all_preference += " " + preference_text;
+      //連線用參數
+      let user_test = localStorage.getItem("user_account");     /*為測試用，先暫時寫死*/
+      let response;
+      //抓取checkbox(飲料客製化選項)的函式，all_preference會把飲料客製化選項加進去
+      wrap_beverages_class();
+      console.log('全部儲存按鈕按下去');
+      axios 
+      .post('php/edit_preference_setting.php' , {  //傳過去PHP是一維陣列
+          user_account:user_test,
+          preference_text: all_preference
+        } ,
+        {headers: { 'Content-Type': 'application/json' }}
+        )
+
+      .then(res => {
+          response = res.data;
+          response = response.substring(11,response.length);
+          console.log('result:' , response);
+          if(response === "True")
+            alert("修改成功!!");
+          else
+            alert("錯誤!!");
+      })
+      .catch(function (error) {
+          console.log(error);
+        });
+
+    }
+
+    function wrap_beverages_class(){
+        /*------飲料甜度------*/
+        let sugar_degree = document.getElementsByName("sugar_degree");
+        /*------飲料冰塊------*/
+        let ice_degree = document.getElementsByName("ice_degree");
+
+        for(let i = 0 ; i < sugar_degree.length ; i++){
+          if(sugar_degree[i].checked){
+            all_preference += " " + sugar_degree[i].value;
+          }
+        }
+        for(i = 0 ; i < ice_degree.length ; i++){
+          if(ice_degree[i].checked){
+            all_preference += " " + ice_degree[i].value;
+          }
+        }
+        console.log(all_preference);
+        //return beverages_preference;
+    }
+
+    function check_box_single_select(checkbox,name){
+      console.log("checkbox_single_select生效");
+      let checkboxes = document.getElementsByName(name); 
+      checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked =  false;
+      })
+    }
+
+    function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                alert("尚未登入，即將跳轉到登入頁面");
+                location.href = 'customer_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+                document.getElementById("user_mode").innerHTML = "顧客模式";
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
+        
+    window.addEventListener("load",start,false);
+    let ws = new WebSocket('ws://20.212.218.184:443')
+        // let ws = new WebSocket('ws://localhost:443');
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('client');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+        
+        //接收 Server 發送的訊息
+        ws.onmessage = event => {
+            console.log(event.data);
+            if(event.data == user_test + "accept"){
+                alert("Your order were accept. :)");
+            }else if(event.data == user_test + "reject"){
+                alert("Your order were reject. Q_Q");
+            }else if(event.data == user_test + "finish"){
+                alert("Your order are finish!!!");
+            }
+        }
+  </script>
   </body>
 </html>

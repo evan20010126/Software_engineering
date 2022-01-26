@@ -4,11 +4,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>帳戶設定</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">     -->
+        <!-- 採用axios，與ajax效果一樣 -->
+	    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     
     <style>
@@ -95,37 +96,52 @@ select:focus {
     </style>
     <body>
   
-        <nav class= "navbar navbar-default">        
-            <div class= "container-fluid">
-                <div class= "navbar-header">
-                    <a class= "navbar-brand" href="visitor_index.html">FBL</a>       
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                    <li><a href="food_menu.html">即時點餐</a></li>
-                    <li><a href="auto_eat.html">自動取eat</a></li>
-                    <li><a href="order_web.html">檢視訂單</a></li>
-                </ul>
-                    <ul class = "nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a href="Account_Setting.html">Account Setting</a></li>
-                                <li><a href="preference.html">My preference Setting</a></li>
-                                <li><a href="customer_sign_in.html">Sign in</a></li>
-                                <li><a href="vistor_index.html">Sign out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> 
+    <nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="visitor_index.html">FBL</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">導覽按鈕</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="food_menu.html">即時點餐</a></li>
+					<li><a href="auto_eat.html">自動取eat</a></li>
+					<li><a href="order_web.html">檢視訂單</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+							<span style="padding-right: 10px; color: navy;" id="hi">Hi! 陌生人~</span><img
+								src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+						<ul class="dropdown-menu" id="logInOut">
+							<li class="active"><a href="Account_Setting.html">Account Setting</a></li>
+							<li><a href="preference.html">My preference Setting</a></li>
+							<!-- <li><a href="customer_sign_in.html">Sign in</a></li> -->
+							<!-- <li><a href="#">Sign out</a></li> -->
+						</ul>
+					</li>
+				</ul>
+				<!-- <form class="navbar-form navbar-right">
+			<div class="form-group has-feedback">
+				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-default">搜尋</button>
+		  </form> -->
+			</div>
+		</div>
+	</nav>
+
     <div class="container">                        
     <!--頁首-->
 	<header>
         <h1 class="pb-4 border-bottom">帳號設定</h1>
-        <p class="lead">OOXX@gmail.com</p>
+        <p class="lead" id="user_mode"></p>
         <hr>
     </header>
     <!--內容區-->
@@ -136,25 +152,35 @@ select:focus {
                             <div class="d-flex align-items-start py-3 border-bottom">
                                 <div class= "text-center"><img src="img/food_table.png" class="img" style = "max-height:15em;" alt="無法顯示附圖"></div> 
                                 
-                                <div class="pl-sm-4 pl-2" id="img-section"> <b>名字 照片</b>
-                                    <p>說明說明說明說明</p> <button class="btn button border"><b>Upload</b></button>
+                                <!-- <div class="pl-sm-4 pl-2" id="img-section"> <b>名字 照片</b> -->
+                                    <!-- <p>說明說明說明說明</p> <button class="btn button border"><b>Upload</b></button> -->
                                 </div>
                             </div>
                             <div class="py-2">
                                 <div class="row py-2">
-                                    <div class="col-md-6"> <label for="firstname">名字</label> <input type="text" class="bg-light form-control" placeholder="Mary Jane Watson"> </div>
-                                    <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">暱稱</label> <input type="text" class="bg-light form-control" placeholder="MJ "> </div>
+                                    <div class="col-md-6"> 
+                                        <label for="firstname">帳戶</label> 
+                                        <input type="text" class="bg-light form-control" id = "user_account" placeholder="Mary Jane Watson" disabled> </div>
+                                    <div class="col-md-6 pt-md-0 pt-3"> 
+                                        <label for="lastname">暱稱</label> 
+                                        <input type="text" class="bg-light form-control" id = "nickname" placeholder="MJ "> 
+                                    </div>
                                 </div>
                                 <div class="row py-2">
-                                    <div class="col-md-6"> <label for="email">Email</label> <input type="text" class="bg-light form-control" placeholder="Mary@email.com"> </div>
-                                    <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">電話號碼</label> <input type="tel" class="bg-light form-control" placeholder="0x-xxxxxxxx"> </div>
+                                    <div class="col-md-6"> 
+                                        <label for="email">Email</label> 
+                                        <input type="text" class="bg-light form-control" id = "email" placeholder="Mary@email.com"> </div>
+                                    <div class="col-md-6 pt-md-0 pt-3"> 
+                                        <label for="phone">電話號碼</label> 
+                                        <input type="tel" class="bg-light form-control" id = "telphone" placeholder="0x-xxxxxxxx"> 
+                                    </div>
                                 </div>
                                 <div class = "row py-2">
                                     <div class="col-md-6"><label for="">生日</label>
-                                        <div class="input-group date" id='date1'>
-                                            <input type="text" class="form-control" />
+                                        <div class="input-group date" id='date'>
+                                            <input type="date" class="form-control">
                                             <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            <!-- <i class="glyphicon glyphicon-calendar"></i> -->
                                             </span>
                                         </div>                                 
                                     </div>
@@ -175,12 +201,15 @@ select:focus {
                                             </select> </div>
                                     </div>
                                 </div>  -->
-                                <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">儲存</button> <button class="btn border button">取消</button> </div>
+                                <div class="py-3 pb-4 border-bottom"> 
+                                    <br>
+                                    <button id = "save_btn" class="btn btn-primary mr-3">儲存</button> 
+                                    <!-- <button id = "cancel_btn" class="btn border button">取消</button></div> -->
                                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                                    <div> <b>刪除帳戶<b>
-                                        <p>注意！帳戶一經刪除便不能還原！！！</p>
+                                    <!-- <div> <b>刪除帳戶<b> -->
+                                        <!-- <p>注意！帳戶一經刪除便不能還原！！！</p> -->
                                     </div>
-                                    <div class="ml-auto"> <button class="btn danger">刪除帳戶</button> </div>
+                                    <!-- <div class="ml-auto"> <button class="btn danger">刪除帳戶</button> </div> -->
                                 </div>
                             </div>
                         </div>
@@ -193,6 +222,159 @@ select:focus {
                         <footer class="blockquote-footer">
                             By<cite>基隆新豐麥味登</cite></footer>    
             </div> 		          
-    </div>  
+    </div> 
+    <script>
+    //全域變數
+    let User_test = null;
+
+    function start() {
+        save_btn = document.getElementById('save_btn');
+        save_btn.addEventListener('click',edit_user_info);
+        
+        cancel_btn = document.getElementById('cancel_btn');
+        // cancel_btn.addEventListener('click',cancel_edit);
+
+        check_login();
+        show_default_user_info();
+    }
+
+    function show_default_user_info(){
+        //==========抓取各個input的id==========//
+        
+        let user_account = document.getElementById('user_account');
+        let nickname = document.getElementById('nickname');
+        let email = document.getElementById('email');
+        let telphone = document.getElementById('telphone');
+        let birthday = document.querySelector('input[type="date"]');
+        
+        let response;
+        axios 
+            .get(`php/edit_user_info_1.php?user_account=${User_test}`)
+            .then (res => {
+                response =  res.data;
+                response = JSON.parse(response.substring(11,response.length));
+                // console.log(res.data);
+                // console.log(response);
+                // console.log(response[0].user_account);
+                // console.log(response[0].birthday);
+                user_account.value = response[0].user_account;
+                nickname.value = response[0].nickname;
+                email.value = response[0].email;
+                telphone.value = response[0].phone;
+                // console.log('birthday：' ,birthday);
+                birthday.value= response[0].birthday;
+                console.log("執行完畢");                   
+            })
+            .catch(function (error) {
+            console.log(error);
+          });   
+        //   console.log(response);
+        //   console.log(typeof(response));
+    }
+
+    function edit_user_info()
+    {
+        //==========抓取id的value==========//
+        // let user_account = document.getElementById('user_account').value;
+        let user_account = User_test;
+        let nickname = document.getElementById('nickname').value;
+        let email = document.getElementById('email').value;
+        let telphone = document.getElementById('telphone').value;
+        let birthday = document.querySelector('input[type="date"]').value;   
+        //============測試==========//
+        // console.log(user_account);
+        // console.log(telphone);  
+        // console.log(birthday);
+        // console.log('儲存按鈕按下去');
+        //========================//      
+        let response = '';  
+        // console.log("接收defauut_info");
+        let default_info = new Array();
+        // console.log(default_info);
+        // default_info = show_default_user_info();
+        // console.log(typeof( show_default_user_info()));
+        // console.log(default_info);
+        
+        //=======================設定空值防呆=======================//
+        if(nickname == "" || email == "" || telphone == "" || birthday == ""){
+            window.alert("修改失敗，表格尚有空缺!");
+            return;
+        }
+    axios      
+        // .post('php/edit_user_info_2.php' , {array_name:{ //陣列寫法。注意：傳過去PHP會變2維陣列 
+        //     user_account:user_account,
+        //     nickname:nickname,
+        //     email:email,
+        //     telphone:telphone,
+        //     birthday:date,
+        // } ,
+         .post('php/edit_user_account_setting.php' , {  //傳過去PHP是一維陣列
+            user_account:user_account,
+            nickname:nickname,
+            email:email,
+            phone:telphone,
+            birthday:birthday
+        } ,
+        {headers: { 'Content-Type': 'application/json' }}
+        )
+        .then(res => {
+            response = res.data;
+            response = response.substring(11,response.length);
+            console.log('result:' , response);
+            if(response === "true")
+                alert("修改成功");
+            else 
+                alert("修改失敗Q_Q");
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
+    }
+    function cancel_edit(){
+
+    }
+    
+    function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                alert("尚未登入，即將跳轉到登入頁面");
+                location.href = 'customer_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+                document.getElementById("user_mode").innerHTML = "顧客模式";
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
+
+    window.addEventListener("load", start, false);
+
+   let ws = new WebSocket('ws://20.212.218.184:443')
+        // let ws = new WebSocket('ws://localhost:443');
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('client');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+        
+        //接收 Server 發送的訊息
+        ws.onmessage = event => {
+            console.log(event.data);
+            if(event.data == User_test + "accept"){
+                alert("Your order were accept. :)");
+            }else if(event.data == User_test + "reject"){
+                alert("Your order were reject. Q_Q");
+            }else if(event.data == User_test + "finish"){
+                alert("Your order are finish!!!");
+            }
+        }
+    </script> 
     </body>
 </html>
