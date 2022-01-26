@@ -288,12 +288,17 @@ select:focus {
         // console.log('儲存按鈕按下去');
         //========================//      
         let response = '';  
-        console.log("接收defauut_info");
+        // console.log("接收defauut_info");
         let default_info = new Array();
-        console.log(default_info);
+        // console.log(default_info);
         // default_info = show_default_user_info();
         // console.log(typeof( show_default_user_info()));
-        console.log(default_info);
+        // console.log(default_info);
+
+        if(nickname == "" || email == "" || telphone == "" || birthday == ""){
+            window.alert("修改失敗，表格尚有空缺!");
+            return;
+        }
     axios      
         // .post('php/edit_user_info_2.php' , {array_name:{ //陣列寫法。注意：傳過去PHP會變2維陣列 
         //     user_account:user_account,
@@ -313,7 +318,12 @@ select:focus {
         )
         .then(res => {
             response = res.data;
+            response = response.substring(11,response.length);
             console.log('result:' , response);
+            if(response === "true")
+                alert("修改成功");
+            else 
+                alert("修改失敗Q_Q");
         })
         .catch(function (error) {
             console.log(error);

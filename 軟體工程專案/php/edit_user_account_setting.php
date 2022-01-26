@@ -25,6 +25,6 @@
     $query = ("UPDATE customer SET email=?, nickname=?, phone=?,birthday=? WHERE user_account =?"); 
     $stmt = $db->prepare($query);    //db為db_conn_sofware.php新建的連線物件 
     $error = $stmt->execute(array($email,$nickname,$phone,$birthday,$user_account)); //執行sql語法
-
+    echo json_encode(true);
     //沒有回傳值
 ?>
