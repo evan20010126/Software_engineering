@@ -129,11 +129,12 @@
 
     function start(){
       let search_btn = document.getElementById('search_btn');
-      search_btn.addEventListener("click", get_customer_list);
+      search_btn.addEventListener("click", search_customer_list);
       check_login();
+      show_default_customer_list();
     }
 
-    function get_customer_list(){ // 用字串串接
+    function search_customer_list(){ // 用字串串接
             // console.log('搜尋按鈕按下去');。
             let nickname = document.getElementById('nickname').value;
             let phone = document.getElementById('phone').value;
@@ -154,13 +155,18 @@
               // console.log("birthday NULL");
               birthday = ' ';
             }
-            /*後端空值不好處理，故前端如果沒輸入把字串型態的null給後端*/
-            if(nickname == " ")
-              nickname = "null";
-            if(phone == " ")
-              phone = "null";
-            if(birthday == " ")
-              birthday = "null";
+            if(nickname == " " && phone == " " && birthday == " "){ /*如果搜尋bar沒東西按搜尋按鈕*/
+              show_default_customer_list();   /*秀出資料庫所有顧客名單*/
+            }
+
+            else{                       /*如果搜尋bar任一欄位有值，就執行搜尋程序*/
+            /*後端空值不好處理，故前端如果沒輸入把字串型態的null給後端*/  
+              if(nickname == " ")
+                nickname = "null";
+              if(phone == " ")
+                phone = "null";
+              if(birthday == " ")
+                birthday = "null";
             /*連線作請求及拿回response並處理*/  
             axios
             .get('php/customer_manage.php', {
@@ -182,9 +188,9 @@
             .catch(function (error) {
                 console.log(error);
             });
+            }           
         }
-
-        
+      
   function renderResult(res){
           let output = `
                         <tr>
@@ -205,19 +211,26 @@
               //output += `<tr><td colspan="3"></td><td colspan="1">找不到想找的店家嗎?</td><td colspan="2"><a href="addStore.html"><button class="btn btn-success" >點我新增店家</button></a></td></tr>`;
           }        
           else{
+            /*=======顯示文字處理========*/
             let is_blank_text = "是";
+            let preference_text = "無";
             let text_color = "red";
               for(let i=0;i < res.length ;i++){
                 if(res[i].is_blank === 0){
                     // console.log("yes");
                   is_blank_text = "否";
                   text_color = "green";
-                }  
+                }
+                if(res[i].preference != null){
+                  preference_text = res[i].preference;
+                }
+            /*=======插入html=======*/      
                   let customer_user_account = res[i].user_account;
                   // console.log('typeof(customer_user_account)：',typeof(customer_user_account));
                   // console.log('customer_user_account',customer_user_account);
                   //加入按鈕按下後將customer_user_account傳進去set_blank_list函數中
                   //刪除按鈕按下後將customer_user_account傳進去clear_blank_list函數中
+                  //「\u00A0」為寫在innerhtml裡面的空字元
                   output += `
                   <tr>
                       <td >${i+1}</td>
@@ -226,17 +239,18 @@
                       <td>${res[i].nickname}</td>
                       <td>${res[i].phone}</td>
                       <td>${res[i].birthday} 
-                          <button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
-                                  onclick = "set_blank_list('${customer_user_account}')">  
+                      </td>
+                      <td id = "is_blank${i}"><span style = 'color:${text_color};'>${is_blank_text}</span>\u00A0
+                      <button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${i}')">  
                             加入  
                           </button>
                           <button type = "button" class = "btn btn-danger btn-sm" 
-                                  onclick = "clear_blank_list('${customer_user_account}')">
+                                  onclick = "clear_blank_list('${customer_user_account}','${i}')">
                             刪除
                           </button>
                       </td>
-                      <td id = "is_blank"><span style = 'color:${text_color};'>${is_blank_text}</span></td>
-                      <td>${res[i].preference}</td>
+                      <td>${preference_text}</td>
                   </tr>
                   `;
               }
@@ -245,7 +259,23 @@
           document.getElementById('customer_searching_result').innerHTML = output;
       }
 
-      function set_blank_list(customer_user_account){
+      function show_default_customer_list(){
+        axios
+            .get('php/show_customer_list.php') //沒有傳任何值給後端
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                console.log(res);
+                renderResult(res);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+
+      function set_blank_list(customer_user_account,button_index){
         // console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -266,15 +296,23 @@
                 if(res[0].is_blank === 0){              
                   is_blank_text = "否";
                 }
-
-                is_blank.innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>";
+                let change_index = "is_blank"+button_index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-danger btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
+                    刪除
+                  </button>`;
             })
             .catch(function (error) {
                 console.log(error);
             });
       }
 
-      function clear_blank_list(customer_user_account){
+      function clear_blank_list(customer_user_account,button_index){
         console.log('customer_user_account：', customer_user_account);
         let add_blank_list = document.getElementById('add_blank_list').value;
         axios
@@ -296,7 +334,16 @@
                 }
                 // console.log(res);
                 // renderResult(res);
-                is_blank.innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"; 
+                let change_index = "is_blank"+button_index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-success btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-danger btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
+                    刪除
+                  </button>`; 
             })
             .catch(function (error) {
                 console.log(error);
@@ -306,7 +353,7 @@
       function check_login() {
             User_test = localStorage.getItem("user_account");
             if (User_test == null) {
-                // alert("尚未登入");
+                alert("尚未登入");
                 location.href = 'store_owner_sign_in.html';
             } else {
                 document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
