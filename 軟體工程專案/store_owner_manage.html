@@ -186,8 +186,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <span style="padding-right: 10px; color: navy;" id = "hi">Hi!</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" id = "logInOut">
+                            <span style="padding-right: 10px; color: navy;" id="hi">Hi!</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="logInOut">
                             <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
                             <!-- <li><a href="preference.html">My preference Setting</a></li> -->
                             <!-- <li><a href="store_owner_sign_in.html">Sign in</a></li> -->
@@ -464,7 +464,7 @@
     </div>
 
     <script>
-         //全域變數
+        //全域變數
         let User_test = null;
         var i = 0; //display index
         var k = 0; //searching index
@@ -539,6 +539,12 @@
             var edit_pic = window.document.getElementById("edit_product_picture").value;
             var edit_price = window.document.getElementById("edit_product_price").value;
             console.log("edit_info: " + edit_info);
+
+            if (edit_name == '' || edit_info == '' || edit_pic == '' || edit_price == '') {
+                window.alert("更改失敗，表格不得有空缺!");
+                return;
+            }
+
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 showMenu();
@@ -570,6 +576,12 @@
             var add_pic = document.getElementById("add_product_picture").value;
             var add_price = document.getElementById("add_product_price").value;
             var add_supply = document.getElementById("add_product_supply").value;
+
+            if (add_name == '' || add_info == '' || add_pic == '' || add_price == '' || add_supply == '') {
+                window.alert("新增失敗，表格不得有空缺!");
+                return;
+            }
+
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 console.log("onload: add product");
@@ -734,6 +746,11 @@
             var coup_code = document.getElementById("set_coupon_code").value;
             var is_per = document.getElementById("set_coupon_mode").value;
             var num = document.getElementById("set_coupon_discount").value;
+
+            if (coup_code == '' || is_per == '' || num == '') {
+                window.alert("新增失敗，表格不得有空缺!");
+                return;
+            }
             // console.log("coup_code: "+coup_code);
             // console.log("_is_per: "+is_per);
             // console.log("num: "+num);
@@ -802,7 +819,7 @@
             showBossInfo();
             //console.log(Date.now);
         }
-        
+
         $(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
             $("#status").delay(2000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
             $("#preloader").delay(2000).fadeOut(500);
