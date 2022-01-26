@@ -186,12 +186,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <span style="padding-right: 10px; color: navy;">Hi! boss_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                            <span style="padding-right: 10px; color: navy;" id = "hi">Hi!</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id = "logInOut">
                             <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
                             <!-- <li><a href="preference.html">My preference Setting</a></li> -->
                             <!-- <li><a href="store_owner_sign_in.html">Sign in</a></li> -->
-                            <li><a href="#" onclick="signout()">Sign out</a></li>
+                            <!-- <li><a href="#" onclick="signout()">Sign out</a></li> -->
                         </ul>
                     </li>
                 </ul>
@@ -464,6 +464,8 @@
     </div>
 
     <script>
+         //全域變數
+        let User_test = null;
         var i = 0; //display index
         var k = 0; //searching index
         var is_searching = 0;
@@ -775,13 +777,31 @@
 
         }
 
+        function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                alert("尚未登入");
+                location.href = 'store_owner_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "store_owner_sign_in.html";
+        }
+
         function start() {
             i = 0;
+            check_login();
             showCoupon();
             showMenu();
             showBossInfo();
             //console.log(Date.now);
         }
+        
         $(window).load(function() { // 確認整個頁面讀取完畢再將這三個div隱藏起來
             $("#status").delay(2000).fadeOut(500); //delay --> 延遲幾秒才fadeOut
             $("#preloader").delay(2000).fadeOut(500);
