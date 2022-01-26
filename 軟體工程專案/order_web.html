@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <span id="hi" style="padding-right: 10px; color: navy;"></span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                            <span id="hi" style="padding-right: 10px; color: navy;">Hi! 陌生人~</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="logInOut">
                             <li><a href="Account_Setting.html">Account Setting</a></li>
                             <li><a href="preference.html">My preference Setting</a></li>
@@ -222,7 +222,7 @@
 
                         <div class="panel-body">
                             <ul id="coupon_code_id">
-                                <li>優惠卷code <span style="float: right;">-30$</span> </li>
+                                <li>尚未載入<span style="float: right;"></span> </li>
                             </ul>
                         </div>
                     </div>
@@ -234,10 +234,11 @@
 
                         <div class="panel-body">
                             <ul id="boss_info">
-                                <li>此處引入php店家資訊</li>
-                                <li>此處引入php店家資訊</li>
-                                <li>此處引入php店家資訊</li>
-                                <li>此處引入php店家資訊</li>
+                                <li>尚未載入</li>
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
                             </ul>
                         </div>
                     </div>
@@ -395,13 +396,13 @@
             xmlhttp.send();
         }
 
-        function start() {
-            check_login();
+        function start() {    
             showOrderList_ing();
             showOrderList_history();
             showOrderList_uncheck();
             showCoupon();
             showBossInfo();
+            check_login();
         }
 
         function check_login() {
