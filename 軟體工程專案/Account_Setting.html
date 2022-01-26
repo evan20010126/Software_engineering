@@ -326,6 +326,7 @@ select:focus {
     function check_login() {
             User_test = localStorage.getItem("user_account");
             if (User_test == null) {
+                alert("尚未登入，即將跳轉到登入頁面");
                 location.href = 'customer_sign_in.html';
             } else {
                 document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";

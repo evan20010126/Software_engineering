@@ -389,7 +389,7 @@
                     document.getElementById("boss_info").innerHTML = '<li> 店名: ' + boss_info["0"]["store_name"] + '</li>';
                     document.getElementById("boss_info").innerHTML += '<li> 地址: ' + boss_info["0"]["store_address"] + '</li>';
                     document.getElementById("boss_info").innerHTML += '<li> 電話: ' + boss_info["0"]["store_phone"] + '</li>';
-                    document.getElementById("boss_info").innerHTML += '<li> 評分: ' + boss_info["0"]["score"] + '</li>';
+                    // document.getElementById("boss_info").innerHTML += '<li> 評分: ' + boss_info["0"]["score"] + '</li>';
                 } //<li>此處引入php店家資訊</li>
             xmlhttp.open("GET", "php/display_boss_info.php");
             xmlhttp.send();
