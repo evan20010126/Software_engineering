@@ -62,7 +62,7 @@
     <header>
         <div class="container">
             <h1>檢視訂單</h1>
-            <p class="lead" id="user_mode">下標</p>
+            <p class="lead" id="user_mode"></p>
             <hr>
         </div>
     </header>
@@ -365,45 +365,19 @@
             xmlhttp.send();
         }
 
-        function check_login() {
-
-            // if (!sessionStorage.length) {
-            // console.log("session是空的");
-            // User_test = localStorage.getItem("user_account");
-            // sessionStorage.setItem('user_account',User_test);
-            // console.log(User_test);
-            // User_test = sessionStorage.getItem("user_account");
-            // localStorage.clear();
-            // }	
-
-            // else{
-            // 	console.log("session存在");
-            // 	User_test = sessionStorage.getItem("user_account");
-            // 	console.log(User_test);
-            // }
-
-            // if(User_test === 'null'){	//session 存在但卻 === 'null'
-            // 	console.log("訪客模式");
-            // 	document.getElementById("user_nav_bar").innerHTML = "Hi！Guest ";
-            // 	document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
-            // }
-            // else{
-            // 	console.log("顧客模式");
-            // 	document.getElementById("user_nav_bar").innerHTML = "Hi！ " + User_test;
-            // 	document.getElementById("user_mode").innerHTML = "顧客模式";
-            // }		
-            // return User_test;	
-            User_test = localStorage.getItem("user_account");
-            if (User_test == null) {
-                document.getElementById("hi").innerHTML = "Hi! 陌生人~";
-                document.getElementById("logInOut").innerHTML += '<li><a href="customer_sign_in.html">Sign in</a></li>';
+        // function check_login() {
+        //     User_test = localStorage.getItem("user_account");
+        //     if (User_test == null) {
+        //         document.getElementById("hi").innerHTML = "Hi! 陌生人~";
+        //         document.getElementById("logInOut").innerHTML += '<li><a href="customer_sign_in.html">Sign in</a></li>';
                 //document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
-            } else {
-                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
-                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="log_out()">Sign out</a></li>';
+            // } else {
+                // console.log('User_test：',User_test);
+                // document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                // document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="log_out()">Sign out</a></li>';
                 //document.getElementById("user_mode").innerHTML = "顧客模式";
-            }
-        }
+            // }
+        // }
 
         function showBossInfo() {
             const xmlhttp = new XMLHttpRequest();
@@ -433,11 +407,14 @@
         function check_login() {
             User_test = localStorage.getItem("user_account");
             if (User_test == null) {
+                alert("您尚未登入！將跳轉回登入頁面");
                 location.href = 'customer_sign_in.html';
             } else {
+                console.log('User_test：',User_test);
                 document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
                 document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
                 document.getElementById("user_mode").innerHTML = "顧客模式";
+                console.log('user_account：',user_account);
             }
         }
 
