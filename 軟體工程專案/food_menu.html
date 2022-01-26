@@ -254,6 +254,8 @@
 
 
     <script>
+        /*為了取得該顧客是不是黑名單的連線*/
+        let is_blank = false;
         var User_test;
         var i = 0; //display index
         var k = 0; //searching index
@@ -433,8 +435,34 @@
         // 			xmlhttp.send(); 
         // 		}
         // 	);
+
+        function check_is_blank(){
+            /*為了取得該顧客是不是黑名單的連線*/
+
+            const xmlhttp_get_isblank = new XMLHttpRequest();
+            xmlhttp_get_isblank.onload = function() {
+                let obj = this.responseText;    
+                obj = obj.substring(11, obj.length);
+                // console.log('obj：',obj);
+                obj = JSON.parse(obj);
+                // console.log('obj：',obj);
+                // console.log('typeof(obj)',typeof(obj));
+                // console.log('typeof(obj.is_blank)',typeof(obj.is_blank));
+                // console.log('is_blank in function before changed：',is_blank);
+                if(obj[0].is_blank == 1){
+                    is_blank = true;
+                    // console.log('is_blank in function：',is_blank);
+                }
+                else if(obj[0].is_blank == 0){
+                    is_blank = false;
+                }
+            }          
+            xmlhttp_get_isblank.open("GET", "php/user_chk_isblank.php?user_account=" + User_test, false ); /*false代表ajax的同步，
+                                                                                                        /*即呼叫check_is_blank的函式要等待check_is_blank執行完*/
+            xmlhttp_get_isblank.send();
+        }
         function addToPackage(button_index) {
-            console.log("user_test: " + User_test);
+            // console.log("user_test: " + User_test);
             if (User_test == null) {
                 window.alert("尚未登入! 即將切換至登錄畫面!");
                 window.location.href = "customer_sign_in.html";
@@ -442,6 +470,7 @@
             }
             //product_name_to_id(product_name_Array[button_index]);
             //console.log("addfunc_id:" + p_id );
+                       
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 //console.log(product_name_Array[button_index]);
@@ -531,6 +560,16 @@
         }
 
         function checkOut() {
+            /*先檢查該顧客帳號是不是屬於黑名單，如果是就不能結帳*/
+            check_is_blank();
+
+            console.log('is_blank：',is_blank);
+            if(is_blank == true){
+                window.alert("對不起！此帳號沒有權限!");
+                return;
+            }
+
+            /*該顧客帳號不是黑名單，執行結帳程序*/
             if (cartEmpty) {
                 window.alert("Cart is Empty !");
                 return;
@@ -619,7 +658,7 @@
                     var obj = this.responseText;
                     obj = obj.substring(11, obj.length);
                     var boss_info = JSON.parse(obj);
-                    console.log(boss_info);
+                    // console.log(boss_info);
                     document.getElementById("boss_info").innerHTML = '<li> 店名: ' + boss_info["0"]["store_name"] + '</li>';
                     document.getElementById("boss_info").innerHTML += '<li> 地址: ' + boss_info["0"]["store_address"] + '</li>';
                     document.getElementById("boss_info").innerHTML += '<li> 電話: ' + boss_info["0"]["store_phone"] + '</li>';
