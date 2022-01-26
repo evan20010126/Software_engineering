@@ -273,6 +273,8 @@
 
                     })
             }
+            var arr_account = {};
+            var index;
 
             function register_func() {
                 var new_acc = document.getElementById("new_user_account").value;
@@ -282,7 +284,7 @@
                 var new_phone = document.getElementById("new_phone").value;
                 var new_birthday = document.querySelector("input[type='date']").value;
                 var p2 = document.getElementById("new_user_password2").value;
-                console.log("new_acc" + new_acc);
+                //console.log("new_acc " + new_acc);
                 if (new_acc == '' || new_pass == '' || new_nickname == '' || new_email == '' || new_phone == '' || new_birthday == '') {
                     window.alert("註冊失敗，表格尚有空缺!");
                     return;
@@ -291,7 +293,17 @@
                     window.alert("註冊失敗，兩次密碼輸入不同!");
                     return;
                 }
-
+                var i = 0;
+                console.log("arr2: " + index);
+                for (; i < 500; i++) {
+                    console.log("new_acc" + new_acc);
+                    console.log(arr_account[i]);
+                    if (new_acc == arr_account[i]) {
+                        console.log("fail");
+                        window.alert("註冊失敗，您的帳號已被他人使用!");
+                        return;
+                    }
+                }
                 const xmlhttp = new XMLHttpRequest();
                 xmlhttp.onload = function() {
 
@@ -300,8 +312,31 @@
                 xmlhttp.send();
             }
 
+
+            function get_account() {
+                const xmlhttp = new XMLHttpRequest();
+                xmlhttp.onload = function() {
+                    var obj = this.responseText;
+                    obj = obj.substring(11, obj.length);
+                    console.log("obj: " + obj);
+                    var acc_obj = JSON.parse(obj);
+                    console.log("acc_obj:" + acc_obj);
+                    console.log("acc_obj[0]:" + acc_obj[0]["user_account"]);
+                    var index = 0;
+                    for (; index < acc_obj.length; index++) {
+                        console.log("in while");
+                        arr_account[index] = acc_obj[index]["user_account"];
+
+                    }
+                    console.log("arr: " + arr_account[5]);
+                }
+                xmlhttp.open("GET", "php/return_customer_list.php");
+                xmlhttp.send();
+            }
+
             function start() {
                 localStorage.clear();
+                get_account();
             }
             window.addEventListener("load", start, false);
         </script>
