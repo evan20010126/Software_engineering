@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>檢視訂單</title>
+    <title>檢視訂單(Customer)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-    	body {font-family: 微軟正黑體;}
+        body {
+            font-family: 微軟正黑體;
+        }
     </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-default">        
-      <div class="container-fluid">
-        <div class="navbar-header">
-		  <a class="navbar-brand" href="☆">FBL</a>
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-              <span class="sr-only">導覽按鈕</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-          </button>          
-        </div>
-		<div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-		    <li><a href="food_menu.html">即時點餐</a></li>
-            <li><a href="auto_eat.html">自動取eat</a></li>
-			<li class="active"><a href="order_web.html">檢視訂單</a></li>
-          </ul>
-		  	<ul class = "nav navbar-nav navbar-right">
-			  <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-              <span style="padding-right: 10px; color: navy;">Hi! user_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="Account_Setting.html">Account Setting</a></li>
-                <li><a href="preference.html">My preference Setting</a></li>
-				<li><a href="customer_sign_in.html">Sign in</a></li>
-				<li><a href="#">Sign out</a></li>
-			</ul>
-            </li>
-		  </ul>
-		  
-		  <!-- <form class="navbar-form navbar-right">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="visitor_index.html">FBL</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">導覽按鈕</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="food_menu.html">即時點餐</a></li>
+                    <li><a href="auto_eat.html">自動取eat</a></li>
+                    <li class="active"><a href="order_web.html">檢視訂單</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <span id="hi" style="padding-right: 10px; color: navy;">Hi! 陌生人~</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="logInOut">
+                            <li><a href="Account_Setting.html">Account Setting</a></li>
+                            <li><a href="preference.html">My preference Setting</a></li>
+                            <!-- <li><a href="customer_sign_in.html">Sign in</a></li>
+                            <li><a href="#">Sign out</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <!-- <form class="navbar-form navbar-right">
 			<div class="form-group has-feedback">
 				<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
 			</div>
 			<button type="submit" class="btn btn-default">搜尋</button>
 		  </form> -->
-		</div>
-	  </div>
-	</nav>
-	
-	<!--頁首-->
-	<header>
-		<div class="container">
-			<h1>檢視訂單</h1>
-			<p class="lead">下標</p>
-			<hr>
-		</div>
-	</header>
-	<!--內容區-->
-	<div class="container">
-		<div class="row">
-			<article>
-				<div class="col-sm-8">
+            </div>
+        </div>
+    </nav>
+
+    <!--頁首-->
+    <header>
+        <div class="container">
+            <h1>檢視訂單</h1>
+            <p class="lead" id="user_mode"></p>
+            <hr>
+        </div>
+    </header>
+    <!--內容區-->
+    <div class="container">
+        <div class="row">
+            <article>
+                <div class="col-sm-8">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1" data-toggle="tab">進行中</a></li>	
-                        <li ><a href="#tab2" data-toggle="tab">歷史訂單</a></li>
-                        
+                        <li><a href="#tab3" data-toggle="tab" onclick="showOrderList_uncheck()">待確認</a></li>
+                        <li class="active"><a href="#tab1" data-toggle="tab" onclick="showOrderList_ing()">進行中</a></li>
+                        <li><a href="#tab2" data-toggle="tab" onclick="showOrderList_history()">歷史訂單</a></li>
+
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
@@ -84,28 +88,28 @@
                                 <div class="panel-body">
                                     <table class="table table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>訂單編號</th>
-                                            <th>下訂時間</th>
-                                            <th>下訂清單</th>
-                                            <th>客製化</th>
-                                            <th>金額</th>
-                                        </tr>
+                                            <tr>
+                                                <th>訂單編號</th>
+                                                <th>下訂時間</th>
+                                                <th>下訂清單</th>
+                                                <th>客製化</th>
+                                                <th>金額</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="order_ing">
-                                        <tr >
-                                            <!-- <td>01</td>
+                                            <tr>
+                                                <!-- <td>01</td>
                                             <td>12:00</td>
                                             <td>漢堡 薯條 薯餅</td>
                                             <td>漢堡 薯條 薯餅不加醬</td>
                                             <td>160</td> -->
-                                        </tr>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="panel-footer">
                                     FBL早餐店
-                                </div>			
+                                </div>
                             </div>
                         </div>
 
@@ -114,25 +118,25 @@
                                 <div class="panel-heading">
                                     <h1>歷史訂單</h1>
                                     <br>
-                                        <!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
+                                    <!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
                                 </div>
                                 <div class="panel-body">
                                     <table class="table table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>訂單編號</th>
-                                            <th>下訂時間</th>
-                                            <th>下訂清單</th>        
-                                            <th>金額</th>
-                                        </tr>
+                                            <tr>
+                                                <th>訂單編號</th>
+                                                <th>下訂時間</th>
+                                                <th>下訂清單</th>
+                                                <th>金額</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="order_history">
-                                        <tr>
-                                            <!-- <td>01</td>
+                                            <tr>
+                                                <!-- <td>01</td>
                                             <td>12:00</td>
                                             <td>漢堡 薯條 薯餅</td>
                                             <td>160</td> -->
-                                        </tr>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -141,13 +145,53 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- tab3(待確認訂單) -->
+                        <div class="tab-pane fade" id="tab3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h1>待確認</h1>
+                                    <br>
+                                    <!-- <div align="center"><img src="img/demo.png" width="30%"></div> -->
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>訂單編號</th>
+                                                <th>下訂時間</th>
+                                                <th>下訂清單</th>
+                                                <th>金額</th>
+                                                <th style="float: right;">訂單狀態</tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="order_unchecked">
+                                            <tr>
+                                                <!-- <td>01</td>
+										<td>12:00</td>
+										<td>漢堡 薯條 薯餅</td>
+										<td>160</td>
+										<td>
+											<button type="button" class="btn btn-secondary btn-sm" onclick="refuse_order()">拒絕</button>
+											<button type="button" class="btn btn-primary btn-sm" onclick="accept_order()">接受</button>
+										</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                    FBL早餐店
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
                     </div>
-				</div>
-			</article>
-			
-			<aside>
-				<div class="col-sm-3 col-sm-offset-1">
-					<!-- <div class="panel panel-success">
+
+                </div>
+            </article>
+
+            <aside>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <!-- <div class="panel panel-success">
 						<div class="panel-heading">
 							<h3>購物車</h3>
 						</div>
@@ -166,127 +210,248 @@
 							<button value="submit">結帳</button>
 						</div>
 					</div> -->
-					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<h3>優惠卷</h3>
-						</div>
-						
-						<div class="panel-body">
-							<ul id="coupon_code_id">
-								<li>優惠卷code <span style="float: right;">-30$</span> </li>
-							</ul>
-						</div>	
-					</div>
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h3>FBL早餐店</h3>
-							<br>[海大店]
-						</div>
-							
-						<div class="panel-body">
-							<ul>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-								<li>此處引入php店家資訊</li>
-							</ul>
-						</div>
-					</div>
-					
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3>優惠卷<svg style="float: right;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+								<path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+								<path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+								<path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
+								<path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+							  </svg></h3>
+                        </div>
 
-				</div>
-			</aside>
-		</div>	
-	</div>
-	<hr>
-	
-	
-	
-	<!--頁尾-->
-	<footer>
-		<div class="container">
-			<p>♂海洋大學 &middot; 資工系 &middot; 軟體工程專案♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+                        <div class="panel-body">
+                            <ul id="coupon_code_id">
+                                <li>尚未載入<span style="float: right;"></span> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3>FBL早餐店</h3>
+                            <br>[海大店]
+                        </div>
 
-		</div>
-	</footer>
-	
-	
-	<script>
-        var User_test = "414";
-        function showOrderList_ing(){
+                        <div class="panel-body">
+                            <ul id="boss_info">
+                                <li>尚未載入</li>
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
+                                <!-- <li>此處引入php店家資訊</li> -->
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </aside>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <!--頁尾-->
+    <footer>
+        <div class="container">
+            <p>♂海洋大學 &middot; 資工系 &middot; 軟體工程專案♀</p>
+            <p style="text-align:right"><a href="#">T O P</a></p>
+
+        </div>
+    </footer>
+
+
+    <script>
+        let User_test;
+
+        function showOrderList_ing() {
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                console.log(obj);
-				obj = obj.substring(11,obj.length);
-				var orderObj = JSON.parse(obj);
-                console.log(orderObj);
+                //console.log(obj);
+                obj = obj.substring(11, obj.length);
+                var orderObj = JSON.parse(obj);
+                //console.log(orderObj);
                 document.getElementById("order_ing").innerHTML = "";
                 var index = 0;
-                while(orderObj[index] != null){
-                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_ing").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                while (orderObj[index] != null) {
+                    var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
+                    document.getElementById("order_ing").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].preference + "</td><td>" + orderObj[index].cost + "</td></tr>";
                     index++;
                 }
             }
-			xmlhttp.open("GET", "php/user_order_ing.php?user_account=" + User_test);
-            xmlhttp.send(); 
+            xmlhttp.open("GET", "php/user_order_ing.php?user_account=" + User_test);
+            xmlhttp.send();
         }
-        function showOrderList_history(){
+
+        function showOrderList_history() {
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
                 var obj = this.responseText;
-                console.log(obj);
-				obj = obj.substring(11,obj.length);
-				var orderObj = JSON.parse(obj);
-                console.log(orderObj);
+                // console.log(obj);
+                obj = obj.substring(11, obj.length);
+                var orderObj = JSON.parse(obj);
+                // console.log(orderObj);
                 document.getElementById("order_history").innerHTML = "";
                 var index = 0;
-                while(orderObj[index] != null){
-                    var time = orderObj[index].T_stamp.substring(0,orderObj[index].T_stamp.length-5);
-                    document.getElementById("order_history").innerHTML +=" <tr><td>"+(index)+"</td><td>"+time+"</td><td>"+orderObj[index].product_list+"</td><td>暫無</td><td>"+orderObj[index].cost+"</td></tr>";
+                while (orderObj[index] != null) {
+                    var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
+                    document.getElementById("order_history").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>暫無</td><td>" + orderObj[index].cost + "</td></tr>";
                     index++;
                 }
             }
-			xmlhttp.open("GET", "php/user_history_order.php?user_account=" + User_test);
-            xmlhttp.send(); 
+            xmlhttp.open("GET", "php/user_history_order.php?user_account=" + User_test);
+            xmlhttp.send();
         }
-        function showCoupon(){
-			//
-			const xmlhttp = new XMLHttpRequest();
+
+        function showOrderList_uncheck() {
+            //test button
+            //document.getElementById("order_unchecked").innerHTML = '<tr><td>01</td><td>12:00</td><td>漢堡 薯條 薯餅</td><td>160</td><td style="float: right;">尚未被接單</td></tr>';
+            //test end
+            const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function() {
-				var obj = this.responseText;
-				
-				obj = obj.substring(11,obj.length);
-				console.log(obj);
-				var coupon_info = JSON.parse(obj);
-				console.log(coupon_info);
-				var index = 0;
-				document.getElementById("coupon_code_id").innerHTML = '';
-				while(coupon_info[index] != null){
-					console.log(typeof(coupon_info[index].is_persentoff));
-					console.log(coupon_info[index].is_persentoff);
-					if(coupon_info[index].is_persentoff == 1){
-						var disc = coupon_info[index].num * 10;
-						console.log("disc: "+disc);
-						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>"+disc+"折</span></li>";
-					}
-					else{
-						document.getElementById("coupon_code_id").innerHTML += "<li>"+coupon_info[index].coupon_code+"<span style='float: right;'>-"+coupon_info[index].num+"$</span></li>";
-					}
-					index++;
-				}
-				//console.log(product_name_Array[button_index]);
-			}
-			xmlhttp.open("GET", "php/show_coupon.php");
-            xmlhttp.send(); 
-		}
-        function start(){
+                var obj = this.responseText;
+                // console.log("uncheck: "+ obj);
+                obj = obj.substring(11, obj.length);
+                var orderObj = JSON.parse(obj);
+                console.log("order_unchecked: " + orderObj);
+                document.getElementById("order_unchecked").innerHTML = "";
+                var str_state = '';
+                var index = 0;
+                if (orderObj[index].is_finish == -2) {
+                    str_state = "已被拒絕";
+                } else if (orderObj[index].is_finish == -1) {
+                    str_state = "尚未被接單";
+                }
+
+
+                while (orderObj[index] != null) {
+                    var time = orderObj[index].T_stamp.substring(0, orderObj[index].T_stamp.length - 5);
+                    document.getElementById("order_unchecked").innerHTML += " <tr><td>" + orderObj[index].order_id + "</td><td>" + time + "</td><td>" + orderObj[index].product_list + "</td><td>" + orderObj[index].cost + "</td><td>" + str_state + "</td></tr>";
+                    index++;
+                }
+            }
+            xmlhttp.open("GET", "php/user_unchecked_order.php?user_account=" + User_test);
+            xmlhttp.send();
+        }
+
+        function showCoupon() {
+            //
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                var obj = this.responseText;
+
+                obj = obj.substring(11, obj.length);
+                //console.log(obj);
+                var coupon_info = JSON.parse(obj);
+                //console.log(coupon_info);
+                var index = 0;
+                document.getElementById("coupon_code_id").innerHTML = '';
+                while (coupon_info[index] != null) {
+                    //console.log(typeof(coupon_info[index].is_persentoff));
+                    //console.log(coupon_info[index].is_persentoff);
+                    if (coupon_info[index].is_persentoff == 1) {
+                        var disc = coupon_info[index].num * 10;
+                        //console.log("disc: "+disc);
+                        document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>" + disc + "折</span></li>";
+                    } else {
+                        document.getElementById("coupon_code_id").innerHTML += "<li>" + coupon_info[index].coupon_code + "<span style='float: right;'>-" + coupon_info[index].num + "$</span></li>";
+                    }
+                    index++;
+                }
+                //console.log(product_name_Array[button_index]);
+            }
+            xmlhttp.open("GET", "php/show_coupon.php");
+            xmlhttp.send();
+        }
+
+        // function check_login() {
+        //     User_test = localStorage.getItem("user_account");
+        //     if (User_test == null) {
+        //         document.getElementById("hi").innerHTML = "Hi! 陌生人~";
+        //         document.getElementById("logInOut").innerHTML += '<li><a href="customer_sign_in.html">Sign in</a></li>';
+        //document.getElementById("user_mode").innerHTML = "訪客模式(只限瀏覽)";
+        // } else {
+        // console.log('User_test：',User_test);
+        // document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+        // document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="log_out()">Sign out</a></li>';
+        //document.getElementById("user_mode").innerHTML = "顧客模式";
+        // }
+        // }
+
+        function showBossInfo() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() {
+                    var obj = this.responseText;
+                    obj = obj.substring(11, obj.length);
+                    var boss_info = JSON.parse(obj);
+                    console.log(boss_info);
+                    document.getElementById("boss_info").innerHTML = '<li> 店名: ' + boss_info["0"]["store_name"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 地址: ' + boss_info["0"]["store_address"] + '</li>';
+                    document.getElementById("boss_info").innerHTML += '<li> 電話: ' + boss_info["0"]["store_phone"] + '</li>';
+                    // document.getElementById("boss_info").innerHTML += '<li> 評分: ' + boss_info["0"]["score"] + '</li>';
+                } //<li>此處引入php店家資訊</li>
+            xmlhttp.open("GET", "php/display_boss_info.php");
+            xmlhttp.send();
+        }
+
+        function start() {    
             showOrderList_ing();
             showOrderList_history();
+            showOrderList_uncheck();
             showCoupon();
+            showBossInfo();
+            check_login();
         }
+
+        function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                alert("您尚未登入！將跳轉回登入頁面");
+                location.href = 'customer_sign_in.html';
+            } else {
+                console.log('User_test：', User_test);
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+                document.getElementById("user_mode").innerHTML = "顧客模式";
+                //console.log('user_account：',user_account);
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "customer_sign_in.html";
+        }
+
         window.addEventListener("load", start, false);
+
+        let ws = new WebSocket('ws://20.212.218.184:443')
+            // let ws = new WebSocket('ws://localhost:443');
+        ws.onopen = () => {
+            // console.log('open connection')
+            console.log('client');
+        }
+
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+
+        //接收 Server 發送的訊息
+        ws.onmessage = event => {
+            console.log(event.data);
+            if (event.data == User_test + "accept") {
+                alert("Your order were accept. :)");
+            } else if (event.data == User_test + "reject") {
+                alert("Your order were reject. Q_Q");
+            } else if (event.data == User_test + "finish") {
+                alert("Your order are finish!!!");
+            }
+            showOrderList_ing();
+            showOrderList_history();
+            showOrderList_uncheck();
+        }
     </script>
-  </body>
+</body>
+
 </html>

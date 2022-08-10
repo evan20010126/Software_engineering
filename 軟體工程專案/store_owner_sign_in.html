@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>麥味登店長登入</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcd n.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-    	body {font-family: 微軟正黑體;}
+        body {
+            font-family: 微軟正黑體;
+        }
     </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-default">        
-		<div class="container-fluid">
-		  <div class="navbar-header">
-			<a class="navbar-brand" href="visitor_index.html">FBL</a>
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="visitor_index.html">FBL</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 				<span class="sr-only">導覽按鈕</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			</button>          
-		  </div>
-		  <!-- <div id="navbar" class="navbar-collapse collapse">
+			</button>
+            </div>
+            <!-- <div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 			  <li><a href="dance00.html">首頁</a></li>
 			  <li class="active"><a href="dance01.html">心得</a></li>
@@ -46,88 +51,157 @@
 			  <button type="submit" class="btn btn-default">搜尋</button>
 			</form> 
 		  </div> -->
-		  <div id="navbar" class="navbar-collapse collapse">
-			  <ul class="nav navbar-nav">
-				<li class="active"><a href="store_owner_manage.html">Manage Menu</a></li>
-				<li><a href="ower_customer_manage.html">顧客資訊</a></li>
-				<li><a href="owner_order.html">檢視訂單</a></li>
-			  </ul>
-				  <ul class = "nav navbar-nav navbar-right">
-				  <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-				  <span style="padding-right: 10px; color: navy;">Hi! boss_test</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
-				  <ul class="dropdown-menu">
-					<!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
-					<!-- <li><a href="preference.html">My preference Setting</a></li> -->
-					<li><a href="store_owner_sign_in.html">Sign in</a></li>
-					<li><a href="#">Sign out</a></li>
-				</ul>
-				</li>
-			  </ul>
-			  <!-- <form class="navbar-form navbar-right">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="store_owner_manage.html">Manage Menu</a></li>
+                    <li><a href="owner_customer_manage.html">顧客資訊</a></li>
+                    <li><a href="owner_order.html">檢視訂單</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <span style="padding-right: 10px; color: navy;" id = "hi">Hi! 陌生人~</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
+                            <!-- <li><a href="preference.html">My preference Setting</a></li> -->
+                            <!-- <li class="active"><a href="store_owner_sign_in.html">Sign in</a></li>
+					<li><a href="#">Sign out</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <!-- <form class="navbar-form navbar-right">
 				<div class="form-group has-feedback">
 					<input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
 				</div>
 				<button type="submit" class="btn btn-default">搜尋</button>
 			  </form> -->
-			</div>
-		</div>
-	  </nav>
-	
-	<!--頁首-->
-	<header>
-		<div class="container">
-			<h1>瀏覽菜單&即時點餐</h1>
-			<p class="lead">下標</p>
-			<hr>
-		</div>
-	</header>
-	<!--內容區-->
-    <center>
-	<div class="container">   
-		<div class="d-flex justify-content-center">
-			<article>
-				<div class="col-sm-12">
-					<h1 style="font-family:微軟正黑體 ; text-align:center">ღMenuღ</h1>
-					<!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
-					<hr>
-					<!--  -->
-                    
-					<div class="col-sm-12">
-						<div class="thumbnail">
-							<img src="img\\demo.png" alt="2" width="400" height="300">
-							<p><form method="post" action="ch14_02.htm" onsubmit="return sendok();">
-                            請輸入您的帳號：
-                            </p>
-                            <p>   <input type="text" id="userid" value="" autofocus><br />
-                                請輸入您的密碼：
-                            </p>
-                            <p>  <input type="password" id="userpwd" value=""><br /><font style="font-size:12px">
-                                (測試帳號：guest 密碼:1234)</font></form>
-                                <input id="btn_send" type="submit" value="送出">
-                            </p>	
-                            </form>
-						</div>
-					</div>				
-				</div>
-			</article>
-			
-		</div>	       
-	</div>
-    </center>
-	<hr>
-	
-	
-	
-	<!--頁尾-->
-	<footer>
-		<div class="container">
-			<p>♂海洋大學&middot;資工系♀</p> <p style="text-align:right"><a href="#">T O P</a></p>
+            </div>
+        </div>
+    </nav>
 
-		</div>
-	</footer>
-	
-	
-	
-  </body>
+    <!--頁首-->
+    <header>
+        <div class="container">
+            <h1>老闆登錄</h1>
+            <p class="lead">您尚未登錄</p>
+            <hr>
+        </div>
+    </header>
+    <!--內容區-->
+    <center>
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <article>
+                    <div class="col-sm-12">
+                        <h1 style="font-family:微軟正黑體 ; text-align:center">ღLoginღ</h1>
+                        <!-- <div align="center"><img src="demo.png" width="80%" class="img-thumbnail"></div> -->
+                        <hr>
+                        <!--  -->
+
+                        <div class="col-sm-12">
+                            <div class="thumbnail">
+                                <img src="img\\demo.png" alt="2" width="400" height="300">
+                                <p>
+                                    <!-- <form method="post" action="ch14_02.htm" onsubmit="return sendok();"> -->
+                                    請輸入您的帳號：
+                                </p>
+                                <p> <input type="text" id="userid" value=""><br /> 請輸入您的密碼：
+                                </p>
+                                <p> <input type="password" id="userpwd" value=""><br />
+                                    <font style="font-size:12px">
+                                        (測試帳號：evan 密碼:1234)</font>
+                                    <!-- </form> -->
+                                    <br>
+                                    <input id="btn_send" type="submit" value="登入" onclick="check_account()">
+                                </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </center>
+    <hr>
+
+
+
+    <!--頁尾-->
+    <footer>
+        <div class="container">
+            <p>♂海洋大學&middot;資工系♀</p>
+            <p style="text-align:right"><a href="#">T O P</a></p>
+
+        </div>
+    </footer>
+
+
+    <script>
+        /*ajax原生*/
+        // var correct = true;
+        // function check_account(){
+        // 	var account_str = document.getElementById("user_account").value;
+        // 	var password_str = document.getElementById("user_password").value;
+        // 	const xmlhttp = new XMLHttpRequest();
+        // 	xmlhttp.onload = function () {
+        // 		var correct = this.responseText;
+        // 		console.log("correct: " + correct);
+        // 		correct = correct.substring(11,correct.length);
+        // 		if(correct=="False"){
+        // 			window.alert("帳號或密碼錯誤 !");
+        // 			window.location.reload();
+        // 		}
+        // 		else if(correct == "True"){
+        // 			localStorage.setItem("user_account", account_str);
+        // 			window.location.href = "food_menu.html";
+        // 		}
+        // 	}
+        // 	xmlhttp.open("GET", "php/login.php?user_accoun	t="+account_str+"&user_password="+password_str );
+        // 	xmlhttp.send();
+        // if(correct){
+        // 	localStorage.setItem("user_account", account_str);
+        // 	window.location.href("food_menu.html");
+        // }
+        // }
+        // axios(from node.js框架) by 石貫志
+        function check_account() {
+            let account_str = document.getElementById("userid").value;
+            let password_str = document.getElementById("userpwd").value;
+            let response;
+            let correct = true;
+            axios
+                .get('php/boss_login.php', {
+                    params: {
+                        boss_account: account_str,
+                        boss_password: password_str
+                    }
+                })
+
+            .then(res => {
+                    response = res.data;
+                    // console.log(response.substring(11,));	//不知為何回傳會有其它雜訊
+                    correct = response.substring(11, );
+
+                    if (correct == "False") {
+                        window.alert("帳號或密碼錯誤 !");
+                        window.location.reload();
+                    } else if (correct == "True") {
+                        localStorage.setItem('user_account', account_str);
+                        window.location.href = "store_owner_manage.html";
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
+
+
+        function start() {
+            localStorage.clear();
+        }
+        window.addEventListener("load", start, false);
+    </script>
+</body>
+
 </html>

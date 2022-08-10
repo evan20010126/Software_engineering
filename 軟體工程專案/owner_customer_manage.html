@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>檢視訂單</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <!-- 採用axios，與ajax效果一樣 -->
+   	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <style>
+      .row{
+		    margin-top:40px;
+		    padding: 10px;
+		}
+      table, td{
+        height: 40px;
+      }
+    </style>
+    <nav class="navbar navbar-default">        
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="visitor_index.html">FBL</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">導覽按鈕</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>          
+          </div>
+          <!-- <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="dance00.html">首頁</a></li>
+              <li class="active"><a href="dance01.html">心得</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                圖/影 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="dance02.html">圖片</a></li>
+                  <li><a href="dance03.html">影集</a></li>
+                </ul>
+              </li>
+            </ul>
+            
+            <form class="navbar-form navbar-right">
+              <div class="form-group has-feedback">
+                  <input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+              </div>
+              <button type="submit" class="btn btn-default">搜尋</button>
+            </form> 
+          </div> -->
+          <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="store_owner_manage.html">Manage Menu</a></li>
+                <li class="active"><a href="owner_customer_manage.html">顧客資訊</a></li>
+                <li><a href="owner_order.html">檢視訂單</a></li>
+              </ul>
+                  <ul class = "nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                  <span style="padding-right: 10px; color: navy;" id = "hi">Hi! 陌生人~</span><img src="img/Setting_icon.png" width="30px"> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" id = "logInOut">
+                    <!-- <li><a href="Account_Setting.html">Account Setting</a></li> -->
+                    <!-- <li><a href="preference.html">My preference Setting</a></li> -->
+                    <!-- <li><a href="store_owner_sign_in.html">Sign in</a></li> -->
+                    <!-- <li><a href="#">Sign out</a></li> -->
+                </ul>
+                </li>
+              </ul>
+              <!-- <form class="navbar-form navbar-right">
+                <div class="form-group has-feedback">
+                    <input type="search" class="form-control" placeholder="search"><span class="glyphicon-search form-control-feedback"></span>
+                </div>
+                <button type="submit" class="btn btn-default">搜尋</button>
+              </form> -->
+            </div>
+        </div>
+      </nav>
+      <!--頁首-->
+	<header>
+		<div class="container">
+			<h1>顧客資訊</h1>
+			<p class="lead"></p>
+			<hr>
+		</div>
+	</header>
+	<!--內容區-->
+  <div class="container">
+        <h3>
+          顧客資訊管理
+        </h3>
+        <div class = "row">
+          <!-- 第1個搜尋Bar -->
+            <div class="col-xs-3">
+              <input type="text" id = "nickname" class="form-control" placeholder="Search by nickname" name="search">
+            </div>                             
+                
+          <!-- 第2個搜尋Bar -->
+            <div class="col-xs-4">
+                <input type="text" id = "phone" class="form-control" placeholder="Search by phone" name="search">
+            </div>
+              
+          <!-- 第3個搜尋Bar -->
+          <div class = "col-xs-4">
+              <div class="input-group">
+                <input type="date" id = "birthday" class="form-control" placeholder="Search by birthday" name="search">
+                <div class="input-group-btn">
+                  <button id = "search_btn" class="btn btn-primary " type="button"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+              </div>
+          </div>
+        </div>
+      <hr>
+      <!-- 搜尋結果Table -->
+      <div class="row">
+        <table class = "table table-hover table-bordered" style id="customer_searching_result">
+          
+        </table>
+    </div>
+  </div>  
+  <script>
+    //全域變數
+    let User_test = null;
+
+    function start(){
+      let search_btn = document.getElementById('search_btn');
+      search_btn.addEventListener("click", search_customer_list);
+      check_login();
+      show_default_customer_list();
+    }
+
+    function search_customer_list(){ // 用字串串接
+            // console.log('搜尋按鈕按下去');。
+            let nickname = document.getElementById('nickname').value;
+            let phone = document.getElementById('phone').value;
+            let birthday = document.getElementById('birthday').value;
+            let response = ' ';
+            let res;
+
+            if(nickname.length == 0){
+              // console.log("nickname NULL");
+              nickname = ' ';
+            }
+            if(phone.length == 0){
+              // console.log("phone NULL");
+              phone = ' ';
+              // console.log('phone：' , phone);
+            }
+            if(birthday.length == 0){
+              // console.log("birthday NULL");
+              birthday = ' ';
+            }
+            if(nickname == " " && phone == " " && birthday == " "){ /*如果搜尋bar沒東西按搜尋按鈕*/
+              show_default_customer_list();   /*秀出資料庫所有顧客名單*/
+            }
+
+            else{                       /*如果搜尋bar任一欄位有值，就執行搜尋程序*/
+            /*後端空值不好處理，故前端如果沒輸入把字串型態的null給後端*/  
+              if(nickname == " ")
+                nickname = "null";
+              if(phone == " ")
+                phone = "null";
+              if(birthday == " ")
+                birthday = "null";
+            /*連線作請求及拿回response並處理*/  
+            axios
+            .get('php/customer_manage.php', {
+              params:
+              { 
+                nickname:nickname,
+                phone:phone,
+                birthday:birthday
+              }
+            })
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                console.log(res);
+                renderResult(res);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            }           
+        }
+      
+  function renderResult(res){
+          let output = `
+                        <tr>
+                        <th> # </th>
+                        <th>帳號</th>
+                        <th>email</th>
+                        <th>暱稱</th>
+                        <th>手機</th>
+                        <th>生日</th>
+                        <th>黑名單</th>
+                        <th>客製化</th>
+                        </tr>
+                        `;
+          if(res == null){
+              output += `<tr>
+                            <td colspan="7">查無資料</td>
+                          </tr>`;
+              //output += `<tr><td colspan="3"></td><td colspan="1">找不到想找的店家嗎?</td><td colspan="2"><a href="addStore.html"><button class="btn btn-success" >點我新增店家</button></a></td></tr>`;
+          }        
+          else{
+            /*=======顯示文字處理========*/
+            let is_blank_text = "是";
+            let preference_text = "無";
+            let text_color = "red";
+              for(let i=0;i < res.length ;i++){
+                if(res[i].is_blank === 0){
+                    // console.log("yes");
+                  is_blank_text = "否";
+                  text_color = "green";
+                }
+                if(res[i].preference != null){
+                  preference_text = res[i].preference;
+                }
+            /*=======插入html=======*/      
+                  let customer_user_account = res[i].user_account;
+                  // console.log('typeof(customer_user_account)：',typeof(customer_user_account));
+                  // console.log('customer_user_account',customer_user_account);
+                  //加入按鈕按下後將customer_user_account傳進去set_blank_list函數中
+                  //刪除按鈕按下後將customer_user_account傳進去clear_blank_list函數中
+                  //「\u00A0」為寫在innerhtml裡面的空字元
+                  output += `
+                  <tr>
+                      <td >${i+1}</td>
+                      <td>${res[i].user_account}</td>
+                      <td>${res[i].email}</td>
+                      <td>${res[i].nickname}</td>
+                      <td>${res[i].phone}</td>
+                      <td>${res[i].birthday} 
+                      </td>
+                      <td id = "is_blank${i}"><span style = 'color:${text_color};'>${is_blank_text}</span>\u00A0
+                      <button type = "button" class = "btn btn-danger btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${i}')">  
+                            加入  
+                          </button>
+                          <button type = "button" class = "btn btn-success btn-sm" 
+                                  onclick = "clear_blank_list('${customer_user_account}','${i}')">
+                            刪除
+                          </button>
+                      </td>
+                      <td>${preference_text}</td>
+                  </tr>
+                  `;
+              }
+          }
+          // console.log(output);
+          document.getElementById('customer_searching_result').innerHTML = output;
+      }
+
+      function show_default_customer_list(){
+        axios
+            .get('php/show_customer_list.php') //沒有傳任何值給後端
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                console.log(res);
+                renderResult(res);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+
+      function set_blank_list(customer_user_account,button_index){
+        // console.log('customer_user_account：', customer_user_account);
+        let add_blank_list = document.getElementById('add_blank_list').value;
+        axios
+            .get('php/boss_set_isblank.php', {
+              params:
+              { 
+                user_account : customer_user_account
+              }
+            })
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                console.log(res[0].is_blank);
+
+                let is_blank_text = "是";
+                if(res[0].is_blank === 0){              
+                  is_blank_text = "否";
+                }
+                let change_index = "is_blank"+button_index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:red;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-danger btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-success btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
+                    刪除
+                  </button>`;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      }
+
+      function clear_blank_list(customer_user_account,button_index){
+        console.log('customer_user_account：', customer_user_account);
+        let add_blank_list = document.getElementById('add_blank_list').value;
+        axios
+            .get('php/boss_clear_isblank.php', {
+              params:
+              { 
+                user_account : customer_user_account
+              }
+            })
+            .then(response => {
+                // console.log(res);
+                res = response.data;
+                res = res.substring(11,res.length);
+                res = JSON.parse(res);
+                
+                let is_blank_text = "是";
+                if(res[0].is_blank === 0){              
+                  is_blank_text = "否";
+                }
+                // console.log(res);
+                // renderResult(res);
+                let change_index = "is_blank"+button_index;
+                document.getElementById(change_index).innerHTML = "<span style = 'color:green;'>"+is_blank_text + "</span>"
+                + `\u00A0\u00A0<button type = "button" class = "btn btn-danger btn-sm" id = "add_blank_list" 
+                                  onclick = "set_blank_list('${customer_user_account}','${button_index}')">  
+                            加入  
+                          </button>
+                  <button type = "button" class = "btn btn-success btn-sm" 
+                          onclick = "clear_blank_list('${customer_user_account}','${button_index}')">
+                    刪除
+                  </button>`; 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      }
+
+      function check_login() {
+            User_test = localStorage.getItem("user_account");
+            if (User_test == null) {
+                alert("尚未登入");
+                location.href = 'store_owner_sign_in.html';
+            } else {
+                document.getElementById("hi").innerHTML = "Hi! " + User_test + "~";
+                document.getElementById("logInOut").innerHTML += '<li><a href="#" onclick="logout()">Sign out</a></li>';
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "store_owner_sign_in.html";
+        }
+
+      window.addEventListener('load',start,false);
+  </script>
+</body>
+<html>
